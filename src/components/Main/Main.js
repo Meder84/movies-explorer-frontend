@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import Promo
+import Promo from '../Promo/Promo';
+// import NavTab from '../NavTab/NavTab';
+// import AboutProject from '../AboutProject/AboutProject';
+// import Techs from '../Techs/Techs';
+// import AboutMe from '../AboutMe/AboutMe';
+// import Portfolio from '../Portfolio/Portfolio';
+import './Main.css';
 
-function Main(props) {
-
-  const [currentUser, setCurrentUser] = useState({
-    about: '',
-    avatar: '',
-    email: '',
-    name: '',
-    _id: 0,
-  });
+function Main() {
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <div className="main">
       <Promo />
-    </CurrentUserContext.Provider>
+      {/* <NavTab />
+      <AboutProject />
+      <Techs />
+      <AboutMe />
+      <Portfolio /> */}
+    </div>
   )
 }
+
+export default Main;

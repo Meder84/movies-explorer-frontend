@@ -2,12 +2,11 @@
 // import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 // import './SearchForm.css';
 
-// function SearchForm() {
+// function FilterCheckbox() {
 //   return (
-//     <div className="searchForm">
-//       <FilterCheckbox />
+//     <div className="filterCheckbox">
 //     </div>
 //   );
 // }
 
-// export default SearchForm;
+// export default FilterCheckbox;

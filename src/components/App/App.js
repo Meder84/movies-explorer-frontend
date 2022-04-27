@@ -45,7 +45,7 @@ function App () {
           </Route>
 
           <Route exact path="/"> {/*exact ===  полный url*/}
-            <Main/>
+            <Main/> {/* страница «О проекте». */}
           </Route>
 
           <Route path="*">

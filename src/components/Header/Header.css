@@ -1,4 +1,4 @@
-.Header {
+.header {
   background-color: transparent;
   transition: 0.5s ease-in-out;
 
@@ -9,18 +9,41 @@
 
   box-sizing: border-box;
   width: 100%;
-  padding: 18px 70px;
+  height: 74px;
+  /* padding: 18px 70px; */
   margin: 0;
 }
 
+.header__logo {
+  display: block;
+  text-decoration: none;
+  box-sizing: border-box;
+  width: 38px;
+  height: 38px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.header__links {
+  min-width: 183px;
+  min-height: 32px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 @media screen and (max-width: 770px) {
-  .Header {
-    padding: 18px 30px;
+  .header {
+    /* padding: 18px 30px; */
   }
 }
 
 @media screen and (max-width: 400px) {
-  .Header {
-    padding: 18px 14px;
+  .header {
+    /* padding: 18px 14px; */
   }
 }

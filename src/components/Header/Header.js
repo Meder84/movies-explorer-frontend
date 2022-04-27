@@ -1,5 +1,6 @@
 import React from "react";
 import logo from '../../images/logo.svg';
+import './Header.css';
 
 function Header(props) {
   return(
@@ -9,7 +10,7 @@ function Header(props) {
         src={logo}
         alt="Текст Mesto."
       />
-      <div>
+      <div className="header__links">
         {props.children}
       </div>
     </header>

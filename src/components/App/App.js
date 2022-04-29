@@ -11,8 +11,8 @@ import './App.css'
 function App () {
 
   return (
-    <CurrentUserContext.Provider>
-      <div className="App">
+    // <CurrentUserContext.Provider>
+      <div className="app">
         <Switch>
           <Route path="/movies"
             // loggedIn={loggedIn}
@@ -53,7 +53,7 @@ function App () {
           </Route>
         </Switch>
       </div>
-    </CurrentUserContext.Provider>
+    // </CurrentUserContext.Provider>
   )
 };
 

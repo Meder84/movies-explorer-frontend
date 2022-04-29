@@ -12,34 +12,46 @@ function Promo() {
   // const currentUser = useContext(CurrentUserContext);
 
   return (
-    <section className="promo promo__block">
+    <section className='promo'>
       <Header>
-        <Link className='promo__header-regis'>Регистрация</Link>
-        <Link className='promo__header-login'>
+        <Link to='/register' className='promo__header-regis opacity'>Регистрация</Link>
+        <Link to='/login' className='promo__header-login'>
           <button
-            type="submit"
-            className="promo__sign-button opacity"
+            type='submit'
+            className='promo__sign-button opacity'
           >
             Войти
           </button>
         </Link>
-        {/* {currentUser.email ? <Navigation theme="blue"/> : <NavTab />} */}
-        {/* <Navigation theme="blue"/>
-         <NavTab /> */}
       </Header>
 
-      <div className="promo__block promo__container">
-        <h1 className="promo__block promo__title">
-          Учебный проект студента факультета Веб-разработки.
-        </h1>
-        <Link className="promo__block promo__image">
+      <main className='promo__main-block'>
+        <div className='promo__main-container'>
+          <div className='promo__main-description'>
+            <h1 className='promo__title'>
+              Учебный проект студента факультета Веб-разработки.
+            </h1>
+            <h4 className='promo__subtitle'>
+              Листайте ниже, чтобы узнать больше про этот проект и его создателя.
+            </h4>
+          </div>
+          <Link>
+            <button
+              type='button'
+              className='promo__info-button opacity'
+            >
+              Узнать больше
+            </button>
+          </Link>
+        </div>
+        <Link>
           <img
-            className="promo__logo opacity"
+            className='promo__main-logo opacity'
             src={promoLogo}
-            alt="Текст Mesto."
+            alt='Тектовая картинка, вид земли из космоса'
           />
         </Link>
-      </div>
+      </main>
     </section>
   );
 }

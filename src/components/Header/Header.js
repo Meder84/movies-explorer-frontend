@@ -14,7 +14,7 @@ function Header(props) {
         {props.children}
       </div>
     </header>
-  )
-}
+  );
+};
 
 export default Header;

@@ -79,7 +79,7 @@
   text-align: center;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1025px) {
   .about-project {
     padding: 0 50px;
   }

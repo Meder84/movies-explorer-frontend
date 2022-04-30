@@ -68,11 +68,13 @@
   margin: 0;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 1025px) {
   .techs {
     padding: 0 50px 90px;
   }
+}
 
+@media screen and (max-width: 850px) {
   .techs__header {
     min-height: 140px;
   }

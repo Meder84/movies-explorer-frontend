@@ -95,9 +95,9 @@
   background-size: 100%;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1025px) {
   .promo {
-    padding: 0 30px 76px;
+    padding: 0 50px 76px;
   }
 
   .promo__main-block {

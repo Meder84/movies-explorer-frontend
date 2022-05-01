@@ -47,10 +47,10 @@ function AboutMe () {
           </ul>
         </div>
         <img
-          className='about-me__image'
-          src={imageDiploma}
-          alt='Фотография студента'
-        />
+            className='about-me__image'
+            src={imageDiploma}
+            alt='Фотография студента'
+          />
       </main>
     </section>
   );

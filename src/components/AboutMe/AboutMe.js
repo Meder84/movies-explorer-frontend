@@ -28,7 +28,7 @@ function AboutMe () {
             </p>
           </div>
           <ul className='social__list'>
-            <li>
+            <li className='social__elem'>
               <a className='social__link'
                 href=''
                 target='_blank' rel=''
@@ -36,7 +36,7 @@ function AboutMe () {
                 Facebook
               </a>
             </li>
-            <li>
+            <li className='social__elem'>
               <a className='social__link'
                 href=''
                 target='_blank' rel=''

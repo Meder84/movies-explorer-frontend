@@ -101,11 +101,13 @@
   }
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 550px) {
   .techs {
     padding: 0 14px 70px;
   }
+}
 
+@media screen and (max-width: 450px) {
   .techs__header {
     min-height: 120px;
   }

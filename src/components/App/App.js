@@ -5,6 +5,7 @@ import Main from '../Main/Main'
 // import Header from '../Header/Header'
 // import Footer from '../Footer/Footer'
 import PageNotFound from '../PageNotFound/PageNotFound';
+import Movies from '../Movies/Movies';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './App.css'
 
@@ -14,10 +15,9 @@ function App () {
     // <CurrentUserContext.Provider>
       <div className="app">
         <Switch>
-          <Route path="/movies"
-            // loggedIn={loggedIn}
-            // component={MoviesPage}
-          />
+          <Route path="/movies">
+            <Movies />
+          </Route>
 
           <Route path="/saved-movies"
             // loggedIn={loggedIn}
@@ -44,8 +44,8 @@ function App () {
               history={history} */}
           </Route>
 
-          <Route exact path="/"> {/*exact ===  полный url*/}
-            <Main/> {/* страница «О проекте». */}
+          <Route exact path="/"> {/*exact ===  полный url */}
+            <Main/> {/* страница «О проекте».*/}
           </Route>
 
           <Route path="*">

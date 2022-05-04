@@ -1,95 +1,71 @@
-.menu {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-.menu__link {
-  text-decoration: none;
-  color: #000;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 18px;
-  text-align: center;
-
+.navigation {
   display: block;
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  transition: .7s ease-in-out;
-}
-
-.menu__link:hover {
-  opacity: .5;
-}
-
-.menu__link_active {
-  font-weight: 500;
-  pointer-events: none;
-}
-
-.menu__link_film + .menu__link_film {
-  margin-left: 20px;
-}
-
-.menu__link_film_blue {
-  color: #fff;
-}
-
-.menu__link_profile {
-  background-color: #F9F9F9;
-  border-radius: 20px;
-
-  font-weight: 500;
-  line-height: 32px;
-
-  width: 100px;
-  height: 32px;
-  margin-left: 50px;
-}
-
-.menu__link_profile_blue {
+  width: 100%;
   color: #000;
-  background-color: #2BE080;
-  font-size: 12px;
-  font-weight: 500;
+  margin: 0;
+  padding: 0 70px 43px;
 }
 
-.menu__button {
-  /* background-image: url(../../images/menu-icon.svg); */
+.navigation__header-conteiner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin: 0 0 0 44px;
+  padding: 0;
+}
+
+.navigation__header-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-width: 212px;
+}
+
+.navigation__header-link-movies {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  color: #000;
+}
+
+.navigation__header-link-saved-movies {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  color: #000;
+}
+
+.navigation__account-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 100px;
+  min-height: 32px;
+  padding: 0 11px;
+  border-radius: 50px;
+  color: #000;
+}
+
+.navigation__subtitle-account {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 12px;
+}
+
+.navigation__icon-account {
+  width: 11px;
+  height: 11px;
+  background-image: url('../../images/iconAccount.svg');
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: contain;
-  width: 44px;
-  height: 44px;
-  display: none;
+  display: block;
+  background-color: #F9F9F9;
+  border-radius: 50px;
 }
 
-.menu__button:hover {
-  opacity: .5;
-}
-
-.menu__button_blue {
-  /* background-image: url(../../images/menu-icon-white.svg); */
-}
-
-@media screen and (max-width: 770px) {
-  .menu__link {
-    display: none;
-  }
-
-  .menu__button {
-    display: block;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .menu__button {
-    width: 40px;
-    height: 43px;
-  }
-}

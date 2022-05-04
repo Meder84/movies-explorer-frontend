@@ -8,7 +8,7 @@ function Header(props) {
       <img
         className="logo header__logo opacity"
         src={logo}
-        alt="Текст Mesto."
+        alt="логотип"
       />
       <div className="header__links">
         {props.children}

@@ -1,13 +1,14 @@
-// import React from 'react'
-// import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-// import './SearchForm.css';
+import React from 'react'
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+import './SearchForm.css';
 
-// function SearchForm() {
-//   return (
-//     <div className="searchForm">
-//       <FilterCheckbox />
-//     </div>
-//   );
-// }
+function SearchForm() {
+  return (
+    <div className="searchForm">
 
-// export default SearchForm;
+      <FilterCheckbox />
+    </div>
+  );
+}
+
+export default SearchForm;

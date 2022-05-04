@@ -1,49 +1,28 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import Button from '../Button/Button';
-import PopupMenu from '../PopupMenu/PopupMenu';
+import { Link } from 'react-router-dom';
+import Header from '../Header/Header';
 import './Navigation.css';
+import iconAccount from '../../images/iconAccount.svg';
 
-function Navigation(props) {
-  // const [isPopupVisible, setIsPopupVisible] = useState(false);
-
-  // const handleClick = () => {
-  //   setIsPopupVisible(true);
-  // // };
-
-  // const handleClose = () => {
-  //   setIsPopupVisible(false);
-  // };
-
+function Navigation() {
   return (
-    <nav className="menu gradual-change">
-      <NavLink to="/movies"
-        activeClassName="menu__link_active"
-        className={`menu__link menu__link_film ${ props.theme ? 'menu__link_film_blue' : ''}`}
-      >
-        Фильмы
-      </NavLink>
-
-      <NavLink to="/saved-movies"
-        activeClassName="menu__link_active"
-        className={`menu__link menu__link_film ${ props.theme ? 'menu__link_film_blue' : ''}`}
-      >
-        Сохранённые фильмы
-      </NavLink>
-
-      <NavLink to="/profile"
-        activeClassName="menu__link_active"
-        className={`menu__link menu__link_profile ${ props.theme ? 'menu__link_profile_blue' : ''}`}
-      >
-        Аккаунт
-      </NavLink>
-
-      <Button
-        userClass={`menu__button ${ props.theme ? 'menu__button_blue' : ''}`}
-        onClick={handleClick}
-      />
-
-      {/* {isPopupVisible && <PopupMenu handleClose={handleClose}/>} */}
+    <nav className="navigation">
+     <Header>
+        <div className='navigation__header-conteiner'>
+          <div className='navigation__header-links'>
+            <Link to='/movies' className='navigation__header-link-movies'>
+              Фильмы
+            </Link>
+            <Link to='/saved-movies' className='navigation__header-link-saved-movies'>
+              Сохранённые фильмы
+            </Link>
+          </div>
+          <Link to='/profile' className='navigation__account-container'>
+            <h3 className='navigation__subtitle-account'>Аккаунт</h3>
+            <div className='navigation__icon-account'> </div>
+          </Link>
+        </div>
+      </Header>
     </nav>
   );
 }

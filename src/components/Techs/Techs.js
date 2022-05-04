@@ -6,7 +6,7 @@ import './Techs.css';
 function Techs () {
   return (
     <section className='techs'>
-      <HeaderBlock customClass='techs__header'>Технологии</HeaderBlock>
+      <HeaderBlock headerBlockCustomClass='techs__header'>Технологии</HeaderBlock>
       <main className='techs__main'>
         <h2 className='techs__title'>7 технологий</h2>
         <h3 className='techs__subtitle'>На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</h3>

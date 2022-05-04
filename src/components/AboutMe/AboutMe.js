@@ -30,16 +30,16 @@ function AboutMe () {
           <ul className='social__list'>
             <li className='social__elem'>
               <a className='social__link'
-                href=''
-                target='_blank' rel=''
+                href='https://www.facebook.com/'
+                target='_blank' rel='noreferrer noopener'
               >
                 Facebook
               </a>
             </li>
             <li className='social__elem'>
               <a className='social__link'
-                href=''
-                target='_blank' rel=''
+                href='https://github.com/Meder84'
+                target='_blank' rel='noreferrer noopener'
               >
                 Github
               </a>

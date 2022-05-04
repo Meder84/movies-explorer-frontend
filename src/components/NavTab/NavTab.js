@@ -4,18 +4,16 @@ import './NavTab.css';
 
 const NavTab = () => (
   <nav className="nav-tab">
-    <Link
-      to="/signup"
-      className="nav-tab__btn nav-tab__btn_register gradual-change"
-    >
+    <Link to='/signup' className='nav-tab__signup opacity'>
       Регистрация
     </Link>
-
-    <Link
-      to="/signin"
-      className="nav-tab__btn nav-tab__btn_login gradual-change"
-    >
-      Войти
+    <Link to='/signin' className='nav-tab__signin opacity'>
+      <button
+        type='submit'
+        className='nav-tab__signin-button opacity'
+      >
+        Войти
+      </button>
     </Link>
   </nav>
 );

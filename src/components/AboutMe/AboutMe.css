@@ -120,6 +120,15 @@
     height: 307px;
   }
 }
+
+@media screen and (max-width: 650px) {
+  .about-me__image {
+    width: 32%;
+    height: 32%;
+    margin: 0 auto 40px;
+  }
+}
+
 @media screen and (max-width: 550px) {
   .about-me {
     padding: 0 14px;
@@ -160,7 +169,13 @@
   .social__list {
     margin-top: 40px;
   }
+
   .social__elem {
     margin-right: 26px;
+  }
+
+  .about-me__image {
+    width: 292px;
+    height: 352px;
   }
 }

@@ -1,3 +1,3 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/font.css);
-@import url(./components/blocks/opacity/opacity.css);
+@import url(./utils/opacity.css);

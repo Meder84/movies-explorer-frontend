@@ -7,6 +7,7 @@ import promoLogo from '../../images/promoLogo.png';
 // import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 import './Promo.css';
 import { Link } from 'react-router-dom';
+import NavTab from '../NavTab/NavTab';
 
 function Promo() {
   // const currentUser = useContext(CurrentUserContext);
@@ -14,15 +15,7 @@ function Promo() {
   return (
     <section className='promo'>
       <Header>
-        <Link to='/register' className='promo__header-regis opacity'>Регистрация</Link>
-        <Link to='/login' className='promo__header-login'>
-          <button
-            type='submit'
-            className='promo__sign-button opacity'
-          >
-            Войти
-          </button>
-        </Link>
+        <NavTab ></NavTab>
       </Header>
 
       <main className='promo__main-block'>
@@ -35,7 +28,7 @@ function Promo() {
               Листайте ниже, чтобы узнать больше про этот проект и его создателя.
             </h4>
           </div>
-          <Link>
+          <Link to='/profile'>
             <button
               type='button'
               className='promo__info-button opacity'
@@ -44,13 +37,11 @@ function Promo() {
             </button>
           </Link>
         </div>
-        <Link>
-          <img
-            className='promo__main-logo opacity'
-            src={promoLogo}
-            alt='Тектовая картинка, вид земли из космоса'
-          />
-        </Link>
+        <img
+          className='promo__main-logo'
+          src={promoLogo}
+          alt='Тектовая картинка, вид земли из космоса'
+        />
       </main>
     </section>
   );

@@ -10,7 +10,7 @@ function Header(props) {
         src={logo}
         alt="логотип"
       />
-      <div className="header__links">
+      <div className={`header__links ${props.headerCustomLinks}`}>
         {props.children}
       </div>
     </header>

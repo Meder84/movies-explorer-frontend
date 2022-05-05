@@ -3,3 +3,11 @@
   height: 44px;
   background-size: contain;
 }
+
+@media screen and (max-width: 400px) {
+  .iconHamburger {
+    width: 40px;
+    height: 43px;
+  }
+}
+

@@ -8,7 +8,10 @@ import IconHamburger from '../IconHamburger/IconHamburger';
 function Navigation() {
   return (
     <nav className="navigation">
-     <Header headerCustomLinks='navigation__header-conteiner'>
+     <Header
+       headerCustom='navigation__header-block'
+       headerCustomLinks='navigation__header-conteiner'
+      >
         <div className='navigation__header-links'>
           <Link to='/movies' className='navigation__header-link-movies opacity'>
             Фильмы

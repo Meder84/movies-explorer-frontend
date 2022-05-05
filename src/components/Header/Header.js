@@ -4,7 +4,7 @@ import './Header.css';
 
 function Header(props) {
   return(
-    <header className="header">
+    <header className={`header ${props.headerCustom}`}>
       <img
         className="logo header__logo opacity"
         src={logo}

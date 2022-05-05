@@ -1,5 +1,5 @@
 import React from 'react'
-// import SearchForm from '../SearchForm/SearchForm';
+import SearchForm from '../SearchForm/SearchForm';
 // import Preloader from '../Preloader/Preloader';
 // import MoviesCardList from '../MoviesCardList/MoviesCardList';
 // import MoviesCard from '../MoviesCard/MoviesCard';
@@ -11,8 +11,8 @@ function Movies() {
   return (
     <nav className="movies">
       <Navigation />
-      {/* <SearchForm />
-      <Preloader />
+      <SearchForm />
+      {/* <Preloader />
       <MoviesCardList />
       <MoviesCard />
       <Footer /> */}

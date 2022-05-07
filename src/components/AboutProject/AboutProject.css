@@ -5,6 +5,7 @@
   margin: 0;
   background-color: #fff;
   color: #000;
+  transition: 0.4s ease-in-out;
 }
 
 .about-project__main {

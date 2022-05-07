@@ -4,6 +4,7 @@
   align-items: flex-end;
   background-color: transparent;
   min-height: 160px;
+  transition: 0.4s ease-in-out;
 }
 
 .headerBlock__title {

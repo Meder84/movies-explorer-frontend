@@ -5,6 +5,7 @@
   color: #000;
   margin: 0;
   padding: 0 70px;
+  transition: 0.4s ease-in-out;
 }
 
 .navigation__header-block {

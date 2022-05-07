@@ -1,6 +1,6 @@
 .header {
   background-color: transparent;
-  transition: 0.5s ease-in-out;
+  transition: 0.4s ease-in-out;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;

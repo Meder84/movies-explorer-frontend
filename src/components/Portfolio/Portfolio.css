@@ -3,6 +3,7 @@
   color: #000;
   padding: 100px 70px;
   margin: 0;
+  transition: 0.4s ease-in-out;
 }
 
 .portfolio__title {

@@ -1,46 +1,36 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 
 function SearchForm() {
+
   return (
-    <div className="searchForm">
-      <form name='search-form'
-        className='search__form search__box'
-      >
-        <fieldset className="search__input-box search__box">
+      <form name='search-form' className='search-form'>
+        <div className="search-form__input-container">
           <input
+            className="search-form__input"
             type="text"
-            id="search-input" name="search-input"
-            className="search__input search__box"
+            id="search-form-input"
+            name="search-form-input"
             placeholder="Фильм"
           />
-          <button>
-
+          <button
+            className='search-form__input-button opacity'
+            type='submit'
+          >
+            Найти
           </button>
-          <Button type="submit" userClass="search__button" />
-        </fieldset>
+        </div>
 
-        <fieldset className="search__switch-box search__box">
-          <div className="search__line search__box" />
-
-          <RoundSwitch
-            isChecked={props.isSwitchOn || false}
-            onChange={handleSwitchChange}
-            isDisabled={props.isSwitchDisabled}
-          />
-
-          <p className="search__switch-name search__box">
+        <fieldset className="search-form__checkbox-container">
+          <div className="search-form__checkbox-button-container">
+            <FilterCheckbox />
+          </div>
+          <span className="search-form__checkbox-text">
             Короткометражки
-          </p>
+          </span>
         </fieldset>
       </form>
-
-      <p className="search__input_error search__box">
-        {errorMessage}
-      </p>
-      {/* <FilterCheckbox /> */}
-    </div>
   );
 }
 

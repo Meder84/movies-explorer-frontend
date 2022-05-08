@@ -80,14 +80,17 @@
   }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 768px) {
   .footer {
-    padding: 0 10px;
-    background-color: #fff;
+    padding: 0 30px;
   }
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 400px) {
+  .footer {
+    padding: 0 10px;
+  }
+
   .footer__footer {
     display: flex;
     flex-direction: column-reverse;

@@ -6,6 +6,7 @@ import Main from '../Main/Main'
 // import Footer from '../Footer/Footer'
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies'
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './App.css'
 
@@ -19,10 +20,9 @@ function App () {
             <Movies />
           </Route>
 
-          <Route path="/saved-movies"
-            // loggedIn={loggedIn}
-            // component={SavedMoviesPage}
-          />
+          <Route path="/saved-movies">
+            <SavedMovies />
+          </Route>
 
           <Route path="/profile"
             // loggedIn={loggedIn}

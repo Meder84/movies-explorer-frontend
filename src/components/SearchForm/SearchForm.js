@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 
-function SearchForm() {
+function SearchForm(props) {
 
   return (
       <form name='search-form' className='search-form'>
@@ -22,11 +22,11 @@ function SearchForm() {
           </button>
         </div>
 
-        <fieldset className="search-form__checkbox-container">
-          <div className="search-form__checkbox-button-container">
+        <fieldset className={`search-form__checkbox-container ${props.customSearchFormCheckboxContainer}`}>
+          <div className='search-form__checkbox-button-container'>
             <FilterCheckbox />
           </div>
-          <span className="search-form__checkbox-text">
+          <span className='search-form__checkbox-text'>
             Короткометражки
           </span>
         </fieldset>

@@ -11,7 +11,7 @@ function MoviesCardList(props) {
       </ul>
       <div className='show-more-items'>
         <div className='show-more-items__container'>
-          <p className='show-more-items__text'>Еще</p>
+          <p className={`show-more-items__text opacity ${props.customShowMoreItemText}`}>Еще</p>
         </div>
       </div>
     </>

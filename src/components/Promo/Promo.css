@@ -12,6 +12,7 @@
   padding: 75px 0 0;
   min-height: 499px;
   box-sizing: border-box;
+  transition: 0.4s ease-in-out;
 }
 
 .promo__main-container {
@@ -20,6 +21,7 @@
   justify-content: space-between;
   width: 100%;
   max-width: 640px;
+  transition: 0.4s ease-in-out;
 }
 
 .promo__main-description {
@@ -111,7 +113,7 @@
   }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 400px) {
   .promo {
     padding: 0 14px 30px;
   }

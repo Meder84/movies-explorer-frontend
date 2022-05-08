@@ -72,7 +72,7 @@
   }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 400px) {
   .portfolio {
     padding: 69px 14px 50px;
   }
@@ -80,9 +80,7 @@
   .portfolio__elem {
     min-height: 67px;
   }
-}
 
-@media screen and (max-width: 400px) {
   .portfolio__title {
     font-size: 14px;
     line-height: 20px;

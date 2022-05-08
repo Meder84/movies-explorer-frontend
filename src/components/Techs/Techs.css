@@ -75,7 +75,7 @@
   }
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 768px) {
   .techs__header {
     min-height: 140px;
   }
@@ -102,13 +102,11 @@
   }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 400px) {
   .techs {
     padding: 0 14px 70px;
   }
-}
 
-@media screen and (max-width: 450px) {
   .techs__header {
     min-height: 120px;
   }

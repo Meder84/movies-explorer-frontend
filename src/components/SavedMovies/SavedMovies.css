@@ -1,0 +1,28 @@
+.saved-movies {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.saved-movies__like-image {
+  background-image: url(../../images/iconDelete.svg);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 14px 12px;
+  margin: 0;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  border-style: none;
+  align-self: center;
+  background-color: #FDFDFD;
+}
+
+.saved-movies__hide-text {
+  display: none;
+}
+
+.saved-movies__search-form__checkbox-container {
+  border-bottom: 1px solid #E8E8E8;
+}

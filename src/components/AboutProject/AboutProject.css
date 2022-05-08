@@ -103,10 +103,6 @@
 }
 
 @media screen and (max-width: 550px) {
-  .about-project {
-    padding: 0 18px;
-  }
-
   .about-project__info-text-elements {
     grid-template-columns: auto;
     row-gap: 16px;
@@ -123,7 +119,11 @@
   }
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 400px) {
+  .about-project {
+    padding: 0 18px;
+  }
+
   .about-project__info-button-elements {
     grid-template-columns: 100px auto;
   }

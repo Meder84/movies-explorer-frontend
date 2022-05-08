@@ -4,18 +4,19 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 import Navigation from '../Navigation/Navigation';
 import './SavedMovies.css';
+import MoviesCard from '../MoviesCard/MoviesCard';
 
 function SavedMovies() {
   return (
     <div className="saved-movies">
       <Navigation />
-      <SearchForm />
+      <SearchForm  customSearchFormCheckboxContainer='saved-movies__search-form__checkbox-container'/>
       <MoviesCardList
-        customShowMoreItemText='saved-movies__hide-text'
-        customMoviesCardLikeImage='saved-movies__like-image'
-      >
-      </MoviesCardList>
-        <SearchForm  customSearchFormCheckboxContainer='saved-movies__search-form__checkbox-container'/>
+        customMoviesCardList='saved-movies__content-container'
+        customMoviesCardDescriptionContainer='saved-movies__description-container'
+        customMoviesCardLikeImage='saved-movies__delete-image'
+        customShowMoreItems='saved-movies__hide-block-more-items'
+      />
       <Footer />
     </div>
   );

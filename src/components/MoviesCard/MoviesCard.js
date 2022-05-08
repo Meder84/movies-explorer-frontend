@@ -11,7 +11,7 @@ function MoviesCard(props) {
           src={test}
           alt='test'
         />
-        <div className='movies-card__description-container'>
+        <div className={`movies-card__description-container ${props.customMoviesCardDescriptionContainer}`}>
           <h3 className='movies-card__subtitle opacity'>Бег это свобода</h3>
           <div className={`movies-card__like-image opacity ${props.customMoviesCardLikeImage}`} />
         </div>
@@ -26,9 +26,9 @@ function MoviesCard(props) {
           src={test}
           alt='test'
         />
-        <div className='movies-card__description-container'>
+        <div className={`movies-card__description-container ${props.customMoviesCardDescriptionContainer}`}>
           <h3 className='movies-card__subtitle opacity'>Бег это свобода</h3>
-          <div className='movies-card__like-image opacity' />
+          <div className={`movies-card__like-image opacity ${props.customMoviesCardLikeImage}`} />
         </div>
         <p className='movies-card__duration'>
           1ч 44м
@@ -41,9 +41,9 @@ function MoviesCard(props) {
           src={test}
           alt='test'
         />
-        <div className='movies-card__description-container'>
+        <div className={`movies-card__description-container ${props.customMoviesCardDescriptionContainer}`}>
           <h3 className='movies-card__subtitle opacity'>Бег это свобода</h3>
-          <div className='movies-card__like-image opacity' />
+          <div className={`movies-card__like-image opacity ${props.customMoviesCardLikeImage}`} />
         </div>
         <p className='movies-card__duration'>
           1ч 44м
@@ -56,9 +56,9 @@ function MoviesCard(props) {
           src={test}
           alt='test'
         />
-        <div className='movies-card__description-container'>
+        <div className={`movies-card__description-container ${props.customMoviesCardDescriptionContainer}`}>
           <h3 className='movies-card__subtitle opacity'>Бег это свобода</h3>
-          <div className='movies-card__like-image opacity' />
+          <div className={`movies-card__like-image opacity ${props.customMoviesCardLikeImage}`} />
         </div>
         <p className='movies-card__duration'>
           1ч 44м
@@ -71,9 +71,9 @@ function MoviesCard(props) {
           src={test}
           alt='test'
         />
-        <div className='movies-card__description-container'>
+        <div className={`movies-card__description-container ${props.customMoviesCardDescriptionContainer}`}>
           <h3 className='movies-card__subtitle opacity'>Бег это свобода</h3>
-          <div className='movies-card__like-image opacity' />
+          <div className={`movies-card__like-image opacity ${props.customMoviesCardLikeImage}`} />
         </div>
         <p className='movies-card__duration'>
           1ч 44м
@@ -86,9 +86,9 @@ function MoviesCard(props) {
           src={test}
           alt='test'
         />
-        <div className='movies-card__description-container'>
+        <div className={`movies-card__description-container ${props.customMoviesCardDescriptionContainer}`}>
           <h3 className='movies-card__subtitle opacity'>Бег это свобода</h3>
-          <div className='movies-card__like-image opacity' />
+          <div className={`movies-card__like-image opacity ${props.customMoviesCardLikeImage}`} />
         </div>
         <p className='movies-card__duration'>
           1ч 44м
@@ -101,9 +101,9 @@ function MoviesCard(props) {
           src={test}
           alt='test'
         />
-        <div className='movies-card__description-container'>
+        <div className={`movies-card__description-container ${props.customMoviesCardDescriptionContainer}`}>
           <h3 className='movies-card__subtitle opacity'>Бег это свобода</h3>
-          <div className='movies-card__like-image opacity' />
+          <div className={`movies-card__like-image opacity ${props.customMoviesCardLikeImage}`} />
         </div>
         <p className='movies-card__duration'>
           1ч 44м
@@ -116,9 +116,9 @@ function MoviesCard(props) {
           src={test}
           alt='test'
         />
-        <div className='movies-card__description-container'>
+        <div className={`movies-card__description-container ${props.customMoviesCardDescriptionContainer}`}>
           <h3 className='movies-card__subtitle opacity'>Бег это свобода</h3>
-          <div className='movies-card__like-image opacity' />
+          <div className={`movies-card__like-image opacity ${props.customMoviesCardLikeImage}`} />
         </div>
         <p className='movies-card__duration'>
           1ч 44м
@@ -131,9 +131,9 @@ function MoviesCard(props) {
           src={test}
           alt='test'
         />
-        <div className='movies-card__description-container'>
+        <div className={`movies-card__description-container ${props.customMoviesCardDescriptionContainer}`}>
           <h3 className='movies-card__subtitle opacity'>Бег это свобода</h3>
-          <div className='movies-card__like-image opacity' />
+          <div className={`movies-card__like-image opacity ${props.customMoviesCardLikeImage}`} />
         </div>
         <p className='movies-card__duration'>
           1ч 44м
@@ -146,9 +146,9 @@ function MoviesCard(props) {
           src={test}
           alt='test'
         />
-        <div className='movies-card__description-container'>
+        <div className={`movies-card__description-container ${props.customMoviesCardDescriptionContainer}`}>
           <h3 className='movies-card__subtitle opacity'>Бег это свобода</h3>
-          <div className='movies-card__like-image opacity' />
+          <div className={`movies-card__like-image opacity ${props.customMoviesCardLikeImage}`} />
         </div>
         <p className='movies-card__duration'>
           1ч 44м
@@ -161,9 +161,9 @@ function MoviesCard(props) {
           src={test}
           alt='test'
         />
-        <div className='movies-card__description-container'>
+        <div className={`movies-card__description-container ${props.customMoviesCardDescriptionContainer}`}>
           <h3 className='movies-card__subtitle opacity'>Бег это свобода</h3>
-          <div className='movies-card__like-image opacity' />
+          <div className={`movies-card__like-image opacity ${props.customMoviesCardLikeImage}`} />
         </div>
         <p className='movies-card__duration'>
           1ч 44м
@@ -176,9 +176,9 @@ function MoviesCard(props) {
           src={test}
           alt='test'
         />
-        <div className='movies-card__description-container'>
+        <div className={`movies-card__description-container ${props.customMoviesCardDescriptionContainer}`}>
           <h3 className='movies-card__subtitle opacity'>Бег это свобода</h3>
-          <div className='movies-card__like-image opacity' />
+          <div className={`movies-card__like-image opacity ${props.customMoviesCardLikeImage}`} />
         </div>
         <p className='movies-card__duration'>
           1ч 44м

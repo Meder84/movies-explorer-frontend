@@ -39,6 +39,10 @@
   width: 100%;
   margin: 0 12px 17px 0;
   padding: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  outline: none;
 }
 
 .movies-card__like-image {

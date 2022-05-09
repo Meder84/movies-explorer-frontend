@@ -3,7 +3,7 @@
   overflow: hidden;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   grid-auto-rows: 281px;
   column-gap: 24px;
   row-gap: 37px;
@@ -52,7 +52,6 @@
 
 @media screen and (max-width: 768px) {
   .movies-card-list {
-    grid-template-columns: repeat(2, 1fr);
     column-gap: 30px;
     row-gap: 30px;
     padding: 70px 30px 30px;

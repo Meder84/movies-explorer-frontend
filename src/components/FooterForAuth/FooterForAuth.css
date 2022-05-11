@@ -1,0 +1,35 @@
+.footer-for-auth {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: 217px;
+  justify-content: center;
+  transition: 0.4s ease-in-out;
+}
+
+.footer-for-auth__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FF6838;
+  color: #fff;
+  width: 100%;
+  min-height: 45px;
+  border: none;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-for-auth__content {
+  display: flex;
+  width: 100%;
+  min-height: 33px;
+  justify-content: center;
+  align-items: flex-end;
+}

@@ -1,0 +1,131 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: fit-content;
+  margin: 0;
+  padding: 0;
+  transition: 0.4s ease-in-out;
+}
+
+.profile__header {
+  margin-bottom: 0;
+}
+
+.profile__main {
+  flex-direction: column;
+  justify-content: flex-end;
+  display: flex;
+  box-sizing: border-box;
+  min-width: 410px;
+  min-height: 323px;
+  transition: 0.4s ease-in-out;
+}
+
+.profile__form {
+  min-height: 249px;
+}
+
+.profile__input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profile__input-container_border-none{
+  border-bottom: none;
+}
+
+.profile__input-item {
+  text-align: end;
+  width: 122px;
+}
+
+.profile__footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  min-width: 410px;
+  min-height: 303px;
+  transition: 0.4s ease-in-out;
+}
+
+.profile__footer-container {
+  display: flex;
+  min-height: 118px;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.profile__footer-button {
+  display: flex;
+  background-color: #fff;
+  min-height: 16px;
+  color: #000;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.profile__footer-button-logout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  color: #EE3465;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  border: none;
+  background-color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__main {
+    min-height: 457px;
+  }
+
+  .profile__form {
+    min-height: 220px;
+  }
+
+  .profile__footer {
+    min-height: 493px;
+  }
+
+  .profile__footer-container {
+    min-height: 317px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .profile__main {
+    min-width: calc(100% - ( 30px * 2 ));
+  }
+
+  .profile__footer {
+    min-width: calc(100% - ( 30px * 2 ));
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .profile__main {
+    min-height: 275px;
+  }
+
+  .profile__form {
+    min-height: 205px;
+  }
+
+  .profile__footer {
+    min-height: 431px;
+  }
+
+  .profile__footer-container {
+    min-height: 86px;
+}
+}

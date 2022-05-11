@@ -1,0 +1,67 @@
+.register {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 390px;
+  margin: 0 auto;
+}
+
+.register__header {
+
+}
+
+.register__main {
+
+}
+
+.register__form {
+
+}
+
+.register__input__container {
+
+}
+
+.register__input__item {
+
+}
+
+.register__input__container {
+
+}
+
+.register__input__item {
+
+}
+
+.register__input__container {
+
+}
+
+.register__input__container_border-none {
+
+}
+
+.register__input__item {
+
+}
+
+.register__footer {
+
+}
+
+.register__footer__container {
+
+}
+
+.register__footer__button {
+
+}
+
+.register__footer__text {
+
+}
+
+.register__footer__button-login {
+
+}

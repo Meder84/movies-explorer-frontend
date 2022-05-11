@@ -1,3 +1,4 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/font.css);
 @import url(./utils/opacity.css);
+@import url(./utils/hidePartText.css);

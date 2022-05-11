@@ -4,11 +4,13 @@ import Main from '../Main/Main'
 // import Navigation from '../Navigation/Navigation'
 // import Header from '../Header/Header'
 // import Footer from '../Footer/Footer'
+import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies'
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './App.css'
+import Profile from '../Profile/Profile';
 
 function App () {
 
@@ -24,12 +26,9 @@ function App () {
             <SavedMovies />
           </Route>
 
-          <Route path="/profile"
-            // loggedIn={loggedIn}
-            // component={ProfilePage}
-            // onLogout={handleLogout}
-          />
-
+          <Route path="/profile">
+            <Profile />
+          </Route>
           <Route path="/signin">
             {/* <Login onLogin={handleLogin}
               errorMessage={resultMessage}
@@ -38,10 +37,7 @@ function App () {
           </Route>
 
           <Route path="/signup">
-            {/* <Register onRegister={handleRegister}
-              errorMessage={resultMessage}
-              resetMessage={resetResultMessage}
-              history={history} */}
+            <Register />
           </Route>
 
           <Route exact path="/"> {/*exact ===  полный url */}

@@ -60,8 +60,11 @@
 }
 
 .footer__link {
-  color: #000000;
   list-style-type: none;
+}
+
+.footer__link-elem {
+  color: #000000;
   text-decoration: none;
   font-weight: 400;
   font-size: 13px;
@@ -70,7 +73,7 @@
   margin: 0 20px 0 0;
 }
 
-.footer__link:last-child {
+.footer__link-elem:last-child {
  margin-right: 0;
 }
 

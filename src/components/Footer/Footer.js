@@ -13,7 +13,7 @@ function Footer () {
         <p className="footer__copyright">&copy; {new Date().getFullYear()}</p>
         <ul className="footer__links">
           <li className="footer__link">
-            <a className="footer__link footer__text"
+            <a className="footer__link-elem opacity"
               href="https://praktikum.yandex.ru"
               target="_blank" rel="noreferrer noopener"
             >
@@ -22,7 +22,7 @@ function Footer () {
           </li>
 
           <li className="footer__link">
-            <a className="footer__link opacity"
+            <a className="footer__link-elem opacity"
               href="https://github.com"
               target="_blank" rel="noreferrer noopener"
             >
@@ -31,7 +31,7 @@ function Footer () {
           </li>
 
           <li className="footer__link">
-            <a className="footer__link opacity"
+            <a className="footer__link-elem opacity"
               href="https://www.facebook.com"
               target="_blank" rel="noreferrer noopener"
             >

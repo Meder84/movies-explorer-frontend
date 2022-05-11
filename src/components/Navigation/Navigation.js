@@ -5,11 +5,11 @@ import './Navigation.css';
 import iconAccount from '../../images/iconAccount.svg';
 import IconHamburger from '../IconHamburger/IconHamburger';
 
-function Navigation() {
+function Navigation(props) {
   return (
     <nav className="navigation">
      <Header
-       headerCustom='navigation__header-block'
+       headerCustom={`navigation__header-block ${props.customNavigationHeaderBlock}`}
        headerCustomLinks='navigation__header-conteiner'
       >
         <div className='navigation__header-links'>

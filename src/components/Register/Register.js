@@ -9,7 +9,10 @@ function Register() {
   return (
     <div className="register">
       <header className='register__header'>
-        <Header />
+        <Header
+          headerCustom='register__header__elem'
+          headerCustomLinks='register__header__links'
+        />
       </header>
       <main className='register__main'>
         <Form
@@ -31,7 +34,7 @@ function Register() {
           </Input>
 
           <Input
-            customInputContainer='register__input__container'
+            customInputContainer='register__input__container register__input__container_error'
             customInputItem='register__input__item'
             type="email"
             id="email" name="email"
@@ -44,7 +47,7 @@ function Register() {
 
           <Input
             customInputContainer='register__input__container register__input__container_border-none'
-            customInputItem='register__input__item'
+            customInputItem='register__input__item register__input__item_error'
             type="password"
             id="password" name="password"
             maxLength="30" minLength="2"
@@ -62,16 +65,15 @@ function Register() {
           customFooterForAuthButton='register__footer__button'
           buttonType='submit'
           buttonText='Зарегистрироваться'
+          customFooterForAuthTextContainer='register__footer__text-container'
         >
-          <div className='register__footer__text-container'>
-            <p className='register__footer__text'>Уже зарегистрированы?</p>
+          <p className='register__footer__text'>Уже зарегистрированы?</p>
             <button
               className='register__footer__button-login'
               type='button'
             >
               Войти
             </button>
-          </div>
         </FooterForAuth>
       </footer>
     </div>

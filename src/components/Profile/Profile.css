@@ -58,6 +58,10 @@
 .profile__input-item {
   text-align: end;
   width: 122px;
+  margin: 0;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
 }
 
 .profile__footer {

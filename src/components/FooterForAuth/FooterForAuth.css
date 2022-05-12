@@ -26,8 +26,10 @@
   padding: 0;
 }
 
-.footer-for-auth__content {
+.footer-for-auth__text-container {
   display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
   width: 100%;
   min-height: 33px;
   justify-content: center;

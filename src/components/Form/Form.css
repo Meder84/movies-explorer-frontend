@@ -29,3 +29,13 @@
   padding: 0;
   width: 100%;
 }
+
+@media screen and (max-width: 470px) {
+  .form {
+    min-height: 316px;
+  }
+
+  .form__title {
+    text-align: center;
+  }
+}

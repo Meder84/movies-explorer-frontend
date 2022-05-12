@@ -5,7 +5,7 @@ import './IconHamburger.css';
 function IconHamburger(props) {
   return (
     <img
-     className={`iconHamburger ${props.customIconHamburger}`}
+     className={`iconHamburger opacity ${props.customIconHamburger}`}
      src={iconHamburger}
      alt='Иконка гамбургер меню'
     />

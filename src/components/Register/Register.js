@@ -15,9 +15,10 @@ function Register() {
         <Form
           customForm='register__form'
           name='register'
-          title='Привет, Медер!'
+          title='Добро пожаловать!'
         >
           <Input
+            customInput='register__input'
             customInputContainer='register__input__container'
             customInputItem='register__input__item'
             type="text"
@@ -49,6 +50,7 @@ function Register() {
             maxLength="30" minLength="2"
             placeholder="Пароль" required
             errorId="password-error"
+            errorText='Что-то пошло не так...'
           >
             Пароль
           </Input>
@@ -61,7 +63,7 @@ function Register() {
           buttonType='submit'
           buttonText='Зарегистрироваться'
         >
-          <div>
+          <div className='register__footer__text-container'>
             <p className='register__footer__text'>Уже зарегистрированы?</p>
             <button
               className='register__footer__button-login'

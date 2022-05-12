@@ -1,22 +1,22 @@
 import React from 'react';
 import './Input.css';
 
-const Input = ({ type, isError, errorText, errorId, children, ...props}) => (
-  <ul className={`input ${props.customInput}`}>
-    <li className={`input__container ${props.customInputContainer}`}>
-      <label className={`input__label ${props.customInputLabel}`}>
+const Input = ({ type, errorText, errorId, children, ...props}) => (
+  <ul className={`input ${props.customInput || ''}`}>
+    <li className={`input__container ${props.customInputContainer || ''}`}>
+      <label className={`input__label ${props.customInputLabel || ''}`}>
         {children}
       </label>
 
       <input
         type={type}
-        className={`input__item ${props.customInputItem} hide-part-text`}
+        className={`input__item ${props.customInputItem || ''} hide-part-text`}
         {...props}
       />
     </li>
 
     <span
-      className={`input__error ${isError ? 'input__error_show' : ''}`}
+      className={`input__error input__error_show ${props.customInputError || ''}`}
       id={errorId}
     >
       {errorText}

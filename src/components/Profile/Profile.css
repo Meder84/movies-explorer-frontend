@@ -29,10 +29,26 @@
   min-height: 249px;
 }
 
+.profile__input {
+  min-height: 48px;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+}
+
 .profile__input-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  min-height: 30px;
+}
+
+.profile__input__label {
+  text-align: start;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  min-width: 141px;
 }
 
 .profile__input-container_border-none{

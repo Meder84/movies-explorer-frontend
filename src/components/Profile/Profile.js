@@ -18,7 +18,9 @@ function Profile() {
           title='Привет, Медер!'
         >
           <Input
+            customInput='profile__input'
             customInputContainer='profile__input-container'
+            customInputLabel='profile__input__label'
             customInputItem='profile__input-item'
             type="text"
             id="name" name="name"
@@ -30,7 +32,9 @@ function Profile() {
           </Input>
 
           <Input
+            customInput='profile__input'
             customInputContainer='profile__input-container profile__input-container_border-none'
+            customInputLabel='profile__input__label'
             customInputItem='profile__input-item'
             type="email"
             id="email" name="email"

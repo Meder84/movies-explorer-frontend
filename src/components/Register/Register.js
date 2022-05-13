@@ -21,9 +21,6 @@ function Register() {
           title='Добро пожаловать!'
         >
           <Input
-            customInput='register__input'
-            customInputContainer='register__input__container'
-            customInputItem='register__input__item'
             type="text"
             id="name" name="name"
             maxLength="30" minLength="2"
@@ -34,8 +31,7 @@ function Register() {
           </Input>
 
           <Input
-            customInputContainer='register__input__container register__input__container_error'
-            customInputItem='register__input__item'
+            customInputContainer='register__input__container_error'
             type="email"
             id="email" name="email"
             maxLength="30" minLength="2"
@@ -46,8 +42,7 @@ function Register() {
           </Input>
 
           <Input
-            customInputContainer='register__input__container register__input__container_border-none'
-            customInputItem='register__input__item register__input__item_error'
+            customInputItem='register__input__item_error'
             type="password"
             id="password" name="password"
             maxLength="30" minLength="2"

@@ -90,6 +90,12 @@
   background-color: #fff;
 }
 
+@media screen and (max-width: 768px) {
+  .register__header {
+    min-height: 288px;
+  }
+}
+
 @media screen and (max-width: 470px) {
   .register {
     width: 100%;
@@ -122,3 +128,17 @@
     display: none;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .register__footer__text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .register__footer__button-login {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+

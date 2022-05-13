@@ -35,3 +35,14 @@
   justify-content: center;
   align-items: flex-end;
 }
+
+@media screen and (max-width: 320px) {
+  .footer-for-auth__button{
+    font-size: 12px;
+  line-height: 15px;
+  }
+
+  .footer-for-auth__text-container {
+    min-height: 29px;
+  }
+}

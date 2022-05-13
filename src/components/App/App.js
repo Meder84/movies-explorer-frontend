@@ -5,6 +5,7 @@ import Main from '../Main/Main'
 // import Header from '../Header/Header'
 // import Footer from '../Footer/Footer'
 import Register from '../Register/Register';
+import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies'
@@ -29,15 +30,13 @@ function App () {
           <Route path="/profile">
             <Profile />
           </Route>
-          <Route path="/signin">
-            {/* <Login onLogin={handleLogin}
-              errorMessage={resultMessage}
-              resetMessage={resetResultMessage}
-              history={history} */}
-          </Route>
 
           <Route path="/signup">
             <Register />
+          </Route>
+
+          <Route path="/signin">
+            <Login />
           </Route>
 
           <Route exact path="/"> {/*exact ===  полный url */}

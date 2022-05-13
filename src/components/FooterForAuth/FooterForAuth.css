@@ -5,7 +5,7 @@
   margin: 0;
   padding: 0;
   min-height: 217px;
-  justify-content: center;
+  justify-content: flex-end;
   transition: 0.4s ease-in-out;
 }
 
@@ -39,10 +39,14 @@
 @media screen and (max-width: 320px) {
   .footer-for-auth__button{
     font-size: 12px;
-  line-height: 15px;
+    line-height: 15px;
   }
 
   .footer-for-auth__text-container {
     min-height: 29px;
+  }
+
+  .footer-for-auth {
+    padding-bottom: 30px;
   }
 }

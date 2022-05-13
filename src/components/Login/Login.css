@@ -21,7 +21,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 357px;
+  min-height: fit-content;
   margin: 0;
   padding: 22px 0 0 0;
   box-sizing: border-box;
@@ -31,6 +31,7 @@
 .login__form {
   text-align: start;
   min-height: 225px;
+  padding-bottom: 18px;
 }
 
 .login__input{
@@ -56,7 +57,9 @@
 .login__footer {
   display: flex;
   width: 100%;
-  min-height: 217px;
+  min-height: 327px;
+  justify-content: flex-end;
+  padding-bottom: 70px;
 }
 
 .login__footer__container {
@@ -131,6 +134,10 @@
 }
 
 @media screen and (max-width: 320px) {
+  .login__form {
+    min-height: 265px;
+  }
+
   .login__footer__text {
     font-size: 12px;
     line-height: 15px;

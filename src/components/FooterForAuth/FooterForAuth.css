@@ -1,9 +1,10 @@
 .footer-for-auth {
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
   width: 100%;
   margin: 0;
-  padding: 0;
+  padding-bottom: 70px;
   min-height: 217px;
   justify-content: flex-end;
   transition: 0.4s ease-in-out;
@@ -36,7 +37,19 @@
   align-items: flex-end;
 }
 
+@media screen and (max-width: 768px) {
+  .footer-for-auth {
+    justify-content: flex-start;
+    padding: 0;
+  }
+}
+
 @media screen and (max-width: 320px) {
+  .footer-for-auth {
+    padding-bottom: 30px;
+    min-height: fit-content;
+  }
+
   .footer-for-auth__button{
     font-size: 12px;
     line-height: 15px;
@@ -44,9 +57,5 @@
 
   .footer-for-auth__text-container {
     min-height: 29px;
-  }
-
-  .footer-for-auth {
-    padding-bottom: 30px;
   }
 }

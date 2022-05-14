@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
-import './Navigation.css';
-import iconAccount from '../../images/iconAccount.svg';
 import IconHamburger from '../IconHamburger/IconHamburger';
+import PopupMenu from '../PopupMenu/PopupMenu';
+import Account from '../Account/Account';
+import './Navigation.css';
 
 function Navigation(props) {
   return (
@@ -20,11 +21,11 @@ function Navigation(props) {
             Сохранённые фильмы
           </Link>
         </div>
-        <Link to='/profile' className='navigation__account-container opacity'>
-          <h3 className='navigation__subtitle-account'>Аккаунт</h3>
-          <div className='navigation__icon-account'> </div>
+        <Link to='/profile' className='navigation__account-container'>
+          <Account />
         </Link>
         <IconHamburger customIconHamburger='navigation__icon-hamburger'/>
+        <PopupMenu />
       </Header>
     </nav>
   );

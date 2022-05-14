@@ -56,10 +56,11 @@
 
 .login__footer {
   display: flex;
+  align-items: flex-end;
   width: 100%;
   min-height: 327px;
-  justify-content: flex-end;
-  padding-bottom: 70px;
+  box-sizing: border-box;
+  transition: 0.4s ease-in-out;
 }
 
 .login__footer__container {
@@ -98,6 +99,16 @@
   .login__header {
     min-height: 288px;
   }
+
+  .login__footer {
+    min-height: 489px;
+    align-items: center;
+    padding-bottom: 53px;
+  }
+
+  .login__footer__container {
+    min-height: fit-content;
+  }
 }
 
 @media screen and (max-width: 470px) {
@@ -122,6 +133,7 @@
 
   .login__footer {
     width: calc(100% - ( 30px * 2 ));
+    padding: 0;
   }
 
   .login__header__elem {
@@ -134,8 +146,17 @@
 }
 
 @media screen and (max-width: 320px) {
+  .login__main {
+    min-height: fit-content;
+  }
+
   .login__form {
     min-height: 265px;
+  }
+
+  .login__footer {
+    align-items: flex-end;
+    min-height: 371px;
   }
 
   .login__footer__text {

@@ -1,22 +1,22 @@
-// import React from 'react';
-// import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-// import './PageNotFound.css';
-// import Bye from '../images/404.svg';
+import './PageNotFound.css';
 
-// function PageNotFound () {
-//   return (
-//     <div className="not-found">
-//       <h3 className="not-found__title">
-//        <span>404</span> - Страница не найдена
-//       </h3>
-//       <img className="not-found__image" src={Bye} alt=""/>
-//       <p className="not-found__text">
-//        Ой, здесь ничего нет
-//       </p>
-//       <Link className="button button_type_to-main" to="/">Назад</Link>
-//     </div>
-//   )
-// }
+function PageNotFound () {
+  return (
+    <div className="page-not-found">
+      <div className="page-not-found__info-container">
+        <h2 className="page-not-found__title">
+          404
+        </h2>
+        <p className="page-not-found__text">
+          Страница не найдена
+        </p>
+      </div>
+      <Link className="page-not-found__button opacity" to="/">Назад</Link>
+    </div>
+  )
+}
 
-// export default PageNotFound;
+export default PageNotFound;

@@ -54,6 +54,7 @@
 
 .register__footer {
   display: flex;
+  box-sizing: border-box;
   width: 100%;
   min-height: 217px;
 }
@@ -94,6 +95,15 @@
   .register__header {
     min-height: 288px;
   }
+
+  .register__footer {
+    min-height: 379px;
+    padding-top: 69px;
+  }
+
+  .register__footer__container {
+
+  }
 }
 
 @media screen and (max-width: 470px) {
@@ -130,6 +140,13 @@
 }
 
 @media screen and (max-width: 320px) {
+  .register__footer {
+    min-height: 261px;
+    padding: 0;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
   .register__footer__text {
     font-size: 12px;
     line-height: 15px;

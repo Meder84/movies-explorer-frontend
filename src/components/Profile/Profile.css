@@ -66,9 +66,9 @@
   flex-direction: column;
   justify-content: flex-end;
   box-sizing: border-box;
+  transition: 0.4s ease-in-out;
   min-width: 410px;
   min-height: 303px;
-  transition: 0.4s ease-in-out;
 }
 
 .profile__footer-container {
@@ -84,8 +84,8 @@
   min-height: 16px;
   color: #000;
   font-weight: 400;
-  font-size: 13px;
-  line-height: 16px;
+  font-size: 12px;
+  line-height: 15px;
 }
 
 .profile__footer-button-logout {
@@ -95,8 +95,8 @@
   width: 100%;
   color: #EE3465;
   font-weight: 500;
-  font-size: 13px;
-  line-height: 16px;
+  font-size: 12px;
+  line-height: 15px;
   border: none;
   background-color: #fff;
 }
@@ -111,11 +111,13 @@
   }
 
   .profile__footer {
-    min-height: 493px;
+    min-height: 379px;
+    margin-top:175px ;
+    justify-content: flex-start;
   }
 
   .profile__footer-container {
-    min-height: 317px;
+    min-height: fit-content;
   }
 }
 
@@ -140,9 +142,12 @@
 
   .profile__footer {
     min-height: 431px;
+    margin: 0;
+    justify-content: flex-end;
   }
 
   .profile__footer-container {
     min-height: 86px;
+    padding: 0;
 }
 }

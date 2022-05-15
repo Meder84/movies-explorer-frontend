@@ -1,8 +1,6 @@
 import React from 'react';
 import HeaderBlock from '../HeaderBlock/HeaderBlock';
-import { Link } from 'react-router-dom';
-import imageDiploma from '../../images/imageDiploma.jpg'
-
+import imageDiploma from '../../images/imageDiploma.jpg';
 import './AboutMe.css';
 
 function AboutMe () {

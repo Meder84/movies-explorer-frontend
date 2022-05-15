@@ -1,6 +1,6 @@
 import React from 'react';
-import './MoviesCard.css';
 import test from '../../images/test.jpg';
+import './MoviesCard.css';
 
 function MoviesCard(props) {
   return (

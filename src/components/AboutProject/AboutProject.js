@@ -1,11 +1,9 @@
 import React from 'react';
 import HeaderBlock from '../HeaderBlock/HeaderBlock';
-// import ScrollableAnchor from 'react-scrollable-anchor'
 import './AboutProject.css';
 
 function AboutProject () {
   return (
-    // <ScrollableAnchor id={'about-project'}>
       <section
         className='about-project'
         id='about-project'
@@ -37,7 +35,6 @@ function AboutProject () {
           </div>
         </main>
       </section>
-    // </ScrollableAnchor>
   );
 }
 export default AboutProject;

@@ -13,6 +13,7 @@
 
 .header__logo {
   display: block;
+  background-image: url('../../images/logo.svg');
   text-decoration: none;
   box-sizing: border-box;
   width: 38px;

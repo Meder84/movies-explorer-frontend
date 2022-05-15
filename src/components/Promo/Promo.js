@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
 import Header from '../Header/Header';
 import promoLogo from '../../images/promoLogo.png';
+// import ScrollableAnchor from 'react-scrollable-anchor'
 // import NavTab from '../NavTab/NavTab';
 // import Navigation from '../Navigation/Navigation';
 
 // import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
-import './Promo.css';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import { Link, animateScroll as scroll } from "react-scroll";
 import NavTab from '../NavTab/NavTab';
+import './Promo.css';
 
 function Promo() {
   // const currentUser = useContext(CurrentUserContext);
@@ -28,7 +30,10 @@ function Promo() {
               Листайте ниже, чтобы узнать больше про этот проект и его создателя.
             </h4>
           </div>
-          <Link to='/profile'>
+
+          <Link
+            to='about-project'
+          >
             <button
               type='button'
               className='promo__info-button opacity'

@@ -13,7 +13,7 @@ const Portfolio = () => (
         </h4>
         <a
           className="portfolio__link"
-          href=""
+          href="https://github.com/Meder84/how-to-learn"
           target="_blank" rel="noreferrer noopener"
         >
           ↗
@@ -26,7 +26,7 @@ const Portfolio = () => (
         </h4>
         <a
           className="portfolio__link"
-          href=""
+          href="https://meder84.github.io/russian-travel/"
           target="_blank" rel="noreferrer noopener"
         >
           ↗
@@ -39,7 +39,7 @@ const Portfolio = () => (
         </h4>
         <a
           className="portfolio__link"
-          href=""
+          href="https://github.com/Meder84/mesto-js"
           target="_blank" rel="noreferrer noopener"
         >
           ↗

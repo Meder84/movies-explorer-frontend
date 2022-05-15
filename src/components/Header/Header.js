@@ -1,18 +1,18 @@
 import React from "react";
-import logo from '../../images/logo.svg';
+import { Link } from "react-router-dom";
 import './Header.css';
 
 function Header(props) {
   return(
     <header className={`header ${props.headerCustom}`}>
-      <img
+      <Link
+        to='/'
         className="logo header__logo opacity"
-        src={logo}
-        alt="логотип"
-      />
-      <div className={`header__links ${props.headerCustomLinks}`}>
-        {props.children}
-      </div>
+      >
+      </Link>
+        <div className={`header__links ${props.headerCustomLinks}`}>
+          {props.children}
+        </div>
     </header>
   );
 };

@@ -8,12 +8,7 @@ const NavTab = () => (
       Регистрация
     </Link>
     <Link to='/signin' className='nav-tab__signin opacity'>
-      <button
-        type='submit'
-        className='nav-tab__signin-button opacity'
-      >
-        Войти
-      </button>
+      Войти
     </Link>
   </nav>
 );

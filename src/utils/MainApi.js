@@ -1,6 +1,6 @@
 import { BASE_URL } from './auth';
 
-class Api {
+class MainApi {
   constructor(config) {
     this._url = config.baseUrl;
     this._headers = config.headers;
@@ -90,7 +90,7 @@ class Api {
   }
 }
 
-const api = new Api({
+const api = new MainApi({
   // baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-33/',
   baseUrl: BASE_URL,
   headers: {

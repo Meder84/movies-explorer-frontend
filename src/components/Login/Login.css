@@ -34,20 +34,8 @@
   padding-bottom: 18px;
 }
 
-.login__input{
-
-}
-
-.login__input__container {
-
-}
-
 .login__input__container_error {
   border-bottom: 1px solid #FF6838;
-}
-
-.login__input__item {
-
 }
 
 .login__input__item_error {
@@ -61,18 +49,6 @@
   min-height: 327px;
   box-sizing: border-box;
   transition: 0.4s ease-in-out;
-}
-
-.login__footer__container {
-
-}
-
-.login__footer__button {
-
-}
-
-.login__footer__text-container {
-
 }
 
 .login__footer__text {

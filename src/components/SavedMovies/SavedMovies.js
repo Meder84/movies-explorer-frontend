@@ -4,7 +4,6 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 import Navigation from '../Navigation/Navigation';
 import './SavedMovies.css';
-import MoviesCard from '../MoviesCard/MoviesCard';
 
 function SavedMovies() {
   return (

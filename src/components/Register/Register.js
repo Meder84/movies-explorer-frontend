@@ -64,7 +64,7 @@ function Register() {
         >
           <p className='register__footer__text'>Уже зарегистрированы?</p>
             <button
-              className='register__footer__button-login'
+              className='register__footer__button-login opacity'
               type='button'
             >
               Войти

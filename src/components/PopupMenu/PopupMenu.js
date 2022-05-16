@@ -4,11 +4,14 @@ import Account from '../Account/Account';
 
 import './PopupMenu.css';
 
-function PopupMenu() {
+function PopupMenu(props) {
 
   return (
     <div className="popup-menu">
-      <button className="popup-menu__btn-close opacity" />
+      <button
+        className="popup-menu__btn-close opacity"
+        onClick={props.handleClose}
+      />
       <div className="popup-menu__container">
         <div className='popup-menu__links' >
           <NavLink exact to="/"

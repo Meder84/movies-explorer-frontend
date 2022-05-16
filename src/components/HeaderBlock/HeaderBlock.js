@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './HeaderBlock.css';
 
 function HeaderBlock (props) {

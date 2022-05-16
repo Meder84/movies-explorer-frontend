@@ -1,25 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Header from '../Header/Header';
 import promoLogo from '../../images/promoLogo.png';
-// import ScrollableAnchor from 'react-scrollable-anchor'
-// import NavTab from '../NavTab/NavTab';
-// import Navigation from '../Navigation/Navigation';
-
-// import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
-// import { Link } from 'react-router-dom';
 import { Link, animateScroll as scroll } from "react-scroll";
 import NavTab from '../NavTab/NavTab';
 import './Promo.css';
 
 function Promo() {
-  // const currentUser = useContext(CurrentUserContext);
-
   return (
     <section className='promo'>
       <Header>
         <NavTab ></NavTab>
       </Header>
-
       <main className='promo__main-block'>
         <div className='promo__main-container'>
           <div className='promo__main-description'>
@@ -33,13 +24,9 @@ function Promo() {
 
           <Link
             to='about-project'
+            className='promo__info-button opacity'
           >
-            <button
-              type='button'
-              className='promo__info-button opacity'
-            >
-              Узнать больше
-            </button>
+            Узнать больше
           </Link>
         </div>
         <img

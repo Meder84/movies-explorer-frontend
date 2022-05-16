@@ -143,4 +143,8 @@
     .promo__subtitle {
       margin: 24px 0 80px;
   }
+
+  .promo__main-container {
+    align-items: center;
+  }
 }

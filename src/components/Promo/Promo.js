@@ -11,7 +11,6 @@ function Promo() {
       <Header>
         <NavTab ></NavTab>
       </Header>
-
       <main className='promo__main-block'>
         <div className='promo__main-container'>
           <div className='promo__main-description'>
@@ -25,13 +24,9 @@ function Promo() {
 
           <Link
             to='about-project'
+            className='promo__info-button opacity'
           >
-            <button
-              type='button'
-              className='promo__info-button opacity'
-            >
-              Узнать больше
-            </button>
+            Узнать больше
           </Link>
         </div>
         <img

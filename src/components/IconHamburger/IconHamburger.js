@@ -8,6 +8,7 @@ function IconHamburger(props) {
      className={`iconHamburger opacity ${props.customIconHamburger}`}
      src={iconHamburger}
      alt='Иконка гамбургер меню'
+     onClick={props.onClick}
     />
   )
 }

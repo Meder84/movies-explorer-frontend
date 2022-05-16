@@ -6,12 +6,13 @@ function SearchForm(props) {
 
   return (
     <form name='search-form' className='search-form'>
-      <div className="search-form__input-container">
+      <div className="search-form__input-container opacity">
         <input
-          className="search-form__input"
+          className="search-form__input opacity"
           type="text"
           id="search-form-input"
           name="search-form-input"
+          required
           placeholder="Фильм"
         />
         <button

@@ -1,11 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../Header/Header';
 import Form from '../Form/Form';
 import Input from '../Input/Input';
 import FooterForAuth from '../FooterForAuth/FooterForAuth';
 import './Register.css';
+import { Link } from 'react-router-dom';
 
-function Register() {
+
+function Register(props) {
+  const [state, setState] = useState({
+    password: '',
+    email: '',
+  })
+
+  function handleChange (e) {
+    const {name, value} = e.target;
+    setState(old => ({
+      ...old,
+      [name]: value,
+    }));
+  };
+
+  const formReset = () => {
+    setState({password: '', email: '',});
+  }
+
+  function handleSubmit (e) {
+    e.preventDefault();
+    const {password, email} = state;
+    if (!password || !email ) return;
+
+    props.handleRegister(password, email, formReset);
+  }
+
   return (
     <div className="register">
       <header className='register__header'>
@@ -63,12 +90,14 @@ function Register() {
           customFooterForAuthTextContainer='register__footer__text-container'
         >
           <p className='register__footer__text'>Уже зарегистрированы?</p>
-            <button
-              className='register__footer__button-login opacity'
-              type='button'
-            >
-              Войти
-            </button>
+            <Link to={'/signin'}>
+              <button
+                className='register__footer__button-login opacity'
+                type='button'
+              >
+                Войти
+              </button>
+            </Link>
         </FooterForAuth>
       </footer>
     </div>

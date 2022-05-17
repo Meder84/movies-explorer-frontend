@@ -4,6 +4,7 @@ import Form from '../Form/Form';
 import Input from '../Input/Input';
 import FooterForAuth from '../FooterForAuth/FooterForAuth';
 import './Login.css';
+import { Link } from 'react-router-dom';
 
 function Login() {
   return (
@@ -54,12 +55,14 @@ function Login() {
           customFooterForAuthTextContainer='login__footer__text-container'
         >
           <p className='login__footer__text'>Ещё не зарегистрированы?</p>
-            <button
-              className='login__footer__button-login opacity'
-              type='button'
-            >
-              Регистрация
-            </button>
+            <Link to={'/signup'}>
+              <button
+                className='login__footer__button-login opacity'
+                type='button'
+              >
+                Регистрация
+              </button>
+            </Link>
         </FooterForAuth>
       </footer>
     </div>

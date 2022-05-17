@@ -10,7 +10,7 @@ function FooterForAuth (props) {
       >
         {props.buttonText}
       </button>
-      <div className={`footer-for-auth__text-container opacity ${props.customFooterForAuthTextContainer}`}>
+      <div className={`footer-for-auth__text-container ${props.customFooterForAuthTextContainer}`}>
         {props.children}
       </div>
     </div>

@@ -5,12 +5,22 @@ function FooterForAuth (props) {
   return (
     <div className={`footer-for-auth ${props.customFooterForAuth}`}>
       <button
-        className={`footer-for-auth__button opacity ${props.customFooterForAuthButton}`}
-        type={props.buttonType || 'button'}
+        className={`
+          footer-for-auth__button
+          opacity
+          ${props.customFooterForAuthButton}
+        `}
+        type='submit'
+        disabled={props.disabled}
       >
         {props.buttonText}
       </button>
-      <div className={`footer-for-auth__text-container ${props.customFooterForAuthTextContainer}`}>
+      <div
+        className={`
+          footer-for-auth__text-container
+          ${props.customFooterForAuthTextContainer}
+        `}
+      >
         {props.children}
       </div>
     </div>

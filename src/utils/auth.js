@@ -1,6 +1,6 @@
 // export const BASE_URL = 'https://auth.nomoreparties.co';
-// export const BASE_URL = 'http://localhost:3001';
-export const BASE_URL = 'https://https://api.asman.students.nomoredomains.work/movies';
+export const BASE_URL = 'http://localhost:3001';
+// export const BASE_URL = 'https://https://api.asman.students.nomoredomains.work/movies';
 
 const request = ({url, method = 'POST', token, body}) => {
   const config = {
@@ -22,17 +22,17 @@ const request = ({url, method = 'POST', token, body}) => {
   })
 }
 
-export const register = (password, email) => {
+export const register = (name,  email, password) => {
   return request({
     url: '/signup',
-    body: {password, email},
+    body: {name, email, password},
   })
 }
 
-export const authorize = (password, email) => {
+export const authorize = (email, password) => {
   return request({
     url: '/signin',
-    body: {password, email},
+    body: {email, password},
   })
 };
 

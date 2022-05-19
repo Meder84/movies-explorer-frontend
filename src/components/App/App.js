@@ -13,29 +13,57 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 import './App.css'
 
 export const initState = {
-  password: '',
+  name: '',
   email: '',
-  message: '',
-  imgTooltip: '',
+  password: '',
+  // message: '',
   loggedIn: false,
 }
 
 function App () {
   const history = useHistory();
-  const [currentUser, setCurrentUser] = useState(initState);
   const [state, setState] = useState(initState);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     tokenCheck();
   }, []);
 
-  function handleLogin (password, email, formReset) {
-    auth.authorize(password, email)
+  function handleRegister(name, email, password, formReset) {
+    let messageText = '';
+
+    auth.register(name, email, password)
+    .then(() => {
+      setState((old) => ({
+        ...old
+      }));
+
+      formReset();
+      history.push('/signin');
+    })
+    .catch((err) => {
+      switch (err) {
+        case 400:
+          messageText = "Некорректные данные";
+          break;
+        case 409:
+          messageText = `Пользователь ${email} уже существует`;
+          break;
+        default:
+          messageText = "Что-то пошло не так! Попробуйте ещё раз.";
+      }
+    })
+    .finally(() => setMessage(messageText))
+  }
+
+  function handleLogin (email, password, formReset) {
+    let messageText = '';
+
+    auth.authorize(email, password)
       .then((data) => {
-        console.dir(data)
         if (!data) return;
 
-        localStorage.setItem(data);
+        localStorage.setItem('jwt', data.token);
         formReset();
         history.push('/movies');
         setState({
@@ -43,34 +71,19 @@ function App () {
           email: email,
         });
       })
-      .catch( () => {
-        setState({
-          message: 'Что-то пошло не так! Попробуйте ещё раз.',
-          // imgTooltip: cross,
-        });
-        // setIsInfoTooltipOpen(true)
+      .catch((err) => {
+        switch (err) {
+          case 400:
+            messageText = 'Некорректные данные!';
+            break;
+          case 401:
+            messageText = `Пользователь ${email} не авторизован!`;
+            break;
+          default:
+            messageText = 'Что-то пошло не так! Попробуйте ещё раз.';
+        }
       })
-  }
-
-  function handleRegister(password, email, formReset) {
-    auth.register(password, email)
-    .then(() => {
-
-      setState((old) => ({
-        ...old,
-        message: 'Вы успешно зарегистрировались!',
-        // imgTooltip: tick,
-      }));
-
-      formReset();
-      history.push('/signin');
-    })
-    .catch(() => setState((old) => ({
-      ...old,
-      message: 'Что-то пошло не так! Попробуйте ещё раз.',
-      // imgTooltip: cross,
-    })))
-    // .finally(() => setIsInfoTooltipOpen(true))
+      .finally(() => setMessage(messageText))
   }
 
   function handleLogout () {
@@ -91,6 +104,7 @@ function App () {
 
       setState({
         loggedIn: true,
+        name: res.data.name,
         email: res.data.email,
       });
 
@@ -101,8 +115,12 @@ function App () {
     });
   }
 
+  function resetMessage () {
+    setMessage('');
+  }
+
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={state.name && state.email}>
       <div className="app">
         <Switch>
           <ProtectedRoute path="/movies" loggedIn={state.loggedIn}>
@@ -118,11 +136,20 @@ function App () {
           </ProtectedRoute>
 
           <Route path="/signup">
-            <Register />
+            <Register
+              handleRegister={handleRegister}
+              message={message}
+              resetMessage={resetMessage}
+              // history={history}
+            />
           </Route>
 
           <Route path="/signin">
-            <Login />
+            <Login
+              handleLogin={handleLogin}
+              message={message}
+              resetMessage={resetMessage}
+            />
           </Route>
 
           <Route exact path="/"> {/*exact ===  полный url */}

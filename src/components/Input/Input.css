@@ -24,6 +24,11 @@
   transition: 0.4s ease-in-out;
 }
 
+
+.input__container_error {
+  border-bottom: 1px solid #FF6838;
+}
+
 .input__label {
   text-align: start;
   font-weight: 400;
@@ -44,6 +49,10 @@
   margin: 5px 0 0;
   padding: 0;
   color: #000;
+}
+
+.input__item_error {
+  color: #EE3465;
 }
 
 .input__error {

@@ -83,7 +83,7 @@ function Login(props) {
           // errorMessage={errorMessage}
         >
           <p className='login__footer__text'>Ещё не зарегистрированы?</p>
-          <Link to={'/signin'}>
+          <Link to={'/signup'}>
             <button
               className='login__footer__button-login opacity'
               type='button'

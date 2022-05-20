@@ -20,17 +20,31 @@ class MainApi {
     .then(this._errorHandler);
   }
 
-  setUser(data) {
+  updateUser(data) {
     return fetch( this._url + '/users/me', {
       method: 'PATCH',
       headers: this._getHeaders(),
       body: JSON.stringify({
         name: data.name,
-        about: data.about
+        email: data.email
       })
     })
     .then(this._errorHandler)
   }
+
+  // userUpdate(data) {
+  //   return fetch( this._url + '/users/me', {
+  //     method: 'PATCH',
+  //     headers: this._getHeaders(),
+  //     body: JSON.stringify({
+  //       avatar: data.avatar
+  //     })
+  //   })
+  //   .then(this._errorHandler)
+  // }
+  // getAllData() {
+  //   return Promise.all([this.getCards(), this.getUser()]);
+  // }
 
   getCards() {
     return fetch( this._url + '/cards', {
@@ -67,20 +81,6 @@ class MainApi {
     .then(this._errorHandler);
   }
 
-  userAvatarUpdate(data) {
-    return fetch( this._url + '/users/me/avatar', {
-      method: 'PATCH',
-      headers: this._getHeaders(),
-      body: JSON.stringify({
-        avatar: data.avatar
-      })
-    })
-    .then(this._errorHandler)
-  }
-  getAllData() {
-    return Promise.all([this.getCards(), this.getUser()]);
-  }
-
   _getHeaders(){
     const token = localStorage.getItem('jwt');
     return {
@@ -90,7 +90,7 @@ class MainApi {
   }
 }
 
-const api = new MainApi({
+const mainApi = new MainApi({
   // baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-33/',
   baseUrl: BASE_URL,
   headers: {
@@ -99,4 +99,4 @@ const api = new MainApi({
   }
 });
 
-export default api;
+export default mainApi;

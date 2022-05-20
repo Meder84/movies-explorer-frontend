@@ -9,14 +9,13 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies'
 import Profile from '../Profile/Profile';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext'
+import CurrentUserContext from '../../contexts/CurrentUserContext'
 import './App.css'
 
 export const initState = {
   name: '',
   email: '',
   password: '',
-  // message: '',
   loggedIn: false,
 }
 
@@ -88,6 +87,12 @@ function App () {
 
   function handleLogout () {
     localStorage.removeItem('jwt');
+    localStorage.removeItem('jwt');
+    setState({
+      loggedIn: false,
+      name: '',
+      email: '',
+    })
     history.push('/signup');
   }
 
@@ -108,7 +113,7 @@ function App () {
         email: res.data.email,
       });
 
-      history.push("/movies");
+      history.push('/movies');
     })
     .catch(err => {
       console.log(err);
@@ -132,7 +137,10 @@ function App () {
           </ProtectedRoute>
 
           <ProtectedRoute path="/profile" loggedIn={state.loggedIn}>
-            <Profile />
+            <Profile
+              loggedIn={state.loggedIn}
+              handleLogout={handleLogout}
+            />
           </ProtectedRoute>
 
           <Route path="/signup">

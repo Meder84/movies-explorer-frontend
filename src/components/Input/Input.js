@@ -1,15 +1,19 @@
 import React from 'react';
 import './Input.css';
 
-const Input = ({ type, errorText, errorId, isError, children, ...props}) => (
+const Input = ({
+  type, errorText, errorId, isError, children, customInput,
+  customInputContainer, customInputLabel, customInputError,
+  customInputItem, ...props
+}) => (
   <ul className={`input ${props.customInput || ''}`}>
     <li
       className={`
         input__container
-        ${props.customInputContainer || ''}
+        ${customInputContainer || ''}
         ${isError ? 'input__container_error' : ''}
       `}>
-      <label className={`input__label ${props.customInputLabel || ''}`}>
+      <label className={`input__label ${customInputLabel || ''}`}>
         {children}
       </label>
 
@@ -18,7 +22,7 @@ const Input = ({ type, errorText, errorId, isError, children, ...props}) => (
         className={`
           input__item
           hide-part-text
-          ${props.customInputItem || ''}
+          ${customInputItem || ''}
           ${isError ? 'input__item_error' : ''}
         `}
         {...props}
@@ -29,7 +33,7 @@ const Input = ({ type, errorText, errorId, isError, children, ...props}) => (
       className={`
         input__error
         ${isError ? 'input__error_show' : ''}
-        ${props.customInputError || ''}
+        ${customInputError || ''}
       `}
       id={errorId}
     >

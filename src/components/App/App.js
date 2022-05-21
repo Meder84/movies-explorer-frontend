@@ -66,8 +66,7 @@ function App () {
         formReset();
         history.push('/movies');
         setState({
-          loggedIn: true,
-          email: email,
+          loggedIn: true
         });
       })
       .catch((err) => {
@@ -136,12 +135,12 @@ function App () {
             <SavedMovies />
           </ProtectedRoute>
 
-          <ProtectedRoute path="/profile" loggedIn={state.loggedIn}>
+          <Route path="/profile" loggedIn={state.loggedIn}>
             <Profile
               loggedIn={state.loggedIn}
               handleLogout={handleLogout}
             />
-          </ProtectedRoute>
+          </Route>
 
           <Route path="/signup">
             <Register
@@ -157,6 +156,7 @@ function App () {
               handleLogin={handleLogin}
               message={message}
               resetMessage={resetMessage}
+              history={history}
             />
           </Route>
 

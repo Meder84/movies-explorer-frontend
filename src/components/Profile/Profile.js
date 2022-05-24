@@ -3,7 +3,7 @@ import Navigation from '../Navigation/Navigation';
 import Form from '../Form/Form';
 import Input from '../Input/Input';
 import FooterForAuth from '../FooterForAuth/FooterForAuth';
-import CurrentUserContext from '../../contexts/CurrentUserContext'
+import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import useFormWithValidation from '../UseFormWithValidation/UseFormWithValidation';
 import mainApi from '../../utils/MainApi'
 import './Profile.css';
@@ -11,14 +11,14 @@ import './Profile.css';
 function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
-  const [message, setmessage] = useState('');
+  // const [message, setmessage] = useState('');
 
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [serverErrorMessage, setServerErrorMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    resetForm({ name: currentUser.name, email: currentUser.email });
+    // resetForm({ name: currentUser.name, email: currentUser.email });
   }, [currentUser]);
 
   useEffect(() => {
@@ -82,18 +82,22 @@ function Profile(props) {
         name='profile'
         title={`Привет, ${currentUser.name}!`}
         onSubmit={handleSubmit}
+        customFormMain='profile__form__main'
       >
         <fieldset className='profile__fieldset-main'>
           <Input
+            customInput='profile__input'
+            customInputContainer='profile__input-container'
+            customInputItem='profile__input-item'
             type="text"
             id="name" name="name"
             pattern="^[A-Za-z]([A-Za-z]| |-){1,28}[A-Za-z]$"
             maxLength="30" minLength="2"
             placeholder="Имя"
             required
-            // errorId="name-error"
-            // isError={errors.name}
-            // errorText={errors.name}
+            errorId="name-error"
+            isError={errors.name}
+            errorText={errors.name}
             onChange={handleChange}
             value={values.name || ''}
           >
@@ -101,16 +105,18 @@ function Profile(props) {
           </Input>
 
           <Input
+            customInput='profile__input'
             customInputContainer='profile__input-container profile__input-container_border-none'
+            customInputItem='profile__input-item'
             type="email"
             id="email" name="email"
             pattern="^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$"
             maxLength="30" minLength="2"
             placeholder="E-mail"
             required
-            // errorId="email-error"
-            // isError={errors.email || message}
-            // errorText={errors.email || message}
+            errorId="email-error"
+            isError={errors.email || (errorMessage && serverErrorMessage)}
+            errorText={errors.email || (errorMessage && serverErrorMessage)}
             onChange={handleChange}
             value={values.email || ''}
           >
@@ -120,18 +126,17 @@ function Profile(props) {
 
         <FooterForAuth
           customFooterForAuth='profile__footer'
-          buttonText='Зарегистрироваться'
+          buttonText='Редактировать'
+          customFooterForAuthButton='profile__footer__button-edit'
           customFooterForAuthTextContainer='profile__footer__text-container'
-          disabled={!isValid}
-          // errorMessage={errorMessage}
+          disabled={!isSubmitDisabled}
         >
-          <p className='profile__footer__text'>Уже зарегистрированы?</p>
           <button
             className='profile__footer__button-login opacity'
             type='button'
             onClick={props.handleLogout}
           >
-            Войти
+            Выйти из аккаунта
           </button>
         </FooterForAuth>
       </Form>

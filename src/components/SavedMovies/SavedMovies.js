@@ -13,7 +13,7 @@ function SavedMovies() {
       <MoviesCardList
         customMoviesCardList='saved-movies__content-container'
         customMoviesCardDescriptionContainer='saved-movies__description-container'
-        customMoviesCardLikeImage='saved-movies__delete-image'
+        // customMoviesCardLikeImage='saved-movies__delete-image'
         customShowMoreItems='saved-movies__hide-block-more-items'
       />
       <Footer />

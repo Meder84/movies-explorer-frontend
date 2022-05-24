@@ -26,60 +26,43 @@ class MainApi {
       headers: this._getHeaders(),
       body: JSON.stringify({
         name: data.name,
-        email: data.email
+        email: data.email,
       })
     })
     .then(this._errorHandler)
   }
 
-  // userUpdate(data) {
-  //   return fetch( this._url + '/users/me', {
-  //     method: 'PATCH',
-  //     headers: this._getHeaders(),
-  //     body: JSON.stringify({
-  //       avatar: data.avatar
-  //     })
-  //   })
-  //   .then(this._errorHandler)
-  // }
-  // getAllData() {
-  //   return Promise.all([this.getCards(), this.getUser()]);
-  // }
-
-  getCards() {
-    return fetch( this._url + '/cards', {
+  getMovies() {
+    return fetch( this._url + '/movies', {
       headers: this._getHeaders(),
     })
     .then(this._errorHandler);
   }
 
-  addNewCard(data) {
-    return fetch( this._url + '/cards', {
+  postNewMovie(data) {
+    return fetch( this._url + '/movies', {
       method: 'POST',
       headers: this._getHeaders(),
-      body: JSON.stringify({
-        name: data.name,
-        link: data.link
-      })
+      body: JSON.stringify(data)
     })
     .then(this._errorHandler);
   }
 
-  deleteCard(id) {
-    return fetch( this._url + '/cards/' + id, {
+  deleteMovie(id) {
+    return fetch( this._url + '/movies/' + id, {
       method: 'DELETE',
       headers: this._getHeaders()
     })
     .then(this._errorHandler);
   }
 
-  changeLikeCardStatus(id, isLiked) {
-    return fetch( this._url + '/cards/' + id + '/likes', {
-      method: isLiked ? 'PUT' : 'DELETE',
-      headers: this._getHeaders()
-    })
-    .then(this._errorHandler);
-  }
+  // changeLikeCardStatus(id, isLiked) {
+  //   return fetch( this._url + '/cards/' + id + '/likes', {
+  //     method: isLiked ? 'PUT' : 'DELETE',
+  //     headers: this._getHeaders()
+  //   })
+  //   .then(this._errorHandler);
+  // }
 
   _getHeaders(){
     const token = localStorage.getItem('jwt');

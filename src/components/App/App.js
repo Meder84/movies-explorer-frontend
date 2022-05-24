@@ -9,19 +9,22 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies'
 import Profile from '../Profile/Profile';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import CurrentUserContext from '../../contexts/CurrentUserContext'
+import {CurrentUserContext} from '../../contexts/CurrentUserContext'
 import './App.css'
 
-export const initState = {
-  name: '',
-  email: '',
-  password: '',
-  loggedIn: false,
-}
+// export const initState = {
+//   name: '',
+//   email: '',
+//   password: '',
+//   loggedIn: false,
+// }
 
 function App () {
   const history = useHistory();
-  const [state, setState] = useState(initState);
+  // const [state, setState] = useState(initState);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({ email: '', name: '' });
+  // const [resultMessage, setResultMessage] = useState('');
   const [message, setMessage] = useState('');
 
   useEffect(() => {
@@ -33,12 +36,9 @@ function App () {
 
     auth.register(name, email, password)
     .then(() => {
-      setState((old) => ({
-        ...old
-      }));
-
       formReset();
       history.push('/signin');
+      setLoggedIn(true);
     })
     .catch((err) => {
       switch (err) {
@@ -58,6 +58,7 @@ function App () {
   function handleLogin (email, password, formReset) {
     let messageText = '';
 
+
     auth.authorize(email, password)
       .then((data) => {
         if (!data) return;
@@ -65,9 +66,8 @@ function App () {
         localStorage.setItem('jwt', data.token);
         formReset();
         history.push('/movies');
-        setState({
-          loggedIn: true
-        });
+
+          setLoggedIn(true)
       })
       .catch((err) => {
         switch (err) {
@@ -85,13 +85,10 @@ function App () {
   }
 
   function handleLogout () {
+    localStorage.removeItem('foundMovies');
     localStorage.removeItem('jwt');
-    localStorage.removeItem('jwt');
-    setState({
-      loggedIn: false,
-      name: '',
-      email: '',
-    })
+    setLoggedIn(false);
+    setCurrentUser({ name: '', email: '' });
     history.push('/signup');
   }
 
@@ -106,16 +103,17 @@ function App () {
     auth.getContent(jwt).then((res) => {
       if (!res) return;
 
-      setState({
-        loggedIn: true,
-        name: res.data.name,
-        email: res.data.email,
+      setCurrentUser({
+        name: res.name,
+        email: res.email,
       });
+      setLoggedIn(true);
 
       history.push('/movies');
     })
     .catch(err => {
       console.log(err);
+      setLoggedIn(false);
     });
   }
 
@@ -124,23 +122,22 @@ function App () {
   }
 
   return (
-    <CurrentUserContext.Provider value={state.name && state.email}>
+    <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
         <Switch>
-          <ProtectedRoute path="/movies" loggedIn={state.loggedIn}>
+          <ProtectedRoute path="/movies" loggedIn={loggedIn}>
             <Movies />
           </ProtectedRoute>
 
-          <ProtectedRoute path="/saved-movies" loggedIn={state.loggedIn}>
+          <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
             <SavedMovies />
           </ProtectedRoute>
 
-          <Route path="/profile" loggedIn={state.loggedIn}>
+          <ProtectedRoute path="/profile" loggedIn={loggedIn}>
             <Profile
-              loggedIn={state.loggedIn}
               handleLogout={handleLogout}
             />
-          </Route>
+          </ProtectedRoute>
 
           <Route path="/signup">
             <Register

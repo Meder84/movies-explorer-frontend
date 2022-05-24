@@ -1,4 +1,4 @@
-export const MOVIES_URL = 'https://api.nomoreparties.co';
+export const MOVIES_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
 class MoviesApi {
   constructor(config) {
@@ -11,8 +11,8 @@ class MoviesApi {
     return Promise.reject(`Произошла ошибка: ${res.status}`);
   }
 
-  async getMovies() {
-    const res = await fetch(`${this._url}/beatfilm-movies`, {
+  async getAllMovies() {
+    const res = await fetch(this._url, {
       method: 'GET',
       headers: this._headers
     });

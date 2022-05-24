@@ -7,6 +7,9 @@ function FilterCheckbox(props) {
       <input
         type="checkbox"
         className="filterCheckboxs__input"
+        checked={props.isChecked}
+        onChange={props.onChange}
+        disabled={props.isDisabled}
       />
 
       <span className='filterCheckbox__slider' />

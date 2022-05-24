@@ -6,7 +6,7 @@ const Input = ({
   customInputContainer, customInputLabel, customInputError,
   customInputItem, ...props
 }) => (
-  <ul className={`input ${props.customInput || ''}`}>
+  <ul className={`input ${customInput || ''}`}>
     <li
       className={`
         input__container

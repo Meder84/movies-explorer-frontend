@@ -65,6 +65,9 @@ function SearchForm(props) {
           Короткометражки
         </span>
       </fieldset>
+      <p>
+        {errorMessage}
+      </p>
     </form>
   );
 }

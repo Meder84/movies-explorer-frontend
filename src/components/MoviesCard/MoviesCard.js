@@ -1,7 +1,9 @@
 import React from 'react';
 import './MoviesCard.css';
 
-function MoviesCard(props, { movie, children, onClick }) {
+function MoviesCard(props, {
+  savedMovies, movie, onBookmarkClick, isMovieAdded,
+}) {
   const {
     nameRU, duration, trailer, image,
   } = movie;
@@ -14,8 +16,15 @@ function MoviesCard(props, { movie, children, onClick }) {
     return hoursStr + minutesStr;
   };
 
-  const handleClick = () => {
-    onClick(movie);
+  const isAdded = isMovieAdded(movie);
+
+  const handleBookmarkClick = (e) => {
+    e.preventDefault();
+    onBookmarkClick(movie, !isAdded);
+  };
+
+  const removeHandler = () => {
+    onBookmarkClick(movie, false);
   };
 
   return (
@@ -24,11 +33,20 @@ function MoviesCard(props, { movie, children, onClick }) {
         className='movies-card__image opacity'
         src={image}
         alt={nameRU}
-        onClick={handleClick}
       />
       <div className={`movies-card__description-container ${props.customMoviesCardDescriptionContainer}`}>
         <h3 className='movies-card__subtitle hide-part-text opacity'>{nameRU}</h3>
-        <button className='movies-card__like-image opacity' /> || {children}
+        {
+          !savedMovies
+          ? <button
+              className='movies-card__like-image opacity'
+              onClick={handleBookmarkClick}
+            />
+          : <button
+              className='saved-movies__delete-image opacity'
+              onClick={removeHandler}
+            />
+        }
       </div>
       <p className='movies-card__duration'>
         {getMovieDuration(duration)}

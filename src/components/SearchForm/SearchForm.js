@@ -1,31 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import { KEY_WORD_ERROR } from '../../utils/consts';
+import useFormWithValidation from '../UseFormWithValidation/UseFormWithValidation';
 import './SearchForm.css';
 
-function SearchForm(props) {
-  const [searchString, setSearchString] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+function SearchForm(props, { onFilterClick, onSearch, isLoading }) {
+  const formWithValidation = useFormWithValidation();
+  const { searchText } = formWithValidation.values;
+  const { handleChange, resetForm } = formWithValidation;
+  const [error, setError] = React.useState('');
 
-  useEffect(() => {
-    setErrorMessage('');
-  }, [searchString]);
+  React.useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
-  const handleSwitchChange = () => {
-    props.onSwitchChange();
-  };
-
-  const handleStringChange = (event) => {
-    setSearchString(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (!searchString && !props.savedFilms) {
-      setErrorMessage(KEY_WORD_ERROR);
-      return;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!searchText) {
+      setError('Нужно ввести ключевое слово');
+      setTimeout(() => {
+        setError('');
+      }, 2000);
+    } else {
+      onSearch(searchText);
+      resetForm();
     }
-    props.onSubmit(searchString);
   };
 
   return (
@@ -42,9 +40,12 @@ function SearchForm(props) {
           name="search-form-input"
           required
           placeholder="Фильм"
-          value={searchString}
-          onChange={handleStringChange}
+          value={searchText || ''}
+          onChange={handleChange}
+          autoComplete="off"
+          disabled={isLoading}
         />
+        {error && <span className="search-form__error">{error}</span>}
         <button
           className='search-form__input-button opacity'
           type='submit'
@@ -55,19 +56,12 @@ function SearchForm(props) {
 
       <fieldset className={`search-form__checkbox-container ${props.customSearchFormCheckboxContainer}`}>
         <div className='search-form__checkbox-button-container'>
-          <FilterCheckbox
-            isChecked={props.isSwitchOn || false}
-            onChange={handleSwitchChange}
-            isDisabled={props.isSwitchDisabled}
-          />
+          <FilterCheckbox onFilterClick={onFilterClick} />
         </div>
         <span className='search-form__checkbox-text'>
           Короткометражки
         </span>
       </fieldset>
-      <p>
-        {errorMessage}
-      </p>
     </form>
   );
 }

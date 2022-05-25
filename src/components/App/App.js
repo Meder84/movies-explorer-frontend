@@ -6,7 +6,7 @@ import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import * as auth from '../../utils/auth';
 import mainApi from '../../utils/MainApi';
-import { getAllMovies } from '../../utils/MoviesApi';
+import moviesApi from '../../utils/MoviesApi';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies'
 import Profile from '../Profile/Profile';
@@ -148,7 +148,7 @@ function App () {
   }
 
   const getAllMoviesData = () => {
-    getAllMovies()
+    moviesApi.getAllMovies()
       .then((data) => {
         const allMoviesData = data.map((item) => {
           const imageURL = item.image ? item.image.url : '';
@@ -284,7 +284,14 @@ function App () {
           </ProtectedRoute>
 
           <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
-            <SavedMovies />
+            <SavedMovies
+              isLoading={isLoading}
+              loadingError={loadingError}
+              // savedMovies
+              movies={savedMovies}
+              onBookmarkClick={bookmarkHandler}
+              isMovieAdded={isMovieAdded}
+            />
           </ProtectedRoute>
 
           <ProtectedRoute path="/profile" loggedIn={loggedIn}>

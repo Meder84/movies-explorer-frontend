@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import { DESKTOP_WIDTH, TABLET_WIDTH, MOBILE_WIDTH } from '../../utils/constants';
+import { DESKTOP_WIDTH, TABLET_WIDTH, MOBILE_WIDTH } from '../../utils/consts';
 import './MoviesCardList.css';
 
 function MoviesCardList(props, {

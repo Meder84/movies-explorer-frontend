@@ -32,14 +32,14 @@ class MainApi {
     .then(this._errorHandler)
   }
 
-  getMovies() {
+  getSavedMovies() {
     return fetch( this._url + '/movies', {
       headers: this._getHeaders(),
     })
     .then(this._errorHandler);
   }
 
-  postNewMovie(data) {
+  addBookmark(data) {
     return fetch( this._url + '/movies', {
       method: 'POST',
       headers: this._getHeaders(),
@@ -48,7 +48,7 @@ class MainApi {
     .then(this._errorHandler);
   }
 
-  deleteMovie(id) {
+  removeBookmark(id) {
     return fetch( this._url + '/movies/' + id, {
       method: 'DELETE',
       headers: this._getHeaders()

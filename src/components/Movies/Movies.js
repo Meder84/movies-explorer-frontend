@@ -17,7 +17,6 @@ function Movies({
 }) {
   const [filterIsOn, setFilterIsOn] = useState(false);
 
-  // eslint-disable-next-line max-len
   const filterShortFilm = (moviesToFilter) => moviesToFilter.filter((item) => item.duration < SHORT_MOVIE_DURATION_MIN);
 
   const onFilterClick = () => {

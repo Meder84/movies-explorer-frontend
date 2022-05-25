@@ -3,117 +3,38 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 import Navigation from '../Navigation/Navigation';
-import mainApi from '../../utils/MainApi';
-import { filterMovies } from '../../utils/MoviesSearch';
-import {
-  SAVED_FILMS_API_BLOCK, NOT_FOUND_ERR_BLOCK, SHORT_FILM_DURATION, DELETE_ERROR,
-} from '../../utils/consts';
+// import mainApi from '../../utils/MainApi';
+// import { filterMovies } from '../../utils/MoviesSearch';
+import Preloader from '../Preloader/Preloader';
 import './SavedMovies.css';
 
-function SavedMovies() {
-  const [moviesList, setMoviesList] = useState([]);
-  const [apiErrorMessage, setApiErrorMessage] = useState('');
-  const [visibleMovies, setVisibleMovies] = useState([]);
+function SavedMovies({
+  savedMovies, movies, isLoading, loadingError, onBookmarkClick, isMovieAdded,
+}) {
+  const [filterIsOn, setFilterIsOn] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSwitchOn, setIsSwitchOn] = useState(false);
-  const [isSwitchDisabled, setIsSwitchDisabled] = useState(true);
-  const STORAGE_NAME = 'visibleMovies';
+  // eslint-disable-next-line max-len
+  const filterShortFilm = (moviesToFilter) => moviesToFilter.filter((item) => item.duration < 40);
+  const onFilterClick = () => {
+    setFilterIsOn(!filterIsOn);
+  };
 
-  useEffect(() => {
-    setIsLoading(true);
-    mainApi.getMovies()
-      .then((data) => {
-        setMoviesList(data);
-        setVisibleMovies(data);
-        localStorage.setItem(STORAGE_NAME, JSON.stringify(data));
-        setIsSwitchDisabled(data.length === 0);
-      })
-      .catch((err) => {
-        setApiErrorMessage(SAVED_FILMS_API_BLOCK);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-    return (() => {
-      localStorage.removeItem(STORAGE_NAME);
-    });
-  }, []);
+  const [moviesToRender, setMoviesToRender] = useState([]);
 
-  useEffect(() => {
-    let visible = [];
-    if (localStorage.getItem(STORAGE_NAME)) {
-      visible = JSON.parse(localStorage.getItem(STORAGE_NAME));
+  React.useEffect(() => {
+    setMoviesToRender(movies);
+  }, [movies]);
+
+  const searchFilter = (data, searchQuery) => {
+    if (searchQuery) {
+      const regex = new RegExp(searchQuery, 'gi');
+      return data.filter((item) => regex.test(item.nameRU) || regex.test(item.nameEN));
     }
-
-    if (isSwitchOn) {
-      const foundFilter = visible.filter(item => item.duration <= SHORT_FILM_DURATION);
-      setVisibleMovies(foundFilter);
-      if (foundFilter.length === 0) {
-        setApiErrorMessage(NOT_FOUND_ERR_BLOCK);
-      }
-    } else {
-      setVisibleMovies(visible);
-    }
-  }, [isSwitchOn]);
-
-  const handleCardClick = (movie) => {
-    window.open(movie.trailer, '_blank');
+    return [];
   };
 
-  const handleDeleteClick = (movie) => {
-    mainApi.deleteMovie(movie._id)
-    .then((deletedMovie) => {
-      const newList = moviesList.filter(item => item.movieId !== deletedMovie.movieId);
-      setMoviesList(newList);
-
-      const newVisible = visibleMovies.filter(item => item.movieId !== deletedMovie.movieId);
-      setVisibleMovies(newVisible);
-      localStorage.setItem(JSON.stringify(newVisible));
-
-      if (newVisible.length === 0) setApiErrorMessage(NOT_FOUND_ERR_BLOCK);
-      setIsSwitchDisabled(newList.length === 0);
-    })
-    .catch((error) => {
-      console.log(`${DELETE_ERROR} ${error}.`);
-    });
-  };
-
-  const searchMain = async (searchString) => {
-    let found = [];
-    setIsLoading(true);
-    setIsSwitchDisabled(true);
-    setVisibleMovies([]);
-    if (localStorage.getItem(STORAGE_NAME)) localStorage.removeItem(STORAGE_NAME);
-
-    try {
-      // Выполняем поиск
-      found = await filterMovies(searchString.toLowerCase(), moviesList);
-      setVisibleMovies(found);
-      setIsSwitchDisabled(false);
-    } catch(err) {
-      setApiErrorMessage(err);
-    } finally {
-      setIsLoading(false);
-      localStorage.setItem(STORAGE_NAME, JSON.stringify(found));
-      setIsSwitchOn(false);
-    };
-  };
-
-  // Параметр searchString получаем из компонента SearchForm
-  const handleSearchSubmit = (searchString) => {
-    const string = searchString || '';
-    if (string.length === 0) {
-      setIsSwitchOn(false);
-      setVisibleMovies(moviesList);
-      localStorage.setItem(STORAGE_NAME, JSON.stringify(moviesList));
-    } else {
-      searchMain(searchString);
-    }
-  };
-
-  const handleSwitchChange = () => {
-    setIsSwitchOn(!isSwitchOn);
+  const searchInSavedHandler = (searchQuery) => {
+    setMoviesToRender(searchFilter(movies, searchQuery));
   };
 
   return (
@@ -121,24 +42,33 @@ function SavedMovies() {
       <Navigation />
       <SearchForm
         customSearchFormCheckboxContainer='saved-movies__search-form__checkbox-container'
-        savedFilms={true}
-        onSubmit={handleSearchSubmit}
-        onSwitchChange={handleSwitchChange}
-        isSwitchOn={isSwitchOn}
-        isSwitchDisabled={isSwitchDisabled}
+        onFilterClick={onFilterClick}
+        onSearch={searchInSavedHandler}
       />
-      <MoviesCardList
-        customMoviesCardList='saved-movies__content-container'
-        customMoviesCardDescriptionContainer='saved-movies__description-container'
-        // customMoviesCardLikeImage='saved-movies__delete-image'
-        customShowMoreItems='saved-movies__hide-block-more-items'
-        savedFilms={true}
-        isLoading={isLoading}
-        moviesList={visibleMovies}
-        errorMessage={apiErrorMessage}
-        onClick={handleCardClick}
-        onDelete={handleDeleteClick}
-      />
+
+      {isLoading && <Preloader />}
+
+      {!isLoading
+      && loadingError === ''
+      && (
+        <MoviesCardList
+          customMoviesCardList='saved-movies__content-container'
+          customMoviesCardDescriptionContainer='saved-movies__description-container'
+          // customMoviesCardLikeImage='saved-movies__delete-image'
+          customShowMoreItems='saved-movies__hide-block-more-items'
+          savedMovies={savedMovies}
+          movies={filterIsOn ? filterShortFilm(moviesToRender) : moviesToRender}
+          onBookmarkClick={onBookmarkClick}
+          isMovieAdded={isMovieAdded}
+        />
+      )}
+
+      {
+        !isLoading
+        && loadingError !== ''
+        && <div className="movies__error">{loadingError}</div>
+      }
+
       <Footer />
     </div>
   );

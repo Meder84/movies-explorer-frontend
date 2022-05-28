@@ -1,8 +1,9 @@
 import React from 'react';
 import './MoviesCard.css';
 
-function MoviesCard(props, {
+function MoviesCard({
   savedMovies, movie, onBookmarkClick, isMovieAdded,
+  customMoviesCardDescriptionContainer
 }) {
   const {
     nameRU, duration, trailer, image,
@@ -34,13 +35,17 @@ function MoviesCard(props, {
         src={image}
         alt={nameRU}
       />
-      <div className={`movies-card__description-container ${props.customMoviesCardDescriptionContainer}`}>
+      <div className={`movies-card__description-container ${customMoviesCardDescriptionContainer}`}>
         <h3 className='movies-card__subtitle hide-part-text opacity'>{nameRU}</h3>
         {
           !savedMovies
           ? <button
-              className='movies-card__like-image opacity'
+              className={!isAdded
+                ? 'movies-card__like-image opacity'
+                : 'movies-card__like-image_red opacity'
+              }
               onClick={handleBookmarkClick}
+              type='button'
             />
           : <button
               className='saved-movies__delete-image opacity'

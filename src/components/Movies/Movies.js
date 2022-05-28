@@ -8,7 +8,7 @@ import Navigation from '../Navigation/Navigation';
 // import { useWindowDimensions } from '../../hooks/useDimensions';
 // import { getVisualProps } from '../../utils/VisualProps';
 import Preloader from '../Preloader/Preloader';
-import {SHORT_MOVIE_DURATION_MIN} from '../../utils/consts';
+// import {SHORT_MOVIE_DURATION_MIN} from '../../utils/consts';
 import './Movies.css';
 
 function Movies({
@@ -17,7 +17,7 @@ function Movies({
 }) {
   const [filterIsOn, setFilterIsOn] = useState(false);
 
-  const filterShortFilm = (moviesToFilter) => moviesToFilter.filter((item) => item.duration < SHORT_MOVIE_DURATION_MIN);
+  const filterShortFilm = (moviesToFilter) => moviesToFilter.filter((item) => item.duration < 40);
 
   const onFilterClick = () => {
     setFilterIsOn(!filterIsOn);

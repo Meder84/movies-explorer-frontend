@@ -43,7 +43,19 @@ class MainApi {
     return fetch( this._url + '/movies', {
       method: 'POST',
       headers: this._getHeaders(),
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        country: data.country || 'unknown',
+        director: data.director || 'unknown',
+        duration: data.duration || 'No data',
+        year: data.year || 'unknown',
+        description: data.description || 'No description',
+        image: data.image,
+        trailerLink: data.trailerLink || 'No trailer',
+        thumbnail: data.image || 'No image',
+        movieId: data.id || 'No data',
+        nameRU: data.nameRU,
+        nameEN: data.nameEN || 'No name',
+      })
     })
     .then(this._errorHandler);
   }

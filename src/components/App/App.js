@@ -16,16 +16,14 @@ import './App.css'
 
 function App () {
   const history = useHistory();
-  // const [state, setState] = useState(initState);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({ email: '', name: '' });
-  // const [resultMessage, setResultMessage] = useState('');
+  const [currentUser, setCurrentUser] = useState({ name: '', email: ''});
   const [message, setMessage] = useState('');
-  const [isSignUpError, setIsSignUpError] = React.useState(false);
-  const [isSignInError, setIsSignInError] = React.useState(false);
+  // const [isSignUpError, setIsSignUpError] = React.useState(false);
+  // const [isSignInError, setIsSignInError] = React.useState(false);
 
-  const [editIsSuccess, setEditIsSuccess] = React.useState(false);
-  const [editIsFailed, setEditIsFailed] = React.useState(false);
+  // const [editIsSuccess, setEditIsSuccess] = React.useState(false);
+  // const [editIsFailed, setEditIsFailed] = React.useState(false);
 
   const [isLoading, setIsLoading] = React.useState(false);
   const [loadingError, setLoadingError] = React.useState('');
@@ -36,25 +34,33 @@ function App () {
   const [filterSavedMovies, setFilterSavedMovies] = React.useState([]);
   console.log(filterSavedMovies);
   const [query, setQuery] = React.useState('');
-  const location = useLocation();
 
-  const getCurrentUser = () => {
-    const token = localStorage.getItem('token');
-    mainApi
-      .getUserInfo(token)
-      .then((userData) => {
-        if (userData) {
-          setCurrentUser(userData);
-          localStorage.setItem('currentUser', JSON.stringify(userData));
-        }
-      })
-      .catch((err) => {
-        console.error(err);
+  function tokenCheck () {
+    // если у пользователя есть токен в localStorage,
+    // эта функция проверит, действующий он или нет
+    if (!localStorage.getItem('jwt')) return;
+
+    const jwt = localStorage.getItem('jwt');
+
+    auth.getContent(jwt).then((res) => {
+      if (!res) return;
+
+      setCurrentUser({
+        name: res.name,
+        email: res.email,
       });
-  };
+      setLoggedIn(true);
+      history.push('/movies');
+    })
+    .catch(err => {
+      console.log(err);
+      setLoggedIn(false);
+      localStorage.removeItem('jwt');
+    });
+  }
 
   useEffect(() => {
-    tokenCheck();
+    tokenCheck()
   }, []);
 
   function handleRegister(name, email, password, formReset) {
@@ -92,8 +98,7 @@ function App () {
         localStorage.setItem('jwt', data.token);
         formReset();
         history.push('/movies');
-
-          setLoggedIn(true)
+        setLoggedIn(true)
       })
       .catch((err) => {
         switch (err) {
@@ -118,31 +123,6 @@ function App () {
     history.push('/signup');
   }
 
-  function tokenCheck () {
-
-    // если у пользователя есть токен в localStorage,
-    // эта функция проверит, действующий он или нет
-    if (!localStorage.getItem('jwt')) return;
-
-    const jwt = localStorage.getItem('jwt');
-
-    auth.getContent(jwt).then((res) => {
-      if (!res) return;
-
-      setCurrentUser({
-        name: res.name,
-        email: res.email,
-      });
-      setLoggedIn(true);
-
-      history.push('/movies');
-    })
-    .catch(err => {
-      console.log(err);
-      setLoggedIn(false);
-    });
-  }
-
   function resetMessage () {
     setMessage('');
   }
@@ -155,7 +135,7 @@ function App () {
           return {
             ...item,
             image: `https://api.nomoreparties.co${imageURL}`,
-            trailer: item.trailerLink,
+            trailerLink: item.trailerLink,
           };
         });
 
@@ -164,7 +144,7 @@ function App () {
       })
       .catch(() => {
         localStorage.removeItem('allMovies');
-        setLoadingError('Во время запроса произошла ошибка. '
+        setLoadingError('?Во время запроса произошла ошибка. '
           + 'Возможно, проблема с соединением или сервер недоступен. '
           + 'Подождите немного и попробуйте ещё раз');
       });
@@ -174,13 +154,13 @@ function App () {
     mainApi
       .getSavedMovies()
       .then((data) => {
-        const savedArray = data.map((item) => ({ ...item, id: item.movieId }));
+        const savedArray = data.map((item) => ({ ...item, id: item.id }));
         localStorage.setItem('savedMovies', JSON.stringify(savedArray));
         setSavedMovies(savedArray);
       })
       .catch(() => {
         localStorage.removeItem('savedMovies');
-        setLoadingError('Во время запроса произошла ошибка. '
+        setLoadingError('2Во время запроса произошла ошибка. '
           + 'Возможно, проблема с соединением или сервер недоступен. '
           + 'Подождите немного и попробуйте ещё раз');
       });
@@ -287,7 +267,7 @@ function App () {
             <SavedMovies
               isLoading={isLoading}
               loadingError={loadingError}
-              // savedMovies
+              savedMovies
               movies={savedMovies}
               onBookmarkClick={bookmarkHandler}
               isMovieAdded={isMovieAdded}

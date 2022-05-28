@@ -3,7 +3,7 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import useFormWithValidation from '../UseFormWithValidation/UseFormWithValidation';
 import './SearchForm.css';
 
-function SearchForm(props, { onFilterClick, onSearch, isLoading }) {
+function SearchForm({ onFilterClick, onSearch, isLoading, customSearchFormCheckboxContainer }) {
   const formWithValidation = useFormWithValidation();
   const { searchText } = formWithValidation.values;
   const { handleChange, resetForm } = formWithValidation;
@@ -37,12 +37,12 @@ function SearchForm(props, { onFilterClick, onSearch, isLoading }) {
           className="search-form__input opacity"
           type="text"
           id="search-form-input"
-          name="search-form-input"
+          name="searchText"
           required
           placeholder="Фильм"
           value={searchText || ''}
           onChange={handleChange}
-          autoComplete="off"
+          // autoComplete="off"
           disabled={isLoading}
         />
         {error && <span className="search-form__error">{error}</span>}
@@ -54,7 +54,7 @@ function SearchForm(props, { onFilterClick, onSearch, isLoading }) {
         </button>
       </div>
 
-      <fieldset className={`search-form__checkbox-container ${props.customSearchFormCheckboxContainer}`}>
+      <fieldset className={`search-form__checkbox-container ${customSearchFormCheckboxContainer}`}>
         <div className='search-form__checkbox-button-container'>
           <FilterCheckbox onFilterClick={onFilterClick} />
         </div>

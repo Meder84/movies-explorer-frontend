@@ -18,7 +18,7 @@ function Profile(props) {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    // resetForm({ name: currentUser.name, email: currentUser.email });
+    resetForm({ name: currentUser.name, email: currentUser.email });
   }, [currentUser]);
 
   useEffect(() => {

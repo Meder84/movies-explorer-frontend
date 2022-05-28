@@ -20,7 +20,7 @@
   transition: 0.4s ease-in-out;
 }
 
-.show-more-items__container {
+.show-more-items__button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,17 +30,12 @@
   width: 100%;
   height: 36px;
   background-color: #F9F9F9;
-}
-
-.show-more-items__text {
   margin: 0;
   padding: 0;
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
   color: #000;
-  min-width: 200px;
-  text-align: center;
 }
 
 @media screen and (max-width: 768px) {

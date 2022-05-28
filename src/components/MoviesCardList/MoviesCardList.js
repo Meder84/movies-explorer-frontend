@@ -5,8 +5,9 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import { DESKTOP_WIDTH, TABLET_WIDTH, MOBILE_WIDTH } from '../../utils/consts';
 import './MoviesCardList.css';
 
-function MoviesCardList(props, {
+function MoviesCardList({
   savedMovies, movies, onBookmarkClick, isMovieAdded,
+  customMoviesCardList,
 }) {
   const [currentCount, setCurrentCount] = useState(0);
   const [extraRow, setExtraRow] = useState(3);
@@ -51,15 +52,28 @@ function MoviesCardList(props, {
 
   const renderMore = () => renderExtraRow();
 
+  function handleShowMoreItems() {
+    return (
+      <div className='show-more-items'>
+        <button
+          className='show-more-items__button opacity'
+          onClick={renderMore}
+        >
+          {/* {`Еще ${props.errorMessage}`} */}
+          Еще
+        </button>
+      </div>
+    )
+  }
 
   return (
-    <>
-      <ul className={`movies-card-list ${props.customMoviesCardList}`}>
+    <section>
+      <ul className={`movies-card-list ${customMoviesCardList}`}>
         { moviesToRender.map((movieData) => (
           <MoviesCard
-            customMoviesCardDescriptionContainer={props.customMoviesCardDescriptionContainer}
+            // customMoviesCardDescriptionContainer={props.customMoviesCardDescriptionContainer}
             // customMoviesCardLikeImage={props.customMoviesCardLikeImage}
-            key={movieData.movieId}
+            key={movieData.id}
             movie={movieData}
             savedMovies={savedMovies}
             isMovieAdded={isMovieAdded}
@@ -67,14 +81,8 @@ function MoviesCardList(props, {
           />
         ))}
       </ul>
-      <div className={`show-more-items ${props.customShowMoreItems}`}>
-        <div className='show-more-items__container'>
-          <p className={`show-more-items__text opacity ${props.customShowMoreItemText}`}>
-            {`Еще ${props.errorMessage}`}
-          </p>
-        </div>
-      </div>
-    </>
+      { currentCount < movies.length && handleShowMoreItems() }
+    </section>
   )
 }
 

@@ -3,7 +3,7 @@ import Navigation from '../Navigation/Navigation';
 import Form from '../Form/Form';
 import Input from '../Input/Input';
 import FooterForAuth from '../FooterForAuth/FooterForAuth';
-import {CurrentUserContext} from '../../contexts/CurrentUserContext'
+import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 import useFormWithValidation from '../UseFormWithValidation/UseFormWithValidation';
 import mainApi from '../../utils/MainApi'
 import './Profile.css';

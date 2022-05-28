@@ -1,18 +1,21 @@
 import React from 'react';
 import './Form.css';
 
-function Form (props) {
+function Form ({
+  customForm, name, onSubmit, customFormTitle,
+  title, customFormMain, children
+}) {
   return (
     <form
-      className={`form ${props.customForm}`}
-      name={props.name}
-      onSubmit={props.onSubmit}
+      className={`form ${customForm}`}
+      name={name}
+      onSubmit={onSubmit}
     >
-      <h2 className={`form__title ${props.customFormTitle}`}>
-        {props.title}
+      <h2 className={`form__title ${customFormTitle}`}>
+        {title}
       </h2>
-      <div className={`form__main ${props.customFormMain}`}>
-        {props.children}
+      <div className={`form__main ${customFormMain}`}>
+        {children}
       </div>
     </form>
   )

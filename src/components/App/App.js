@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, useHistory, useLocation, } from 'react-router-dom';
+import { Route, Switch, useHistory, } from 'react-router-dom';
 import Main from '../Main/Main'
 import Register from '../Register/Register';
 import Login from '../Login/Login';
@@ -31,8 +31,8 @@ function App () {
   const [allMovies, setAllMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [filterMovies, setFilterMovies] = React.useState([]);
-  const [filterSavedMovies, setFilterSavedMovies] = React.useState([]);
-  console.log(filterSavedMovies);
+  // const [filterSavedMovies, setFilterSavedMovies] = React.useState([]);
+  // console.log(filterSavedMovies);
   const [query, setQuery] = React.useState('');
 
   function tokenCheck () {
@@ -46,8 +46,8 @@ function App () {
       if (!res) return;
 
       setCurrentUser({
-        name: res.name,
-        email: res.email,
+        name: res.data.name,
+        email: res.data.email,
       });
       setLoggedIn(true);
       history.push('/movies');
@@ -144,23 +144,24 @@ function App () {
       })
       .catch(() => {
         localStorage.removeItem('allMovies');
-        setLoadingError('?Во время запроса произошла ошибка. '
+        setLoadingError('1 Во время запроса произошла ошибка. '
           + 'Возможно, проблема с соединением или сервер недоступен. '
           + 'Подождите немного и попробуйте ещё раз');
       });
   };
 
   const getSavedMovies = () => {
-    mainApi
-      .getSavedMovies()
+    mainApi.getSavedMovies()
       .then((data) => {
-        const savedArray = data.map((item) => ({ ...item, id: item.id }));
+        if(!data) return;
+        console.dir(data);
+        const savedArray = data.map((item) => item.id) //({ ...item, id: item.id }));
         localStorage.setItem('savedMovies', JSON.stringify(savedArray));
         setSavedMovies(savedArray);
       })
       .catch(() => {
         localStorage.removeItem('savedMovies');
-        setLoadingError('2Во время запроса произошла ошибка. '
+        setLoadingError('2 Во время запроса произошла ошибка. '
           + 'Возможно, проблема с соединением или сервер недоступен. '
           + 'Подождите немного и попробуйте ещё раз');
       });
@@ -242,10 +243,10 @@ function App () {
 
   const bookmarkHandler = (m, isAdded) => (isAdded ? addToBookmarks(m) : removeFromBookmark(m));
 
-  useEffect(() => {
-    setFilterSavedMovies(searchFilter(savedMovies, query));
-    localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-  }, [savedMovies]);
+  // useEffect(() => {
+  //   setFilterSavedMovies(searchFilter(savedMovies, query));
+  //   localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+  // }, [savedMovies]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

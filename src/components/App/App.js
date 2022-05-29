@@ -155,7 +155,7 @@ function App () {
       .then((data) => {
         if(!data) return;
         console.dir(data);
-        const savedArray = data.map((item) => item.id) //({ ...item, id: item.id }));
+        const savedArray = data.map((item) => ({ ...item, id: item.id }));
         localStorage.setItem('savedMovies', JSON.stringify(savedArray));
         setSavedMovies(savedArray);
       })
@@ -190,7 +190,7 @@ function App () {
     }
   }, [loggedIn]);
 
-  const isMovieAdded = (movie) => savedMovies.some((item) => item.id === movie.id);
+  const isMovieAdded = (movie) => savedMovies.some((item) => item.id === movie.movieId);
 
   const searchFilter = (data, searchQuery) => {
     if (searchQuery) {

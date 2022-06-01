@@ -6,8 +6,7 @@ import { DESKTOP_WIDTH, TABLET_WIDTH, MOBILE_WIDTH } from '../../utils/consts';
 import './MoviesCardList.css';
 
 function MoviesCardList({
-  savedMovies, movies, onBookmarkClick, isMovieAdded,
-  customMoviesCardList,
+  savedMoviesPage, movies, onClickSaveDelete, selectedMovies, onClickImage
 }) {
   const [currentCount, setCurrentCount] = useState(0);
   const [extraRow, setExtraRow] = useState(3);
@@ -59,7 +58,6 @@ function MoviesCardList({
           className='show-more-items__button opacity'
           onClick={renderMore}
         >
-          {/* {`Еще ${props.errorMessage}`} */}
           Еще
         </button>
       </div>
@@ -68,16 +66,15 @@ function MoviesCardList({
 
   return (
     <section>
-      <ul className={`movies-card-list ${customMoviesCardList}`}>
+      <ul className='movies-card-list'>
         { moviesToRender.map((movieData) => (
           <MoviesCard
-            // customMoviesCardDescriptionContainer={props.customMoviesCardDescriptionContainer}
-            // customMoviesCardLikeImage={props.customMoviesCardLikeImage}
-            key={movieData.id}
+            key={movieData.movieId}
             movie={movieData}
-            savedMovies={savedMovies}
-            isMovieAdded={isMovieAdded}
-            onBookmarkClick={onBookmarkClick}
+            savedMoviesPage={savedMoviesPage}
+            selectedMovies={selectedMovies}
+            onClickSaveDelete={onClickSaveDelete}
+            onClickImage={onClickImage}
           />
         ))}
       </ul>

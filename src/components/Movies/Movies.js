@@ -3,17 +3,13 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 import Navigation from '../Navigation/Navigation';
-// import mainApi from '../../utils/MainApi'
-// import { readMovies, filterMovies, addSavedFlag } from '../../utils/MoviesSearch';
-// import { useWindowDimensions } from '../../hooks/useDimensions';
-// import { getVisualProps } from '../../utils/VisualProps';
 import Preloader from '../Preloader/Preloader';
-// import {SHORT_MOVIE_DURATION_MIN} from '../../utils/consts';
 import './Movies.css';
+import Header from '../Header/Header';
 
 function Movies({
-  savedMovies, onSubmitSearch, movies, isLoading,
-  loadingError, onBookmarkClick, isMovieAdded,
+  savedMoviesPage, onSubmitSearch, movies, isLoading,
+  loadingError, onClickSaveDelete, selectedMovies,
 }) {
   const [filterIsOn, setFilterIsOn] = useState(false);
 
@@ -23,10 +19,15 @@ function Movies({
     setFilterIsOn(!filterIsOn);
   };
 
+  const handleClickImage = (movie) => {
+    window.open(movie.trailerLink, '_blank');
+  };
 
   return (
     <main className="movies">
-      <Navigation />
+      <Header>
+        <Navigation />
+      </Header>
       <SearchForm
         onFilterClick={onFilterClick}
         onSearch={onSubmitSearch}
@@ -36,17 +37,18 @@ function Movies({
       {!isLoading && loadingError === ''
         && (
         <MoviesCardList
-          savedMovies={savedMovies}
+          savedMoviesPage={savedMoviesPage}
           movies={filterIsOn ? filterShortFilm(movies) : movies}
-          onBookmarkClick={onBookmarkClick}
-          isMovieAdded={isMovieAdded}
+          onClickSaveDelete={onClickSaveDelete}
+          selectedMovies={selectedMovies}
+          onClickImage={handleClickImage}
         />
       )}
 
       {
         !isLoading
         && loadingError !== ''
-        && <div className="movies__error">{loadingError}</div>
+        && <div className="error-message">{loadingError}</div>
       }
       <Footer />
     </main>

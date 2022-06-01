@@ -2,11 +2,11 @@ import React from 'react';
 import './MoviesCard.css';
 
 function MoviesCard({
-  savedMovies, movie, onBookmarkClick, isMovieAdded,
-  customMoviesCardDescriptionContainer
+  savedMoviesPage, movie, onClickSaveDelete, selectedMovies,
+  customMoviesCardDescriptionContainer, onClickImage
 }) {
   const {
-    nameRU, duration, trailer, image,
+    nameRU, duration, image,
   } = movie;
 
   const getMovieDuration = (duration) => {
@@ -17,15 +17,19 @@ function MoviesCard({
     return hoursStr + minutesStr;
   };
 
-  const isAdded = isMovieAdded(movie);
+  const select = selectedMovies(movie);
 
-  const handleBookmarkClick = (e) => {
+  const handleClickSave = (e) => {
     e.preventDefault();
-    onBookmarkClick(movie, !isAdded);
+    onClickSaveDelete(movie, !select);
   };
 
-  const removeHandler = () => {
-    onBookmarkClick(movie, false);
+  const handleClickDelete = () => {
+    onClickSaveDelete(movie, false);
+  };
+
+  const handleClickImage = () => {
+    onClickImage(movie);
   };
 
   return (
@@ -34,22 +38,24 @@ function MoviesCard({
         className='movies-card__image opacity'
         src={image}
         alt={nameRU}
+        onClick={handleClickImage}
       />
       <div className={`movies-card__description-container ${customMoviesCardDescriptionContainer}`}>
         <h3 className='movies-card__subtitle hide-part-text opacity'>{nameRU}</h3>
         {
-          !savedMovies
+          !savedMoviesPage
           ? <button
-              className={!isAdded
-                ? 'movies-card__like-image opacity'
-                : 'movies-card__like-image_red opacity'
+              className={
+                select
+                ? 'movies-card__like-image_red opacity'
+                : 'movies-card__like-image opacity'
               }
-              onClick={handleBookmarkClick}
+              onClick={handleClickSave}
               type='button'
             />
           : <button
-              className='saved-movies__delete-image opacity'
-              onClick={removeHandler}
+              className='movies-card__delete-image opacity'
+              onClick={handleClickDelete}
             />
         }
       </div>

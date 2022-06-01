@@ -39,7 +39,7 @@ class MainApi {
     .then(this._errorHandler);
   }
 
-  addBookmark(data) {
+  saveMovie(data) {
     return fetch( this._url + '/movies', {
       method: 'POST',
       headers: this._getHeaders(),
@@ -60,7 +60,7 @@ class MainApi {
     .then(this._errorHandler);
   }
 
-  removeBookmark(id) {
+  deleteMovie(id) {
     return fetch( this._url + '/movies/' + id, {
       method: 'DELETE',
       headers: this._getHeaders()

@@ -2,24 +2,22 @@ import React, { useState }  from 'react'
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
 import Navigation from '../Navigation/Navigation';
-// import mainApi from '../../utils/MainApi';
-// import { filterMovies } from '../../utils/MoviesSearch';
 import Preloader from '../Preloader/Preloader';
 import './SavedMovies.css';
 
 function SavedMovies({
-  savedMovies, movies, isLoading, loadingError, onBookmarkClick, isMovieAdded,
+  savedMoviesPage, movies, isLoading, loadingError, onClickSaveDelete, selectedMovies,
 }) {
   const [filterIsOn, setFilterIsOn] = useState(false);
+  const [moviesToRender, setMoviesToRender] = useState([]);
 
-  // eslint-disable-next-line max-len
-  const filterShortFilm = (moviesToFilter) => moviesToFilter.filter((item) => item.duration < 40);
+  const filterShortFilm = (movies) => movies.filter((item) => item.duration < 40);
+
   const onFilterClick = () => {
     setFilterIsOn(!filterIsOn);
   };
-
-  const [moviesToRender, setMoviesToRender] = useState([]);
 
   React.useEffect(() => {
     setMoviesToRender(movies);
@@ -27,6 +25,8 @@ function SavedMovies({
 
   const searchFilter = (data, searchQuery) => {
     if (searchQuery) {
+      console.dir(searchQuery)
+      console.dir(data)
       const regex = new RegExp(searchQuery, 'gi');
       return data.filter((item) => regex.test(item.nameRU) || regex.test(item.nameEN));
     }
@@ -35,11 +35,19 @@ function SavedMovies({
 
   const searchInSavedHandler = (searchQuery) => {
     setMoviesToRender(searchFilter(movies, searchQuery));
+      console.dir(movies)
+      console.dir(searchQuery)
+  };
+
+  const handleClickImage = (movie) => {
+    window.open(movie.trailerLink, '_blank');
   };
 
   return (
     <div className="saved-movies">
-      <Navigation />
+      <Header>
+        <Navigation />
+      </Header>
       <SearchForm
         customSearchFormCheckboxContainer='saved-movies__search-form__checkbox-container'
         onFilterClick={onFilterClick}
@@ -54,19 +62,18 @@ function SavedMovies({
         <MoviesCardList
           customMoviesCardList='saved-movies__content-container'
           customMoviesCardDescriptionContainer='saved-movies__description-container'
-          // customMoviesCardLikeImage='saved-movies__delete-image'
-          customShowMoreItems='saved-movies__hide-block-more-items'
-          savedMovies={savedMovies}
+          savedMoviesPage={savedMoviesPage}
           movies={filterIsOn ? filterShortFilm(moviesToRender) : moviesToRender}
-          onBookmarkClick={onBookmarkClick}
-          isMovieAdded={isMovieAdded}
+          onClickSaveDelete={onClickSaveDelete}
+          onClickImage={handleClickImage}
+          selectedMovies={selectedMovies}
         />
       )}
 
       {
         !isLoading
         && loadingError !== ''
-        && <div className="movies__error">{loadingError}</div>
+        && <div className="error-message">{loadingError}</div>
       }
 
       <Footer />

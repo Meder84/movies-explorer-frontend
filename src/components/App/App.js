@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, useHistory, } from 'react-router-dom';
 import Main from '../Main/Main'
+// import Header from '../Header/Header';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import * as auth from '../../utils/auth';
 import mainApi from '../../utils/MainApi';
-import moviesApi from '../../utils/MoviesApi';
+import moviesApi, { MOVIES_URL } from '../../utils/MoviesApi';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies'
 import Profile from '../Profile/Profile';
@@ -31,33 +32,9 @@ function App () {
   const [allMovies, setAllMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [filterMovies, setFilterMovies] = React.useState([]);
-  // const [filterSavedMovies, setFilterSavedMovies] = React.useState([]);
+  const [filterSavedMovies, setFilterSavedMovies] = React.useState([]);
   // console.log(filterSavedMovies);
   const [query, setQuery] = React.useState('');
-
-  function tokenCheck () {
-    // если у пользователя есть токен в localStorage,
-    // эта функция проверит, действующий он или нет
-    if (!localStorage.getItem('jwt')) return;
-
-    const jwt = localStorage.getItem('jwt');
-
-    auth.getContent(jwt).then((res) => {
-      if (!res) return;
-
-      setCurrentUser({
-        name: res.data.name,
-        email: res.data.email,
-      });
-      setLoggedIn(true);
-      history.push('/movies');
-    })
-    .catch(err => {
-      console.log(err);
-      setLoggedIn(false);
-      localStorage.removeItem('jwt');
-    });
-  }
 
   useEffect(() => {
     tokenCheck()
@@ -90,7 +67,6 @@ function App () {
   function handleLogin (email, password, formReset) {
     let messageText = '';
 
-
     auth.authorize(email, password)
       .then((data) => {
         if (!data) return;
@@ -115,6 +91,30 @@ function App () {
       .finally(() => setMessage(messageText))
   }
 
+  function tokenCheck () {
+    // если у пользователя есть токен в localStorage,
+    // эта функция проверит, действующий он или нет
+    if (!localStorage.getItem('jwt')) return;
+
+    const jwt = localStorage.getItem('jwt');
+
+    auth.getContent(jwt).then((res) => {
+      if (!res) return;
+
+      setCurrentUser({
+        name: res.data.name,
+        email: res.data.email,
+      });
+      setLoggedIn(true);
+      history.push('/movies');
+    })
+    .catch(err => {
+      console.log(err);
+      setLoggedIn(false);
+      localStorage.removeItem('jwt');
+    });
+  }
+
   function handleLogout () {
     localStorage.removeItem('foundMovies');
     localStorage.removeItem('jwt');
@@ -134,8 +134,9 @@ function App () {
           const imageURL = item.image ? item.image.url : '';
           return {
             ...item,
-            image: `https://api.nomoreparties.co${imageURL}`,
-            trailerLink: item.trailerLink,
+            image: `${MOVIES_URL}${imageURL}`,
+            trailer: item.trailerLink,
+            movieId: item.id,
           };
         });
 
@@ -152,18 +153,19 @@ function App () {
 
   const getSavedMovies = () => {
     mainApi.getSavedMovies()
-      .then((data) => {
-        if(!data) return;
+      .then(({ data }) => {
         console.dir(data);
-        const savedArray = data.map((item) => ({ ...item, id: item.id }));
-        localStorage.setItem('savedMovies', JSON.stringify(savedArray));
-        setSavedMovies(savedArray);
+        if(!data) return;
+        const savedMoviesArr = data.map((item) => ({ ...item, id: item.movieId }));
+        console.dir(savedMoviesArr);
+        localStorage.setItem('savedMovies', JSON.stringify(savedMoviesArr));
+        setSavedMovies(savedMoviesArr);
       })
       .catch(() => {
         localStorage.removeItem('savedMovies');
         setLoadingError('2 Во время запроса произошла ошибка. '
-          + 'Возможно, проблема с соединением или сервер недоступен. '
-          + 'Подождите немного и попробуйте ещё раз');
+        + 'Возможно, проблема с соединением или сервер недоступен. '
+        + 'Подождите немного и попробуйте ещё раз');
       });
   };
 
@@ -190,14 +192,14 @@ function App () {
     }
   }, [loggedIn]);
 
-  const isMovieAdded = (movie) => savedMovies.some((item) => item.id === movie.movieId);
+  const selectedMovies = (movie) => savedMovies.some((item) => item.movieId === movie.movieId);
 
   const searchFilter = (data, searchQuery) => {
     if (searchQuery) {
       const regex = new RegExp(searchQuery, 'gi');
       const filterData = data.filter((item) => regex.test(item.nameRU) || regex.test(item.nameEN));
       if (filterData.length === 0) {
-        setLoadingError('Ничего не найдено');
+        setLoadingError('!Ничего не найдено');
       } else {
         setLoadingError('');
       }
@@ -215,9 +217,9 @@ function App () {
     }, 600);
   };
 
-  const addToBookmarks = (movie) => {
+  const saveMovie = (movie) => {
     mainApi
-      .addBookmark(movie)
+      .saveMovie(movie)
       .then((res) => {
         setSavedMovies([...savedMovies, { ...res, id: res.movieId }]);
       })
@@ -226,10 +228,10 @@ function App () {
       });
   };
 
-  const removeFromBookmark = (movie) => {
-    const movieId = savedMovies.find((item) => item.id === movie.id)._id;
+  const deleteMovie = (movie) => {
+    const movieId = savedMovies.find((item) => item.movieId === movie.movieId)._id;
     mainApi
-      .removeBookmark(movieId)
+      .deleteMovie(movieId)
       .then((res) => {
         if (res) {
           const newArray = savedMovies.filter((item) => item.movieId !== res.movieId);
@@ -241,12 +243,12 @@ function App () {
       });
   };
 
-  const bookmarkHandler = (m, isAdded) => (isAdded ? addToBookmarks(m) : removeFromBookmark(m));
+  const saveDeleteHandler = (movie, isAdded) => (isAdded ? saveMovie(movie) : deleteMovie(movie));
 
-  // useEffect(() => {
-  //   setFilterSavedMovies(searchFilter(savedMovies, query));
-  //   localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-  // }, [savedMovies]);
+  useEffect(() => {
+    setFilterSavedMovies(searchFilter(savedMovies, query));
+    localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+  }, [savedMovies]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -256,11 +258,11 @@ function App () {
             <Movies
               isLoading={isLoading}
               loadingError={loadingError}
-              savedMovies={false}
+              savedMoviesPage={false}
               movies={filterMovies}
               onSubmitSearch={searchHandler}
-              onBookmarkClick={bookmarkHandler}
-              isMovieAdded={isMovieAdded}
+              onClickSaveDelete={saveDeleteHandler}
+              selectedMovies={selectedMovies}
             />
           </ProtectedRoute>
 
@@ -268,10 +270,10 @@ function App () {
             <SavedMovies
               isLoading={isLoading}
               loadingError={loadingError}
-              savedMovies
+              savedMoviesPage={true}
               movies={savedMovies}
-              onBookmarkClick={bookmarkHandler}
-              isMovieAdded={isMovieAdded}
+              onClickSaveDelete={saveDeleteHandler}
+              selectedMovies={selectedMovies}
             />
           </ProtectedRoute>
 
@@ -300,7 +302,9 @@ function App () {
           </Route>
 
           <Route exact path="/"> {/*exact ===  полный url */}
-            <Main/> {/* страница «О проекте».*/}
+            <Main
+              loggedIn={loggedIn}
+            /> {/* страница «О проекте».*/}
           </Route>
 
           <Route path="*">

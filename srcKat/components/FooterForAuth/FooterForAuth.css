@@ -1,0 +1,70 @@
+.footer-for-auth {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding-bottom: 70px;
+  min-height: 217px;
+  justify-content: flex-end;
+  transition: 0.4s ease-in-out;
+}
+
+.footer-for-auth__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FF6838;
+  color: #fff;
+  width: 100%;
+  min-height: 45px;
+  border: none;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-for-auth__button:disabled {
+  background-color: grey;
+}
+
+.footer-for-auth__button:disabled:hover {
+  cursor: default;
+  opacity: 1;
+}
+
+.footer-for-auth__text-container {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 33px;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+@media screen and (max-width: 768px) {
+  .footer-for-auth {
+    justify-content: flex-start;
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .footer-for-auth {
+    padding-bottom: 30px;
+    min-height: fit-content;
+  }
+
+  .footer-for-auth__button{
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .footer-for-auth__text-container {
+    min-height: 29px;
+  }
+}

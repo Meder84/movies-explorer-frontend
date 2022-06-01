@@ -1,0 +1,21 @@
+.bookmark-remove-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background-image: url('../../../images/bookmark-icon-to-remove.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #313131;
+  transition: opacity .3s ease-in-out;
+  opacity: 1;
+}
+
+.bookmark-remove-btn:hover {
+  cursor: pointer;
+  opacity: .6;
+}
+
+.bookmark-remove-btn:focus {
+  outline: none;
+}

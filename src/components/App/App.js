@@ -135,7 +135,7 @@ function App () {
           return {
             ...item,
             image: `${MOVIES_URL}${imageURL}`,
-            trailer: item.trailerLink,
+            // trailer: item.trailerLink,
             movieId: item.id,
           };
         });

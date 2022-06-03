@@ -19,7 +19,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && scp -r ./build/* mr-medi@51.250.4.38:/home/mr-medi/diploma/movies-explorer-frontend"
+    "deploy": "npm run build && scp -r ./build/* mr-medi@51.250.84.134:/home/mr-medi/diploma/movies-explorer-frontend"
   },
   "eslintConfig": {
     "extends": [

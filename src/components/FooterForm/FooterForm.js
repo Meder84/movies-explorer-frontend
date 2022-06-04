@@ -1,14 +1,14 @@
 import React from 'react';
-import './FooterForAuth.css';
+import './FooterForm.css';
 
-function FooterForAuth (props) {
+function FooterForm (props) {
   return (
-    <div className={`footer-for-auth ${props.customFooterForAuth}`}>
+    <div className={`footer-for-auth ${props.customFooterForm}`}>
       <button
         className={`
           footer-for-auth__button
           opacity
-          ${props.customFooterForAuthButton}
+          ${props.customFooterFormButton}
         `}
         type='submit'
         disabled={props.disabled}
@@ -18,7 +18,7 @@ function FooterForAuth (props) {
       <div
         className={`
           footer-for-auth__text-container
-          ${props.customFooterForAuthTextContainer}
+          ${props.customFooterFormTextContainer}
         `}
       >
         {props.children}
@@ -27,4 +27,4 @@ function FooterForAuth (props) {
   )
 }
 
-export default FooterForAuth;
+export default FooterForm;

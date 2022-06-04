@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Header from '../Header/Header';
 import Form from '../Form/Form';
 import Input from '../Input/Input';
-import FooterForAuth from '../FooterForAuth/FooterForAuth';
+import FooterForm from '../FooterForm/FooterForm';
 import useFormWithValidation from '../UseFormWithValidation/UseFormWithValidation';
 import { Link } from 'react-router-dom';
 import './Login.css';
@@ -73,10 +73,10 @@ function Login(props) {
           </Input>
         </fieldset>
 
-        <FooterForAuth
-          customFooterForAuth='login__footer'
+        <FooterForm
+          customFooterForm='login__footer'
           buttonText='Войти'
-          customFooterForAuthTextContainer='login__footer__text-container'
+          customFooterFormTextContainer='login__footer__text-container'
           disabled={!isValid}
           // errorMessage={errorMessage}
         >
@@ -89,7 +89,7 @@ function Login(props) {
               Регистрация
             </button>
           </Link>
-        </FooterForAuth>
+        </FooterForm>
       </Form>
     </div>
   );

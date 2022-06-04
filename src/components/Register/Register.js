@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Header from '../Header/Header';
 import Form from '../Form/Form';
 import Input from '../Input/Input';
-import FooterForAuth from '../FooterForAuth/FooterForAuth';
+import FooterForm from '../FooterForm/FooterForm';
 import useFormWithValidation from '../UseFormWithValidation/UseFormWithValidation';
 import { Link } from 'react-router-dom';
 import './Register.css';
@@ -90,10 +90,10 @@ function Register(props) {
           </Input>
         </fieldset>
 
-        <FooterForAuth
-          customFooterForAuth='register__footer'
+        <FooterForm
+          customFooterForm='register__footer'
           buttonText='Зарегистрироваться'
-          customFooterForAuthTextContainer='register__footer__text-container'
+          customFooterFormTextContainer='register__footer__text-container'
           disabled={!isValid}
           // errorMessage={errorMessage}
         >
@@ -106,7 +106,7 @@ function Register(props) {
               Войти
             </button>
           </Link>
-        </FooterForAuth>
+        </FooterForm>
       </Form>
     </div>
   );

@@ -135,7 +135,6 @@ function App () {
           return {
             ...item,
             image: `${MOVIES_URL}${imageURL}`,
-            // trailer: item.trailerLink,
             movieId: item.id,
           };
         });
@@ -156,7 +155,7 @@ function App () {
       .then(({ data }) => {
         console.dir(data);
         if(!data) return;
-        const savedMoviesArr = data.map((item) => ({ ...item, id: item.movieId }));
+        const savedMoviesArr = data.map((item) => ({ ...item, movieId: item.id }));
         console.dir(savedMoviesArr);
         localStorage.setItem('savedMovies', JSON.stringify(savedMoviesArr));
         setSavedMovies(savedMoviesArr);

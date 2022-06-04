@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import Navigation from '../Navigation/Navigation';
 import Form from '../Form/Form';
 import Input from '../Input/Input';
-import FooterForAuth from '../FooterForAuth/FooterForAuth';
+import FooterForm from '../FooterForm/FooterForm';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 import useFormWithValidation from '../UseFormWithValidation/UseFormWithValidation';
 import mainApi from '../../utils/MainApi'
@@ -127,12 +127,12 @@ function Profile(props) {
           </Input>
         </fieldset>
 
-        <FooterForAuth
-          customFooterForAuth='profile__footer'
+        <FooterForm
+          customFooterForm='profile__footer'
           buttonText='Редактировать'
-          customFooterForAuthButton='profile__footer__button-edit'
-          customFooterForAuthTextContainer='profile__footer__text-container'
-          disabled={!isSubmitDisabled}
+          customFooterFormButton='profile__footer__button-edit'
+          customFooterFormTextContainer='profile__footer__text-container'
+          // disabled={!isSubmitDisabled}
         >
           <button
             className='profile__footer__button-login opacity'
@@ -141,7 +141,7 @@ function Profile(props) {
           >
             Выйти из аккаунта
           </button>
-        </FooterForAuth>
+        </FooterForm>
       </Form>
     </div>
   );

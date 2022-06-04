@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, useHistory, } from 'react-router-dom';
 import Main from '../Main/Main'
-// import Header from '../Header/Header';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';

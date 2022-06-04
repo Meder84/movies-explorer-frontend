@@ -7,9 +7,6 @@ function FilterCheckbox({onFilterClick}) {
       <input
         type="checkbox"
         className="filterCheckboxs__input"
-        // checked={props.isChecked}
-        // onChange={props.onChange}
-        // disabled={props.isDisabled}
         onClick={onFilterClick}
       />
 

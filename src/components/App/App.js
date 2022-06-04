@@ -20,11 +20,6 @@ function App () {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({ name: '', email: ''});
   const [message, setMessage] = useState('');
-  // const [isSignUpError, setIsSignUpError] = React.useState(false);
-  // const [isSignInError, setIsSignInError] = React.useState(false);
-
-  // const [editIsSuccess, setEditIsSuccess] = React.useState(false);
-  // const [editIsFailed, setEditIsFailed] = React.useState(false);
 
   const [isLoading, setIsLoading] = React.useState(false);
   const [loadingError, setLoadingError] = React.useState('');
@@ -144,7 +139,7 @@ function App () {
       })
       .catch(() => {
         localStorage.removeItem('allMovies');
-        setLoadingError('1 Во время запроса произошла ошибка. '
+        setLoadingError('Во время запроса произошла ошибка. '
           + 'Возможно, проблема с соединением или сервер недоступен. '
           + 'Подождите немного и попробуйте ещё раз');
       });
@@ -155,16 +150,14 @@ function App () {
       .then(({ data }) => {
         console.dir(data);
         if(!data) return;
-        const savedMoviesArr = data.map((item) => ({ ...item, movieId: item.id }));
+        const savedMoviesArr = data.map((item) => ({ ...item, id: item.movieId }));
         console.dir(savedMoviesArr);
         localStorage.setItem('savedMovies', JSON.stringify(savedMoviesArr));
         setSavedMovies(savedMoviesArr);
       })
-      .catch(() => {
+      .catch((err) => {
         localStorage.removeItem('savedMovies');
-        setLoadingError('2 Во время запроса произошла ошибка. '
-        + 'Возможно, проблема с соединением или сервер недоступен. '
-        + 'Подождите немного и попробуйте ещё раз');
+        setLoadingError(err);
       });
   };
 

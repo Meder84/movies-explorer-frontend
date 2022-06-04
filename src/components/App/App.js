@@ -32,7 +32,7 @@ function App () {
 
   useEffect(() => {
     tokenCheck()
-  }, []);
+  }, [loggedIn]);
 
   function handleRegister(name, email, password, formReset) {
     let messageText = '';

@@ -12,7 +12,6 @@ import Header from '../Header/Header';
 function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
-  // const [message, setmessage] = useState('');
 
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [serverErrorMessage, setServerErrorMessage] = useState('');
@@ -39,7 +38,6 @@ function Profile(props) {
     setIsSubmitDisabled(condition1 || condition2);
   }, [values, currentUser, isValid]);
 
-  // Ошибки ввода данных
   useEffect(() => {
     const msgName = errors.name ? `Имя: ${errors.name}` : '';
     const msgEmail = errors.email ? `Почта: ${errors.email}` : '';
@@ -132,7 +130,7 @@ function Profile(props) {
           buttonText='Редактировать'
           customFooterFormButton='profile__footer__button-edit'
           customFooterFormTextContainer='profile__footer__text-container'
-          // disabled={!isSubmitDisabled}
+          disabled={!isSubmitDisabled}
         >
           <button
             className='profile__footer__button-login opacity'

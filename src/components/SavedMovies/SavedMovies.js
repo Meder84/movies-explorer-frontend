@@ -8,7 +8,7 @@ import Preloader from '../Preloader/Preloader';
 import './SavedMovies.css';
 
 function SavedMovies({
-  savedMoviesPage, movies, isLoading, loadingError, onClickSaveDelete, selectedMovies,
+  movies, isLoading, loadingError, onClickSaveDelete, selectedMovies,
 }) {
   const [filterIsOn, setFilterIsOn] = useState(false);
   const [moviesToRender, setMoviesToRender] = useState([]);
@@ -62,7 +62,7 @@ function SavedMovies({
         <MoviesCardList
           customMoviesCardList='saved-movies__content-container'
           customMoviesCardDescriptionContainer='saved-movies__description-container'
-          savedMoviesPage={savedMoviesPage}
+          savedMoviesPage={true}
           movies={filterIsOn ? filterShortFilm(moviesToRender) : moviesToRender}
           onClickSaveDelete={onClickSaveDelete}
           onClickImage={handleClickImage}

@@ -204,7 +204,6 @@ function App () {
     setTimeout(() => {
       setQuery(searchQuery);
       setFilterMovies(searchFilter(allMovies, searchQuery));
-      setSavedMovies(searchFilter(savedMovies, searchQuery))
       setIsLoading(false);
     }, 600);
   };
@@ -221,9 +220,9 @@ function App () {
   };
 
   const deleteMovie = (movie) => {
-    const movieId = savedMovies.find((item) => item.movieId === movie.movieId)._id;
+    const movieId = savedMovies.find((item) => item.movieId === movie.movieId);
     mainApi
-      .deleteMovie(movieId)
+      .deleteMovie(movieId._id)
       .then((res) => {
         if (res) {
           const newArray = savedMovies.filter((item) => item.movieId !== res.movieId);
@@ -235,7 +234,9 @@ function App () {
       });
   };
 
-  const saveDeleteHandler = (movie, isAdded) => (isAdded ? saveMovie(movie) : deleteMovie(movie));
+  const onClickSaveDelete = (movie, select) => {
+    (select ? saveMovie(movie) : deleteMovie(movie));
+  }
 
   useEffect(() => {
     setFilterSavedMovies(searchFilter(savedMovies, query));
@@ -253,7 +254,7 @@ function App () {
               savedMoviesPage={false}
               movies={filterMovies}
               onSubmitSearch={searchHandler}
-              onClickSaveDelete={saveDeleteHandler}
+              onClickSaveDelete={onClickSaveDelete}
               selectedMovies={selectedMovies}
             />
           </ProtectedRoute>
@@ -264,7 +265,7 @@ function App () {
               loadingError={loadingError}
               savedMoviesPage={true}
               movies={savedMovies}
-              onClickSaveDelete={saveDeleteHandler}
+              onClickSaveDelete={onClickSaveDelete}
               selectedMovies={selectedMovies}
             />
           </ProtectedRoute>

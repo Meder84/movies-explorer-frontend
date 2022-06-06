@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
@@ -8,7 +8,7 @@ import './Movies.css';
 import Header from '../Header/Header';
 
 function Movies({
-  savedMoviesPage, onSubmitSearch, movies, isLoading,
+  onSubmitSearch, movies, isLoading,
   loadingError, onClickSaveDelete, selectedMovies,
 }) {
   const [filterIsOn, setFilterIsOn] = useState(false);
@@ -37,7 +37,7 @@ function Movies({
       {!isLoading && loadingError === ''
         && (
         <MoviesCardList
-          savedMoviesPage={savedMoviesPage}
+          savedMoviesPage={false}
           movies={filterIsOn ? filterShortFilm(movies) : movies}
           onClickSaveDelete={onClickSaveDelete}
           selectedMovies={selectedMovies}

@@ -190,7 +190,7 @@ function App () {
       const regex = new RegExp(searchQuery, 'gi');
       const filterData = data.filter((item) => regex.test(item.nameRU) || regex.test(item.nameEN));
       if (filterData.length === 0) {
-        setLoadingError('!Ничего не найдено');
+        setLoadingError('Ничего не найдено!');
       } else {
         setLoadingError('');
       }
@@ -204,6 +204,7 @@ function App () {
     setTimeout(() => {
       setQuery(searchQuery);
       setFilterMovies(searchFilter(allMovies, searchQuery));
+      setSavedMovies(searchFilter(savedMovies, searchQuery))
       setIsLoading(false);
     }, 600);
   };

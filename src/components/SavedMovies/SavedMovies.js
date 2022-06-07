@@ -8,35 +8,15 @@ import Preloader from '../Preloader/Preloader';
 import './SavedMovies.css';
 
 function SavedMovies({
-  movies, isLoading, loadingError, onClickSaveDelete, selectedMovies,
+  savedMovies, isLoading, loadingError, onClickSaveDelete,
+  selectedMovies, onSubmitSearch,
 }) {
   const [filterIsOn, setFilterIsOn] = useState(false);
-  const [moviesToRender, setMoviesToRender] = useState([]);
 
-  const filterShortFilm = (movies) => movies.filter((item) => item.duration < 40);
+  const filterShortFilm = (cards) => cards.filter((item) => item.duration < 40);
 
   const onFilterClick = () => {
     setFilterIsOn(!filterIsOn);
-  };
-
-  React.useEffect(() => {
-    setMoviesToRender(movies);
-  }, [movies]);
-
-  const searchFilter = (data, searchQuery) => {
-    if (searchQuery) {
-      console.dir(searchQuery)
-      console.dir(data)
-      const regex = new RegExp(searchQuery, 'gi');
-      return data.filter((item) => regex.test(item.nameRU) || regex.test(item.nameEN));
-    }
-    return [];
-  };
-
-  const searchInSavedHandler = (searchQuery) => {
-    setMoviesToRender(searchFilter(movies, searchQuery));
-      console.dir(movies)
-      console.dir(searchQuery)
   };
 
   const handleClickImage = (movie) => {
@@ -51,7 +31,7 @@ function SavedMovies({
       <SearchForm
         customSearchFormCheckboxContainer='saved-movies__search-form__checkbox-container'
         onFilterClick={onFilterClick}
-        onSearch={searchInSavedHandler}
+        onSearch={onSubmitSearch}
       />
 
       {isLoading && <Preloader />}
@@ -63,7 +43,7 @@ function SavedMovies({
           customMoviesCardList='saved-movies__content-container'
           customMoviesCardDescriptionContainer='saved-movies__description-container'
           savedMoviesPage={true}
-          movies={filterIsOn ? filterShortFilm(moviesToRender) : moviesToRender}
+          movies={filterIsOn ? filterShortFilm(savedMovies) : savedMovies}
           onClickSaveDelete={onClickSaveDelete}
           onClickImage={handleClickImage}
           selectedMovies={selectedMovies}

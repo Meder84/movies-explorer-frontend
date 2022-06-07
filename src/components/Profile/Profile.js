@@ -130,7 +130,7 @@ function Profile(props) {
           buttonText='Редактировать'
           customFooterFormButton='profile__footer__button-edit'
           customFooterFormTextContainer='profile__footer__text-container'
-          disabled={!isSubmitDisabled}
+          disabled={isSubmitDisabled}
         >
           <button
             className='profile__footer__button-login opacity'

@@ -56,6 +56,7 @@ function MoviesCard({
           : <button
               className='movies-card__delete-image opacity'
               onClick={handleClickDelete}
+              type='button'
             />
         }
       </div>

@@ -228,13 +228,9 @@ function App () {
     mainApi
       .deleteMovie(movieId._id)
       .then((res) => {
-        if (res) {
-          const newArray = savedMovies.filter((item) => item.movieId !== res.movieId);
-          setSavedMovies(newArray);
-
-          const newArrayMovies = allMovies.filter((item) => item.movieId !== res.movieId);
-          setAllMovies(newArrayMovies)
-        }
+        if (!res) return;
+        const newArray = savedMovies.filter((item) => item.movieId !== res.movieId);
+        setSavedMovies(newArray);
       })
       .catch((err) => {
         console.error(err);
@@ -298,7 +294,7 @@ function App () {
           <Route exact path="/"> {/*exact ===  полный url */}
             <Main
               loggedIn={loggedIn}
-            /> {/* страница «О проекте».*/}
+            />
           </Route>
 
           <Route path="*">

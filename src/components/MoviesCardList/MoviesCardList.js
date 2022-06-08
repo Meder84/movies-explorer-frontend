@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import { DESKTOP_WIDTH, TABLET_WIDTH, MOBILE_WIDTH } from '../../utils/consts';
+import { TABLET_WIDTH, MOBILE_WIDTH } from '../../utils/consts';
 import './MoviesCardList.css';
 
 function MoviesCardList({
@@ -9,11 +9,12 @@ function MoviesCardList({
   const [currentCount, setCurrentCount] = useState(0);
   const [extraRow, setExtraRow] = useState(3);
   const [moviesToRender, setMoviesToRender] = useState([]);
+  // const [windowSize, setWindowSize] = useState('')
 
   const getCount = (windowSize) => {
-    if (windowSize >= DESKTOP_WIDTH) {
+    if ( windowSize > TABLET_WIDTH ) {
       return { first: 12, extra: 3 };
-    } if (windowSize > MOBILE_WIDTH && windowSize <= TABLET_WIDTH) {
+    } else if (windowSize > MOBILE_WIDTH && windowSize <= TABLET_WIDTH) {
       return { first: 8, extra: 2 };
     }
     return { first: 5, extra: 2 };
@@ -28,12 +29,13 @@ function MoviesCardList({
 
   const resizeHandler = () => {
     const windowSize = window.innerWidth;
+    // setWindowSize(window.innerWidth)
     setExtraRow(getCount(windowSize));
   };
 
   useEffect(() => {
     window.addEventListener('resize', resizeHandler);
-
+    // setWindowSize()
     return () => {
       window.removeEventListener('resize', resizeHandler);
     };

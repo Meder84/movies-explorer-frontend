@@ -9,7 +9,6 @@ function MoviesCardList({
   const [currentCount, setCurrentCount] = useState(0);
   const [extraRow, setExtraRow] = useState(3);
   const [moviesToRender, setMoviesToRender] = useState([]);
-  // const [windowSize, setWindowSize] = useState('')
 
   const getCount = (windowSize) => {
     if ( windowSize > TABLET_WIDTH ) {
@@ -29,13 +28,11 @@ function MoviesCardList({
 
   const resizeHandler = () => {
     const windowSize = window.innerWidth;
-    // setWindowSize(window.innerWidth)
     setExtraRow(getCount(windowSize));
   };
 
   useEffect(() => {
     window.addEventListener('resize', resizeHandler);
-    // setWindowSize()
     return () => {
       window.removeEventListener('resize', resizeHandler);
     };

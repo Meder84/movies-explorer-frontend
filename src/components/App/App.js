@@ -28,6 +28,7 @@ function App () {
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [filterMovies, setFilterMovies] = React.useState([]);
   const [filterSavedMovies, setFilterSavedMovies] = React.useState([]);
+  const [query, setQuery] = React.useState('');
 
   useEffect(() => {
     tokenCheck()
@@ -180,6 +181,10 @@ function App () {
     }
   }, [loggedIn]);
 
+  useEffect(() => {
+    setSavedMovies(savedMovies);
+  }, [loggedIn]);
+
   const selectedMovies = (movie) => savedMovies.some((item) => item.movieId === movie.movieId);
 
   const searchFilter = (data, searchQuery) => {
@@ -199,6 +204,7 @@ function App () {
   const searchHandler = (searchQuery) => {
     setIsLoading(true);
     setTimeout(() => {
+      setQuery(searchQuery);
       setFilterMovies(searchFilter(allMovies, searchQuery));
       setIsLoading(false);
     }, 600);
@@ -207,6 +213,7 @@ function App () {
   const searchHandlerSavedMovies = (searchQuery) => {
     setIsLoading(true);
     setTimeout(() => {
+      setQuery(searchQuery);
       setFilterSavedMovies(searchFilter(savedMovies, searchQuery));
       setIsLoading(false);
     }, 600);
@@ -240,6 +247,11 @@ function App () {
   const onClickSaveDelete = (movie, select) => {
     (select ? saveMovie(movie) : deleteMovie(movie));
   }
+
+  useEffect(() => {
+    setFilterSavedMovies(searchFilter(savedMovies, query));
+    localStorage.setItem(savedMoviesStorage, JSON.stringify(savedMovies));
+  }, [savedMovies]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

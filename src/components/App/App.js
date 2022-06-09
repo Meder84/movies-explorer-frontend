@@ -6,7 +6,7 @@ import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import * as auth from '../../utils/auth';
 import mainApi from '../../utils/MainApi';
-import { savedMoviesStorage, moviesStorage } from '../../utils/consts';
+import { SAVED_MOVIES_STOREGE, MOVIES_STOREGE } from '../../utils/consts';
 import moviesApi, { MOVIES_URL } from '../../utils/MoviesApi';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies'
@@ -21,14 +21,14 @@ function App () {
   const [currentUser, setCurrentUser] = useState({ name: '', email: ''});
   const [message, setMessage] = useState('');
 
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [loadingError, setLoadingError] = React.useState('');
+  // const [isLoading, setIsLoading] = React.useState(false);
+  // const [loadingError, setLoadingError] = React.useState('');
 
-  const [allMovies, setAllMovies] = React.useState([]);
-  const [savedMovies, setSavedMovies] = React.useState([]);
-  const [filterMovies, setFilterMovies] = React.useState([]);
-  const [filterSavedMovies, setFilterSavedMovies] = React.useState([]);
-  const [query, setQuery] = React.useState('');
+  // const [allMovies, setAllMovies] = React.useState([]);
+  // const [savedMovies, setSavedMovies] = React.useState([]);
+  // const [filterMovies, setFilterMovies] = React.useState([]);
+  // const [filterSavedMovies, setFilterSavedMovies] = React.useState([]);
+  // const [query, setQuery] = React.useState('');
 
   useEffect(() => {
     tokenCheck()
@@ -112,146 +112,146 @@ function App () {
     localStorage.removeItem('jwt');
     setLoggedIn(false);
     setCurrentUser({ name: '', email: '' });
-    history.push('/signup');
+    history.push('/');
   }
 
   function resetMessage () {
     setMessage('');
   }
 
-  const getAllMovies = () => {
-    moviesApi.getAllMovies()
-      .then((data) => {
-        const allMoviesData = data.map((item) => {
-          const imageURL = item.image ? item.image.url : '';
-          return {
-            ...item,
-            image: `${MOVIES_URL}${imageURL}`,
-            movieId: item.id,
-          };
-        });
+  // const getAllMovies = () => {
+  //   moviesApi.getAllMovies()
+  //     .then((data) => {
+  //       const allMoviesData = data.map((item) => {
+  //         const imageURL = item.image ? item.image.url : '';
+  //         return {
+  //           ...item,
+  //           image: `${MOVIES_URL}${imageURL}`,
+  //           movieId: item.id,
+  //         };
+  //       });
 
-        localStorage.setItem(moviesStorage, JSON.stringify(allMoviesData));
-        setAllMovies(allMoviesData);
-      })
-      .catch(() => {
-        localStorage.removeItem(moviesStorage);
-        setLoadingError('Во время запроса произошла ошибка. '
-          + 'Возможно, проблема с соединением или сервер недоступен. '
-          + 'Подождите немного и попробуйте ещё раз');
-      });
-  };
+  //       localStorage.setItem(MOVIES_STOREGE, JSON.stringify(allMoviesData));
+  //       setAllMovies(allMoviesData);
+  //     })
+  //     .catch(() => {
+  //       localStorage.removeItem(MOVIES_STOREGE);
+  //       setLoadingError('Во время запроса произошла ошибка. '
+  //         + 'Возможно, проблема с соединением или сервер недоступен. '
+  //         + 'Подождите немного и попробуйте ещё раз');
+  //     });
+  // };
 
-  const getSavedMovies = () => {
-    mainApi.getSavedMovies()
-      .then(({data}) => {
-        console.dir(data);
-        if(!data) return;
-        const savedMoviesArr = data.map((item) => ({ ...item, id: item.movieId }));
+  // const getSavedMovies = () => {
+  //   mainApi.getSavedMovies()
+  //     .then(({data}) => {
+  //       console.dir(data);
+  //       if(!data) return;
+  //       const savedMoviesArr = data.map((item) => ({ ...item, id: item.movieId }));
 
-        localStorage.setItem(savedMoviesStorage, JSON.stringify(savedMoviesArr));
-        setSavedMovies(savedMoviesArr);
-      })
-      .catch(() => {
-        localStorage.removeItem(savedMoviesStorage);
-        setLoadingError('Сохраненные фильмы отсутсвуют.');
-      });
-  };
+  //       localStorage.setItem(SAVED_MOVIES_STOREGE, JSON.stringify(savedMoviesArr));
+  //       setSavedMovies(savedMoviesArr);
+  //     })
+  //     .catch(() => {
+  //       localStorage.removeItem(SAVED_MOVIES_STOREGE);
+  //       setLoadingError('Сохраненные фильмы отсутсвуют.');
+  //     });
+  // };
 
-  useEffect(() => {
-    const allMoviesArr = JSON.parse(localStorage.getItem(moviesStorage));
-    if (allMoviesArr) {
-      setAllMovies(allMoviesArr);
-    } else {
-      getAllMovies();
-    }
+  // useEffect(() => {
+  //   const allMoviesArr = JSON.parse(localStorage.getItem(MOVIES_STOREGE));
+  //   if (allMoviesArr) {
+  //     setAllMovies(allMoviesArr);
+  //   } else {
+  //     getAllMovies();
+  //   }
 
-    const savedMovies = JSON.parse(localStorage.getItem(savedMoviesStorage));
-    if (savedMovies) {
-      setSavedMovies(savedMovies);
-    } else {
-      getSavedMovies();
-    }
-  }, []);
+  //   const savedMovies = JSON.parse(localStorage.getItem(SAVED_MOVIES_STOREGE));
+  //   if (savedMovies) {
+  //     setSavedMovies(savedMovies);
+  //   } else {
+  //     getSavedMovies();
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    if (loggedIn) {
-      getAllMovies();
-      getSavedMovies();
-    }
-  }, [loggedIn]);
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     getAllMovies();
+  //     getSavedMovies();
+  //   }
+  // }, [loggedIn]);
 
-  useEffect(() => {
-    setSavedMovies(savedMovies);
-  }, [loggedIn]);
+  // useEffect(() => {
+  //   setSavedMovies(savedMovies);
+  // }, [loggedIn]);
 
-  const selectedMovies = (movie) => savedMovies.some((item) => item.movieId === movie.movieId);
+  // const selectedMovies = (movie) => savedMovies.some((item) => item.movieId === movie.movieId);
 
-  const searchFilter = (data, searchQuery) => {
-    if (searchQuery) {
-      const regex = new RegExp(searchQuery, 'gi');
-      const filterData = data.filter((item) => regex.test(item.nameRU) || regex.test(item.nameEN));
-      if (filterData.length === 0) {
-        setLoadingError('Ничего не найдено!');
-      } else {
-        setLoadingError('');
-      }
-      return filterData;
-    }
-    return [];
-  };
+  // const searchFilter = (data, searchQuery) => {
+  //   if (searchQuery) {
+  //     const regex = new RegExp(searchQuery, 'gi');
+  //     const filterData = data.filter((item) => regex.test(item.nameRU) || regex.test(item.nameEN));
+  //     if (filterData.length === 0) {
+  //       setLoadingError('Ничего не найдено!');
+  //     } else {
+  //       setLoadingError('');
+  //     }
+  //     return filterData;
+  //   }
+  //   return [];
+  // };
 
-  const searchHandler = (searchQuery) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setQuery(searchQuery);
-      setFilterMovies(searchFilter(allMovies, searchQuery));
-      setIsLoading(false);
-    }, 600);
-  };
+  // const searchHandler = (searchQuery) => {
+  //   setIsLoading(true);
+  //   setTimeout(() => {
+  //     setQuery(searchQuery);
+  //     setFilterMovies(searchFilter(allMovies, searchQuery));
+  //     setIsLoading(false);
+  //   }, 600);
+  // };
 
-  const searchHandlerSavedMovies = (searchQuery) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setQuery(searchQuery);
-      setFilterSavedMovies(searchFilter(savedMovies, searchQuery));
-      setIsLoading(false);
-    }, 600);
-  };
+  // const searchHandlerSavedMovies = (searchQuery) => {
+  //   setIsLoading(true);
+  //   setTimeout(() => {
+  //     setQuery(searchQuery);
+  //     setFilterSavedMovies(searchFilter(savedMovies, searchQuery));
+  //     setIsLoading(false);
+  //   }, 600);
+  // };
 
-  const saveMovie = (movie) => {
-    mainApi
-      .saveMovie(movie)
-      .then((res) => {
-        setSavedMovies([...savedMovies, { ...res, id: res.movieId }]);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
+  // const saveMovie = (movie) => {
+  //   mainApi
+  //     .saveMovie(movie)
+  //     .then((res) => {
+  //       setSavedMovies([...savedMovies, { ...res, id: res.movieId }]);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // };
 
-  const deleteMovie = (movie) => {
-    const movieId = savedMovies.find((item) => item.movieId === movie.movieId);
-    mainApi
-      .deleteMovie(movieId._id)
-      .then((res) => {
-        if (!res) return;
-        const newArray = savedMovies.filter((item) => item.movieId !== res.movieId);
-        setSavedMovies(newArray);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
+  // const deleteMovie = (movie) => {
+  //   const movieId = savedMovies.find((item) => item.movieId === movie.movieId);
+  //   mainApi
+  //     .deleteMovie(movieId._id)
+  //     .then((res) => {
+  //       if (!res) return;
+  //       const newArray = savedMovies.filter((item) => item.movieId !== res.movieId);
+  //       setSavedMovies(newArray);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // };
 
-  const onClickSaveDelete = (movie, select) => {
-    (select ? saveMovie(movie) : deleteMovie(movie));
-  }
+  // const onClickSaveDelete = (movie, select) => {
+  //   (select ? saveMovie(movie) : deleteMovie(movie));
+  // }
 
-  useEffect(() => {
-    setFilterSavedMovies(searchFilter(savedMovies, query));
-    localStorage.setItem(savedMoviesStorage, JSON.stringify(savedMovies));
-  }, [savedMovies]);
+  // useEffect(() => {
+  //   setFilterSavedMovies(searchFilter(savedMovies, query));
+  //   localStorage.setItem(SAVED_MOVIES_STOREGE, JSON.stringify(savedMovies));
+  // }, [savedMovies]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -259,23 +259,23 @@ function App () {
         <Switch>
           <ProtectedRoute path="/movies" loggedIn={loggedIn}>
             <Movies
-              isLoading={isLoading}
-              loadingError={loadingError}
-              movies={filterMovies}
-              onSubmitSearch={searchHandler}
-              onClickSaveDelete={onClickSaveDelete}
-              selectedMovies={selectedMovies}
+              // isLoading={isLoading}
+              // loadingError={loadingError}
+              // movies={filterMovies}
+              // onSubmitSearch={searchHandler}
+              // onClickSaveDelete={onClickSaveDelete}
+              // selectedMovies={selectedMovies}
             />
           </ProtectedRoute>
 
           <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
             <SavedMovies
-              isLoading={isLoading}
-              loadingError={loadingError}
-              savedMovies={filterSavedMovies}
-              onClickSaveDelete={onClickSaveDelete}
-              onSubmitSearch={searchHandlerSavedMovies}
-              selectedMovies={selectedMovies}
+              // isLoading={isLoading}
+              // loadingError={loadingError}
+              // savedMovies={filterSavedMovies}
+              // onClickSaveDelete={onClickSaveDelete}
+              // onSubmitSearch={searchHandlerSavedMovies}
+              // selectedMovies={selectedMovies}
             />
           </ProtectedRoute>
 

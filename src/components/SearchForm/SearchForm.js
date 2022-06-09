@@ -3,7 +3,10 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import useFormWithValidation from '../UseFormWithValidation/UseFormWithValidation';
 import './SearchForm.css';
 
-function SearchForm({ onFilterClick, onSearch, isLoading, customSearchFormCheckboxContainer }) {
+function SearchForm({
+  onFilterClick, onSearch, isLoading, customSearchFormCheckboxContainer,
+  isSwitchOn,isSwitchDisabled
+}) {
   const formWithValidation = useFormWithValidation();
   const { searchText } = formWithValidation.values;
   const { handleChange, resetForm } = formWithValidation;
@@ -22,7 +25,6 @@ function SearchForm({ onFilterClick, onSearch, isLoading, customSearchFormCheckb
       }, 2000);
     } else {
       onSearch(searchText);
-      resetForm();
     }
   };
 
@@ -42,7 +44,6 @@ function SearchForm({ onFilterClick, onSearch, isLoading, customSearchFormCheckb
           placeholder="Фильм"
           value={searchText || ''}
           onChange={handleChange}
-          // autoComplete="off"
           disabled={isLoading}
         />
         {error && <span className="search-form__error">{error}</span>}
@@ -56,7 +57,11 @@ function SearchForm({ onFilterClick, onSearch, isLoading, customSearchFormCheckb
 
       <fieldset className={`search-form__checkbox-container ${customSearchFormCheckboxContainer}`}>
         <div className='search-form__checkbox-button-container'>
-          <FilterCheckbox onFilterClick={onFilterClick} />
+          <FilterCheckbox
+            onFilterClick={onFilterClick}
+            isChecked={isSwitchOn || false}
+            isDisabled={isSwitchDisabled}
+          />
         </div>
         <span className='search-form__checkbox-text'>
           Короткометражки

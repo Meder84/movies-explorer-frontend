@@ -77,6 +77,15 @@ export const filterMovies = async (searchString, moviesList) => {
   return Promise.reject(NOT_FOUND_ERR_BLOCK);
 };
 
+// export const addSavedFlag = (films, savedFilms) => {
+  // Просматриваем массив найденных фильмов
+  // return films.map((item) => ({ ...item, id: item.movieId }));
+
+  // Проверяем, есть ли данный фильм в списке сохраненных
+  // const saved = savedFilms.filter(savedFilm => savedFilm.movieId === movieId);
+
+// };
+
 export const addSavedFlag = (films, savedFilms) => {
   // Просматриваем массив найденных фильмов
   return films.map((film) => {
@@ -102,5 +111,3 @@ export const addSavedFlag = (films, savedFilms) => {
     return newFilm;
   });
 };
-
-

@@ -3,7 +3,7 @@ import './MoviesCard.css';
 
 function MoviesCard({
   savedMoviesPage, movie, onClickSaveDelete, selectedMovies,
-  customMoviesCardDescriptionContainer, onClickImage
+  customMoviesCardDescriptionContainer, onClickImage, onSave, onDelete
 }) {
   const {
     nameRU, duration, image,
@@ -19,13 +19,15 @@ function MoviesCard({
 
   const select = selectedMovies(movie);
 
-  const handleClickSave = (e) => {
-    e.preventDefault();
-    onClickSaveDelete(movie, !select);
+  const handleClickSave = (movieId) => {
+    // e.preventDefault();
+    // onClickSaveDelete(movie);
+    onSave(movieId);
   };
 
-  const handleClickDelete = () => {
-    onClickSaveDelete(movie, false);
+  const handleClickDelete = (movieId) => {
+    // onClickSaveDelete(movie);
+    onDelete(movieId);
   };
 
   const handleClickImage = () => {

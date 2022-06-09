@@ -4,7 +4,8 @@ import { TABLET_WIDTH, MOBILE_WIDTH } from '../../utils/consts';
 import './MoviesCardList.css';
 
 function MoviesCardList({
-  savedMoviesPage, movies, onClickSaveDelete, selectedMovies, onClickImage
+  savedMoviesPage, movies, onClickSaveDelete, selectedMovies,
+  onClickImage, onSave, onDelete,
 }) {
   const [currentCount, setCurrentCount] = useState(0);
   const [extraRow, setExtraRow] = useState(3);
@@ -70,7 +71,9 @@ function MoviesCardList({
             movie={movieData}
             savedMoviesPage={savedMoviesPage}
             selectedMovies={selectedMovies}
-            onClickSaveDelete={onClickSaveDelete}
+            // onClickSaveDelete={onClickSaveDelete}
+            onDelete={onDelete}
+            onSave={onSave}
             onClickImage={onClickImage}
           />
         ))}

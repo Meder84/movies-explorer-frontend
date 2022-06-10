@@ -97,78 +97,118 @@ function Movies() {
     searchMain(searchString);
   };
 
-  const handleSaveClick = async (movieId) => {
-    try {
-      // Находим сохраняемый/удаляемый фильм
-      const films = foundMovies.filter(currentMovie => currentMovie.movieId === movieId);
-      if (films.length !== 1) throw new Error(SAVE_FILM_ERR_TEXT);
+  // const handleSaveClick = async (movieId) => {
+  //   try {
+  //     // Находим сохраняемый/удаляемый фильм
+  //     const films = foundMovies.filter(currentMovie => currentMovie.movieId === movieId);
+  //     console.dir(films)
+  //     if (!films) throw new Error(SAVE_FILM_ERR_TEXT);
 
-      let newFoundMovies = [];
+      // let newFoundMovies = [];
 
-      if (films[0].saved === 0) {
-        delete films[0].saved;
-        const result = await mainApi.saveMovie(films[0]);
+      // if (films[0].saved === 0) {
+      //   // delete films[0].saved;
+      //   const result = await mainApi.saveMovie(films[0]);
 
-        const {
-          movieId, country, director, duration, year,
-          description, image, trailerLink, nameRU, nameEN,
-          thumbnail, _id,
-        } = result;
+      //   const {
+      //     movieId, country, director, duration, year,
+      //     description, image, trailerLink, nameRU, nameEN,
+      //     thumbnail, _id,
+      //   } = result;
 
-        const newFilm = {
-          movieId, country, director, duration, year,
-          description, image, trailerLink, nameRU, nameEN,
-          thumbnail, saved: _id,
-        };
+      //   const newFilm = {
+      //     movieId, country, director, duration, year,
+      //     description, image, trailerLink, nameRU, nameEN,
+      //     thumbnail, saved: _id,
+      //   };
 
-        // Дополняем массивы foundMovies & savedMovies
-        newFoundMovies = foundMovies.map((item) => (
-          item.movieId === movieId ? newFilm : item
-        ));
+      //   // Дополняем массивы foundMovies & savedMovies
+      //   newFoundMovies = foundMovies.map((item) => (
+      //     item.movieId === movieId ? newFilm : item
+      //   ));
 
-        setFoundMovies(newFoundMovies);
+  //       setFoundMovies(newFoundMovies);
 
-        const newSavedMovies = savedMovies.slice();
-        newSavedMovies.push(result);
-        setSavedMovies(newSavedMovies);
+  //       const newSavedMovies = savedMovies.slice();
+  //       newSavedMovies.push(result);
+  //       setSavedMovies(newSavedMovies);
 
-      } else {
-        const result = await mainApi.deleteMovie(films[0].saved);
+  //     } else {
+  //       const result = await mainApi.deleteMovie(films[0].saved);
 
-        const {
-          movieId, country, director, duration, year,
-          description, image, trailerLink, nameRU, nameEN,
-          thumbnail,
-        } = result;
+  //       const {
+  //         movieId, country, director, duration, year,
+  //         description, image, trailerLink, nameRU, nameEN,
+  //         thumbnail,
+  //       } = result;
 
-        const newFilm = {
-          movieId, country, director, duration, year,
-          description, image, trailerLink, nameRU, nameEN,
-          thumbnail, saved: 0,
-        };
+  //       const newFilm = {
+  //         movieId, country, director, duration, year,
+  //         description, image, trailerLink, nameRU, nameEN,
+  //         thumbnail, saved: 0,
+  //       };
 
-        // Дополняем массивы foundMovies & savedMovies
-        newFoundMovies = foundMovies.map((item) => (
-          item.movieId === movieId ? newFilm : item
-        ));
+  //       // Дополняем массивы foundMovies & savedMovies
+  //       newFoundMovies = foundMovies.map((item) => (
+  //         item.movieId === movieId ? newFilm : item
+  //       ));
 
-        setFoundMovies(newFoundMovies);
+  //       setFoundMovies(newFoundMovies);
 
-        const newSavedMovies = savedMovies.filter((item) => (
-          item.movieId !== movieId
-        ));
-        setSavedMovies(newSavedMovies);
-      }
+  //       const newSavedMovies = savedMovies.filter((item) => (
+  //         item.movieId !== movieId
+  //       ));
+  //       setSavedMovies(newSavedMovies);
+  //     }
 
-      if (localStorage.getItem('foundMovies')) localStorage.removeItem('foundMovies');
-      localStorage.setItem('foundMovies', JSON.stringify(newFoundMovies));
+  //     if (localStorage.getItem('foundMovies')) localStorage.removeItem('foundMovies');
+  //     localStorage.setItem('foundMovies', JSON.stringify(newFoundMovies));
 
-    } catch(err) {
-      console.log(err);
-    }
-  };
+  //   } catch(err) {
+  //     console.log(err);
+  //   }
+  // };
 
   // const filterShortFilm = (moviesToFilter) => moviesToFilter.filter((item) => item.duration < SHORT_FILMS);
+
+  const saveMovie = (movie) => {
+    mainApi
+      .saveMovie(movie)
+      .then((res) => {
+        setSavedMovies([...savedMovies, { ...res, movieId: res.movieId }]);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  // const saveMovie = (movie) => {
+  //   mainApi
+  //     .saveMovie(movie)
+  //     .then((res) => {
+  //       setSavedMovies([...savedMovies, { ...res, movieId: res.movieId }]);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // };
+
+  const deleteMovie = (movie) => {
+    const movieId = savedMovies.find((item) => item.movieId === movie.movieId)._id;
+    mainApi
+      .deleteMovie(movieId)
+      .then((res) => {
+        if (!res) return;
+        const newArray = savedMovies.filter((item) => item.movieId !== res.movieId);
+        setSavedMovies(newArray);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const onClickSaveDelete = (movie, select) => {
+    (select ? saveMovie(movie) : deleteMovie(movie));
+  }
 
   const handleSwitchChange = () => {
     setIsSwitchOn(!isSwitchOn);
@@ -197,10 +237,10 @@ function Movies() {
         <MoviesCardList
           savedMoviesPage={false}
           movies={foundMovies}
-          // onClickSaveDelete={handleSaveClick}
+          onClickSaveDelete={onClickSaveDelete}
           selectedMovies={selectedMovies}
           onClickImage={handleClickImage}
-          onSave={handleSaveClick}
+          // onSave={handleSaveClick}
         />
       )}
 

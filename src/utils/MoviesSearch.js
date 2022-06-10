@@ -15,12 +15,12 @@ export const readMovies = async () => {
     const movies = await moviesApi.getAllMovies();
 
     // Формируем полный список фильмов
-    const moviesList = movies.map(item => {
-      const imageURL = item.image ? item.image.url : '';
+    const moviesList = movies.map(movie => {
+      const imageURL = movie.image ? movie.image.url : '';
       return {
-        ...item,
+        ...movie,
         image: `${MOVIES_URL}${imageURL}`,
-        movieId: item.id,
+        movieId: movie.id,
         // movieId: movie.id,
         // country: movie.country || '-',
         // director: movie.director || '-',

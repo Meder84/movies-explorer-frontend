@@ -71,9 +71,9 @@ function MoviesCardList({
             movie={movieData}
             savedMoviesPage={savedMoviesPage}
             selectedMovies={selectedMovies}
-            // onClickSaveDelete={onClickSaveDelete}
-            onDelete={onDelete}
-            onSave={onSave}
+            onClickSaveDelete={onClickSaveDelete}
+            // onDelete={onDelete}
+            // onSave={onSave}
             onClickImage={onClickImage}
           />
         ))}

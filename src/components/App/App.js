@@ -6,7 +6,7 @@ import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import * as auth from '../../utils/auth';
 import mainApi from '../../utils/MainApi';
-import { SAVED_MOVIES_STOREGE, MOVIES_STOREGE } from '../../utils/consts';
+import { SAVED_MOVIES_STOREGE, MOVIES_STOREGE, BAD_REQUEST, DEFAULT_ERROR } from '../../utils/consts';
 import moviesApi, { MOVIES_URL } from '../../utils/MoviesApi';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies'
@@ -21,15 +21,6 @@ function App () {
   const [currentUser, setCurrentUser] = useState({ name: '', email: ''});
   const [message, setMessage] = useState('');
 
-  // const [isLoading, setIsLoading] = React.useState(false);
-  // const [loadingError, setLoadingError] = React.useState('');
-
-  // const [allMovies, setAllMovies] = React.useState([]);
-  // const [savedMovies, setSavedMovies] = React.useState([]);
-  // const [filterMovies, setFilterMovies] = React.useState([]);
-  // const [filterSavedMovies, setFilterSavedMovies] = React.useState([]);
-  // const [query, setQuery] = React.useState('');
-
   useEffect(() => {
     tokenCheck()
   }, [loggedIn]);
@@ -40,19 +31,29 @@ function App () {
     auth.register(name, email, password)
     .then(() => {
       formReset();
-      history.push('/signin');
-      setLoggedIn(true);
+      auth.authorize(email, password)
+        .then((data) => {
+          if (!data) return;
+
+          localStorage.setItem('jwt', data.token);
+          formReset();
+          history.push('/movies');
+          setLoggedIn(true)
+        })
+        .catch(() => {
+          setMessage(BAD_REQUEST);
+        })
     })
     .catch((err) => {
       switch (err) {
         case 400:
-          messageText = "Некорректные данные";
+          messageText = BAD_REQUEST;
           break;
         case 409:
           messageText = `Пользователь ${email} уже существует`;
           break;
         default:
-          messageText = "Что-то пошло не так! Попробуйте ещё раз.";
+          messageText = DEFAULT_ERROR;
       }
     })
     .finally(() => setMessage(messageText))
@@ -73,13 +74,13 @@ function App () {
       .catch((err) => {
         switch (err) {
           case 400:
-            messageText = 'Некорректные данные!';
+            messageText = BAD_REQUEST;
             break;
           case 401:
             messageText = `Пользователь ${email} не авторизован!`;
             break;
           default:
-            messageText = 'Что-то пошло не так! Попробуйте ещё раз.';
+            messageText = DEFAULT_ERROR;
         }
       })
       .finally(() => setMessage(messageText))
@@ -119,163 +120,19 @@ function App () {
     setMessage('');
   }
 
-  // const getAllMovies = () => {
-  //   moviesApi.getAllMovies()
-  //     .then((data) => {
-  //       const allMoviesData = data.map((item) => {
-  //         const imageURL = item.image ? item.image.url : '';
-  //         return {
-  //           ...item,
-  //           image: `${MOVIES_URL}${imageURL}`,
-  //           movieId: item.id,
-  //         };
-  //       });
-
-  //       localStorage.setItem(MOVIES_STOREGE, JSON.stringify(allMoviesData));
-  //       setAllMovies(allMoviesData);
-  //     })
-  //     .catch(() => {
-  //       localStorage.removeItem(MOVIES_STOREGE);
-  //       setLoadingError('Во время запроса произошла ошибка. '
-  //         + 'Возможно, проблема с соединением или сервер недоступен. '
-  //         + 'Подождите немного и попробуйте ещё раз');
-  //     });
-  // };
-
-  // const getSavedMovies = () => {
-  //   mainApi.getSavedMovies()
-  //     .then(({data}) => {
-  //       console.dir(data);
-  //       if(!data) return;
-  //       const savedMoviesArr = data.map((item) => ({ ...item, id: item.movieId }));
-
-  //       localStorage.setItem(SAVED_MOVIES_STOREGE, JSON.stringify(savedMoviesArr));
-  //       setSavedMovies(savedMoviesArr);
-  //     })
-  //     .catch(() => {
-  //       localStorage.removeItem(SAVED_MOVIES_STOREGE);
-  //       setLoadingError('Сохраненные фильмы отсутсвуют.');
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   const allMoviesArr = JSON.parse(localStorage.getItem(MOVIES_STOREGE));
-  //   if (allMoviesArr) {
-  //     setAllMovies(allMoviesArr);
-  //   } else {
-  //     getAllMovies();
-  //   }
-
-  //   const savedMovies = JSON.parse(localStorage.getItem(SAVED_MOVIES_STOREGE));
-  //   if (savedMovies) {
-  //     setSavedMovies(savedMovies);
-  //   } else {
-  //     getSavedMovies();
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     getAllMovies();
-  //     getSavedMovies();
-  //   }
-  // }, [loggedIn]);
-
-  // useEffect(() => {
-  //   setSavedMovies(savedMovies);
-  // }, [loggedIn]);
-
-  // const selectedMovies = (movie) => savedMovies.some((item) => item.movieId === movie.movieId);
-
-  // const searchFilter = (data, searchQuery) => {
-  //   if (searchQuery) {
-  //     const regex = new RegExp(searchQuery, 'gi');
-  //     const filterData = data.filter((item) => regex.test(item.nameRU) || regex.test(item.nameEN));
-  //     if (filterData.length === 0) {
-  //       setLoadingError('Ничего не найдено!');
-  //     } else {
-  //       setLoadingError('');
-  //     }
-  //     return filterData;
-  //   }
-  //   return [];
-  // };
-
-  // const searchHandler = (searchQuery) => {
-  //   setIsLoading(true);
-  //   setTimeout(() => {
-  //     setQuery(searchQuery);
-  //     setFilterMovies(searchFilter(allMovies, searchQuery));
-  //     setIsLoading(false);
-  //   }, 600);
-  // };
-
-  // const searchHandlerSavedMovies = (searchQuery) => {
-  //   setIsLoading(true);
-  //   setTimeout(() => {
-  //     setQuery(searchQuery);
-  //     setFilterSavedMovies(searchFilter(savedMovies, searchQuery));
-  //     setIsLoading(false);
-  //   }, 600);
-  // };
-
-  // const saveMovie = (movie) => {
-  //   mainApi
-  //     .saveMovie(movie)
-  //     .then((res) => {
-  //       setSavedMovies([...savedMovies, { ...res, id: res.movieId }]);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // };
-
-  // const deleteMovie = (movie) => {
-  //   const movieId = savedMovies.find((item) => item.movieId === movie.movieId);
-  //   mainApi
-  //     .deleteMovie(movieId._id)
-  //     .then((res) => {
-  //       if (!res) return;
-  //       const newArray = savedMovies.filter((item) => item.movieId !== res.movieId);
-  //       setSavedMovies(newArray);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // };
-
-  // const onClickSaveDelete = (movie, select) => {
-  //   (select ? saveMovie(movie) : deleteMovie(movie));
-  // }
-
-  // useEffect(() => {
-  //   setFilterSavedMovies(searchFilter(savedMovies, query));
-  //   localStorage.setItem(SAVED_MOVIES_STOREGE, JSON.stringify(savedMovies));
-  // }, [savedMovies]);
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
         <Switch>
           <ProtectedRoute path="/movies" loggedIn={loggedIn}>
             <Movies
-              // isLoading={isLoading}
-              // loadingError={loadingError}
-              // movies={filterMovies}
-              // onSubmitSearch={searchHandler}
-              // onClickSaveDelete={onClickSaveDelete}
-              // selectedMovies={selectedMovies}
+              loggedIn={loggedIn}
             />
           </ProtectedRoute>
 
           <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
             <SavedMovies
-              // isLoading={isLoading}
-              // loadingError={loadingError}
-              // savedMovies={filterSavedMovies}
-              // onClickSaveDelete={onClickSaveDelete}
-              // onSubmitSearch={searchHandlerSavedMovies}
-              // selectedMovies={selectedMovies}
+              loggedIn={loggedIn}
             />
           </ProtectedRoute>
 
@@ -290,7 +147,6 @@ function App () {
               handleRegister={handleRegister}
               message={message}
               resetMessage={resetMessage}
-              // history={history}
             />
           </Route>
 

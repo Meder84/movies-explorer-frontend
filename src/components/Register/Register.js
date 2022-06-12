@@ -95,7 +95,6 @@ function Register(props) {
           buttonText='Зарегистрироваться'
           customFooterFormTextContainer='register__footer__text-container'
           disabled={!isValid}
-          // errorMessage={errorMessage}
         >
           <p className='register__footer__text'>Уже зарегистрированы?</p>
           <Link to={'/signin'}>

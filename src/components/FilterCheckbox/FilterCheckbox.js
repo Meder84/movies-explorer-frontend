@@ -1,21 +1,13 @@
 import React from 'react'
 import './FilterCheckbox.css';
 
-function FilterCheckbox({ onFilterClick, isChecked, onChange, isDisabled, movieId }) {
-
-  const handleChange = () => {
-    onChange(movieId);
-  };
-
+function FilterCheckbox({ onFilterClick }) {
   return (
     <label className="filterCheckbox opacity">
       <input
         type="checkbox"
         className="filterCheckboxs__input"
         onClick={onFilterClick}
-        checked={isChecked}
-        onChange={handleChange}
-        disabled={isDisabled}
       />
 
       <span className='filterCheckbox__slider' />

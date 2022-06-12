@@ -5,7 +5,6 @@ import './SearchForm.css';
 
 function SearchForm({
   onFilterClick, onSearch, isLoading, customSearchFormCheckboxContainer,
-  isSwitchOn,isSwitchDisabled
 }) {
   const formWithValidation = useFormWithValidation();
   const { searchText } = formWithValidation.values;
@@ -59,8 +58,6 @@ function SearchForm({
         <div className='search-form__checkbox-button-container'>
           <FilterCheckbox
             onFilterClick={onFilterClick}
-            isChecked={isSwitchOn || false}
-            isDisabled={isSwitchDisabled}
           />
         </div>
         <span className='search-form__checkbox-text'>

@@ -1,6 +1,6 @@
 // export const BASE_URL = 'https://auth.nomoreparties.co';
-export const BASE_URL = 'http://localhost:3001';
-// export const BASE_URL = 'https://diploma.meder.nomoredomains.work';
+// export const BASE_URL = 'http://localhost:3001';
+export const BASE_URL = 'https://diploma.meder.nomoredomains.work';
 
 const request = ({url, method = 'POST', token, body}) => {
   const config = {
@@ -11,7 +11,6 @@ const request = ({url, method = 'POST', token, body}) => {
       ...!!token && {'Authorization': `Bearer ${token}`},
     },
     ...!!body && {body: JSON.stringify(body)},
-    // credentials: 'include',
   }
   return fetch(`${BASE_URL}${url}`, config)
   .then((response) => {

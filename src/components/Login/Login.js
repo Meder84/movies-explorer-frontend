@@ -78,7 +78,6 @@ function Login(props) {
           buttonText='Войти'
           customFooterFormTextContainer='login__footer__text-container'
           disabled={!isValid}
-          // errorMessage={errorMessage}
         >
           <p className='login__footer__text'>Ещё не зарегистрированы?</p>
           <Link to={'/signup'}>

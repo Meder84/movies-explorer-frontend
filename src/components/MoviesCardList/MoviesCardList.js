@@ -5,7 +5,7 @@ import './MoviesCardList.css';
 
 function MoviesCardList({
   savedMoviesPage, movies, onClickSaveDelete, selectedMovies,
-  onClickImage, onSave, onDelete,
+  onClickImage, onDelete,
 }) {
   const [currentCount, setCurrentCount] = useState(0);
   const [extraRow, setExtraRow] = useState(3);
@@ -67,13 +67,12 @@ function MoviesCardList({
       <ul className='movies-card-list'>
         { moviesToRender.map((movieData) => (
           <MoviesCard
-            key={movieData.movieId}
+            key={movieData.id || movieData.movieId}
             movie={movieData}
             savedMoviesPage={savedMoviesPage}
             selectedMovies={selectedMovies}
             onClickSaveDelete={onClickSaveDelete}
-            // onDelete={onDelete}
-            // onSave={onSave}
+            onDelete={onDelete}
             onClickImage={onClickImage}
           />
         ))}

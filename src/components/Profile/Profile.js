@@ -6,23 +6,23 @@ import FooterForm from '../FooterForm/FooterForm';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 import useFormWithValidation from '../UseFormWithValidation/UseFormWithValidation';
 import mainApi from '../../utils/MainApi'
-import './Profile.css';
+import { BAD_REQUEST } from '../../utils/consts';
 import Header from '../Header/Header';
+import './Profile.css';
 
-function Profile(props) {
+function Profile({ handleLogout }) {
   const currentUser = useContext(CurrentUserContext);
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
 
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
-  const [serverErrorMessage, setServerErrorMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [serverMessage, setServerMessage] = useState('');
 
   useEffect(() => {
     resetForm({ name: currentUser.name, email: currentUser.email });
   }, [currentUser]);
 
   useEffect(() => {
-    setServerErrorMessage('');
+   setServerMessage('');
   }, [values]);
 
   useEffect(() => {
@@ -38,37 +38,31 @@ function Profile(props) {
     setIsSubmitDisabled(condition1 || condition2);
   }, [values, currentUser, isValid]);
 
-  useEffect(() => {
-    const msgName = errors.name ? `Имя: ${errors.name}` : '';
-    const msgEmail = errors.email ? `Почта: ${errors.email}` : '';
-    setErrorMessage(`${msgName} ${msgEmail}`);
-  }, [errors]);
-
-  // Сохранение изменений
   const handleSubmit = (event) => {
     event.preventDefault();
-    setServerErrorMessage('Сохранение...');
+
+    setServerMessage('Сохранение...')
 
     mainApi.updateUser(values)
-      .then((data) => {
-        setServerErrorMessage('Информация о пользователе сохранена.');
-        currentUser.name = data.name;
-        currentUser.email = data.email;
-        resetForm({ name: currentUser.name, email: currentUser.email });
-        setTimeout(() => setServerErrorMessage(''), 1000);
-      })
-      .catch((err) => {
-        switch (err) {
-          case 400:
-            setServerErrorMessage("Некорректное значение одного или нескольких полей");
-            break;
-          case 409:
-            setServerErrorMessage(`Пользователь ${values.email} уже существует.`);
-            break;
-          default:
-            setServerErrorMessage(`Невозможно сохранить данные на сервере. Ошибка ${err}.`);
-          }
-      });
+    .then(() => {
+      currentUser.name = values.name;
+      currentUser.email = values.email;
+      resetForm({ name: currentUser.name, email: currentUser.email });
+      setServerMessage('Информация о пользователе сохранена.');
+      setTimeout(() => setServerMessage(''), 800);
+    })
+    .catch((err) => {
+      switch (err) {
+        case 400:
+          setServerMessage(BAD_REQUEST);
+          break;
+        case 409:
+          setServerMessage(`Пользователь ${values.email} уже существует.`);
+          break;
+        default:
+          setServerMessage(`Невозможно сохранить данные на сервере. Ошибка ${err}.`);
+        }
+    });
   };
 
   return (
@@ -116,14 +110,16 @@ function Profile(props) {
             placeholder="E-mail"
             required
             errorId="email-error"
-            isError={errors.email || (errorMessage && serverErrorMessage)}
-            errorText={errors.email || (errorMessage && serverErrorMessage)}
+            isError={errors.email}
+            errorText={errors.email}
             onChange={handleChange}
             value={values.email || ''}
           >
             E-mail
           </Input>
         </fieldset>
+
+        <p className='error-message'>{serverMessage}</p>
 
         <FooterForm
           customFooterForm='profile__footer'
@@ -135,7 +131,7 @@ function Profile(props) {
           <button
             className='profile__footer__button-login opacity'
             type='button'
-            onClick={props.handleLogout}
+            onClick={handleLogout}
           >
             Выйти из аккаунта
           </button>

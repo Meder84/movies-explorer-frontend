@@ -5,7 +5,9 @@ import Footer from '../Footer/Footer';
 import Navigation from '../Navigation/Navigation';
 import Preloader from '../Preloader/Preloader';
 import Header from '../Header/Header';
-import { SHORT_FILMS, SAVE_FILM_ERR_TEXT, NOT_FOUND_ERR_BLOCK } from '../../utils/consts';
+import { SHORT_FILMS, SAVE_FILM_ERR_TEXT, SEARCH_STRING_STORAGE,
+  MOVIES_STOREGE, SAVED_ERR_API_TEXT, DELETE_ERROR,
+} from '../../utils/consts';
 import mainApi from '../../utils/MainApi';
 import { readMovies, filterMovies, addSavedFlag } from '../../utils/MoviesSearch';
 import './Movies.css';
@@ -13,21 +15,17 @@ import './Movies.css';
 function Movies() {
   const [filterIsOn, setFilterIsOn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isSwitchOn, setIsSwitchOn] = useState(false);
-  const [isSwitchDisabled, setIsSwitchDisabled] = useState(true);
 
   const [savedMovies, setSavedMovies] = useState([]);
   const [foundMovies, setFoundMovies] = useState([]);
-  const [showedMovies, setShowedMovies] = useState([]);
-  const [findErrorMessage, setFindErrorMessage] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     let found, foundChecked;
-    const fromStorage = localStorage.getItem('foundMovies');
+    const fromStorage = localStorage.getItem(MOVIES_STOREGE);
     if (fromStorage) {
       found = JSON.parse(fromStorage);
       setFoundMovies(found);
-      setIsSwitchDisabled(found.length === 0);
     }
 
     mainApi.getSavedMovies()
@@ -41,168 +39,60 @@ function Movies() {
     });
   }, []);
 
-  useEffect(() => {
-    const fromStorage = localStorage.getItem('foundMovies');
-    if (!fromStorage) return;
-    const found = JSON.parse(fromStorage);
-
-    if (isSwitchOn) {
-      const foundFilter = found.filter(item => item.duration <= SHORT_FILMS);
-      setFoundMovies(foundFilter);
-      if (foundFilter.length === 0) {
-        setFindErrorMessage(NOT_FOUND_ERR_BLOCK);
-      }
-    } else {
-      setFoundMovies(found);
-    }
-  }, [isSwitchOn]);
-
-    // Поиск фильмов
-
-  const searchMain = async (searchString) => {
+  const getAllMovies = async (searchString) => {
     setFoundMovies([]);
-    // setShowedMovies([]);
-    setFindErrorMessage('');
-    // setIsSwitchOn(false);
-    setIsSwitchDisabled(true);
-    if (localStorage.getItem('foundMovies')) localStorage.removeItem('foundMovies');
-    if (localStorage.getItem('searchString')) localStorage.removeItem('searchString');
+    if (localStorage.getItem(MOVIES_STOREGE)) localStorage.removeItem(MOVIES_STOREGE);
+    if (localStorage.getItem(SEARCH_STRING_STORAGE)) localStorage.removeItem(SEARCH_STRING_STORAGE);
 
     try {
       setIsLoading(true);
 
-      // Читаем фильмы с сервиса beatfilm-movies
       const movies = await readMovies();
 
-      // Выполняем поиск
-      const found = await filterMovies(searchString.toLowerCase(), movies);
+      const found = await filterMovies(movies, searchString.toLowerCase());
 
-      // Добавить признак того, сохранена ли карточка
       const foundChecked = addSavedFlag(found, savedMovies.slice());
       setFoundMovies(foundChecked);
 
-      localStorage.setItem('foundMovies', JSON.stringify(foundChecked));
-      localStorage.setItem('searchString', JSON.stringify(searchString));
-      setIsSwitchDisabled(false);
+      localStorage.setItem(MOVIES_STOREGE, JSON.stringify(foundChecked));
+      localStorage.setItem(SEARCH_STRING_STORAGE, JSON.stringify(searchString));
 
     } catch (err) {
-      setFindErrorMessage(err);
+      setError(err);
     } finally {
       setIsLoading(false);
     };
   };
 
-  // Параметр searchString получаем из компонента SearchForm
   const handleSearchSubmit = (searchString) => {
-    searchMain(searchString);
+    getAllMovies(searchString);
   };
-
-  // const handleSaveClick = async (movieId) => {
-  //   try {
-  //     // Находим сохраняемый/удаляемый фильм
-  //     const films = foundMovies.filter(currentMovie => currentMovie.movieId === movieId);
-  //     console.dir(films)
-  //     if (!films) throw new Error(SAVE_FILM_ERR_TEXT);
-
-      // let newFoundMovies = [];
-
-      // if (films[0].saved === 0) {
-      //   // delete films[0].saved;
-      //   const result = await mainApi.saveMovie(films[0]);
-
-      //   const {
-      //     movieId, country, director, duration, year,
-      //     description, image, trailerLink, nameRU, nameEN,
-      //     thumbnail, _id,
-      //   } = result;
-
-      //   const newFilm = {
-      //     movieId, country, director, duration, year,
-      //     description, image, trailerLink, nameRU, nameEN,
-      //     thumbnail, saved: _id,
-      //   };
-
-      //   // Дополняем массивы foundMovies & savedMovies
-      //   newFoundMovies = foundMovies.map((item) => (
-      //     item.movieId === movieId ? newFilm : item
-      //   ));
-
-  //       setFoundMovies(newFoundMovies);
-
-  //       const newSavedMovies = savedMovies.slice();
-  //       newSavedMovies.push(result);
-  //       setSavedMovies(newSavedMovies);
-
-  //     } else {
-  //       const result = await mainApi.deleteMovie(films[0].saved);
-
-  //       const {
-  //         movieId, country, director, duration, year,
-  //         description, image, trailerLink, nameRU, nameEN,
-  //         thumbnail,
-  //       } = result;
-
-  //       const newFilm = {
-  //         movieId, country, director, duration, year,
-  //         description, image, trailerLink, nameRU, nameEN,
-  //         thumbnail, saved: 0,
-  //       };
-
-  //       // Дополняем массивы foundMovies & savedMovies
-  //       newFoundMovies = foundMovies.map((item) => (
-  //         item.movieId === movieId ? newFilm : item
-  //       ));
-
-  //       setFoundMovies(newFoundMovies);
-
-  //       const newSavedMovies = savedMovies.filter((item) => (
-  //         item.movieId !== movieId
-  //       ));
-  //       setSavedMovies(newSavedMovies);
-  //     }
-
-  //     if (localStorage.getItem('foundMovies')) localStorage.removeItem('foundMovies');
-  //     localStorage.setItem('foundMovies', JSON.stringify(newFoundMovies));
-
-  //   } catch(err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  // const filterShortFilm = (moviesToFilter) => moviesToFilter.filter((item) => item.duration < SHORT_FILMS);
 
   const saveMovie = (movie) => {
     mainApi
       .saveMovie(movie)
       .then((res) => {
-        setSavedMovies([...savedMovies, { ...res, movieId: res.movieId }]);
+        setSavedMovies([...savedMovies, { ...res, id: res.movieId }]);
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
+        setError(SAVE_FILM_ERR_TEXT)
       });
   };
-  // const saveMovie = (movie) => {
-  //   mainApi
-  //     .saveMovie(movie)
-  //     .then((res) => {
-  //       setSavedMovies([...savedMovies, { ...res, movieId: res.movieId }]);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // };
 
   const deleteMovie = (movie) => {
-    const movieId = savedMovies.find((item) => item.movieId === movie.movieId)._id;
+    const movieId = savedMovies.find((item) => item.movieId === movie.id)._id;
+    if(!movieId) throw new Error(SAVED_ERR_API_TEXT);
+
     mainApi
       .deleteMovie(movieId)
-      .then((res) => {
-        if (!res) return;
-        const newArray = savedMovies.filter((item) => item.movieId !== res.movieId);
+      .then(() => {
+        const newArray = savedMovies.filter((item) => item._id !== movieId);
         setSavedMovies(newArray);
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
+        setError(DELETE_ERROR)
       });
   };
 
@@ -210,15 +100,17 @@ function Movies() {
     (select ? saveMovie(movie) : deleteMovie(movie));
   }
 
-  const handleSwitchChange = () => {
-    setIsSwitchOn(!isSwitchOn);
+  const filterShortFilm = (movies) => movies.filter((item) => item.duration < SHORT_FILMS);
+
+  const onFilterClick = () => {
+    setFilterIsOn(!filterIsOn);
   };
 
   const handleClickImage = (movie) => {
     window.open(movie.trailerLink, '_blank');
   };
 
-  const selectedMovies = (movie) => savedMovies.some((item) => item.movieId === movie.movieId);
+  const selectedMovies = (movie) => savedMovies.some((item) => item.movieId === movie.id);
 
   return (
     <main className="movies">
@@ -226,9 +118,8 @@ function Movies() {
         <Navigation />
       </Header>
       <SearchForm
-        onFilterClick={handleSwitchChange}
+        onFilterClick={onFilterClick}
         onSearch={handleSearchSubmit}
-        isSwitchOn={isSwitchOn}
       />
       {isLoading && <Preloader />}
 
@@ -236,18 +127,17 @@ function Movies() {
         && (
         <MoviesCardList
           savedMoviesPage={false}
-          movies={foundMovies}
+          movies={filterIsOn ? filterShortFilm(foundMovies) : foundMovies}
           onClickSaveDelete={onClickSaveDelete}
           selectedMovies={selectedMovies}
           onClickImage={handleClickImage}
-          // onSave={handleSaveClick}
         />
       )}
 
-      {/* {
+      {
         !isLoading
-        && <div className="error-message">{loadingError}</div>
-      } */}
+        && <p className='error-message'>{error}</p>
+      }
       <Footer />
     </main>
   );

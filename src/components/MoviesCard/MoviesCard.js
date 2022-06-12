@@ -3,8 +3,7 @@ import './MoviesCard.css';
 
 function MoviesCard({
   savedMoviesPage, movie, onClickSaveDelete, selectedMovies,
-  customMoviesCardDescriptionContainer, onClickImage, onChange, onDelete,
-  isChecked,
+  customMoviesCardDescriptionContainer, onClickImage, onDelete,
 }) {
   const {
     nameRU, duration, image,
@@ -23,12 +22,10 @@ function MoviesCard({
   const handleClickSave = (e) => {
     e.preventDefault();
     onClickSaveDelete(movie, !select);
-    // onChange(movieId);
   };
 
   const handleClickDelete = () => {
-    onClickSaveDelete(movie, false);
-    // onDelete(movieId);
+    onDelete(movie, false);
   };
 
   const handleClickImage = () => {
@@ -55,9 +52,6 @@ function MoviesCard({
               }
               onClick={handleClickSave}
               type='button'
-              // onChange={handleChange}
-              // type='checkbox'
-              // checked={isChecked || false}
             />
           : <button
               className='movies-card__delete-image opacity'

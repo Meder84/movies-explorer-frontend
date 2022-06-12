@@ -43,7 +43,6 @@ class MainApi {
     return fetch( this._url + '/movies', {
       method: 'POST',
       headers: this._getHeaders(),
-      // body: JSON.stringify(data)
       body: JSON.stringify({
         country: data.country || 'unknown',
         director: data.director || 'unknown',
@@ -51,9 +50,9 @@ class MainApi {
         year: data.year || 'unknown',
         description: data.description || 'No description',
         image: data.image,
-        trailerLink: data.trailerLink || 'No trailer',
+        trailerLink: data.trailerLink || 'No trailerLink',
         thumbnail: data.image || 'No image',
-        movieId: data.movieId || 'No data',
+        movieId: data.id || 'No data',
         nameRU: data.nameRU,
         nameEN: data.nameEN || 'No name',
       })
@@ -79,7 +78,6 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  // baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-33/',
   baseUrl: BASE_URL,
   headers: {
     'Accept': 'application/json',

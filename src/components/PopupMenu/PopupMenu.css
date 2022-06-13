@@ -71,11 +71,6 @@
   margin-bottom: 0;
 }
 
-.popup-menu__link-active {
-  border-bottom: 2px solid #000;
-  padding-bottom: 4px;
-}
-
 .popup-menu__link-profile {
   display: flex;
   box-sizing: border-box;

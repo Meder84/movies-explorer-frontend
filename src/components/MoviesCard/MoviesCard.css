@@ -58,9 +58,32 @@
 
 .movies-card__like-image_red {
   background-image: url(../../images/iconLikeRed.svg);
-  background-position: 50%;
   background-repeat: no-repeat;
-  cursor: pointer;
+  background-position: 50%;
+  background-size: 14px 12px;
+  margin: 0;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  border: none;
+  align-self: center;
+  background-color: #FDFDFD;
+}
+
+
+.movies-card__delete-image {
+  background-image: url(../../images/iconDelete.svg);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 7px 7px;
+  margin: 0;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  border: none;
+  align-self: center;
+  background-color: #FDFDFD;
+  opacity: 0;
 }
 
 .movies-card__duration {

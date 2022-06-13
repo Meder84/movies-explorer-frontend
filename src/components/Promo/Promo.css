@@ -5,6 +5,22 @@
   transition: 0.4s ease-in-out;
 }
 
+.promo__header {
+  padding: 0;
+}
+
+.propmo__nav__movies {
+  color: #fff;
+}
+
+.propmo__nav__saved-movies {
+  color: #fff;
+}
+
+.promo__subtitle__account {
+  color: #fff;
+}
+
 .promo__main-block {
   display: flex;
   flex-flow: row nowrap;

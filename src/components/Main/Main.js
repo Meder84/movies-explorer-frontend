@@ -7,11 +7,13 @@ import Portfolio from '../Portfolio/Portfolio';
 import './Main.css';
 import Footer from "../Footer/Footer";
 
-function Main() {
+function Main({loggedIn}) {
 
   return (
     <main className="main">
-      <Promo />
+      <Promo
+        loggedIn={loggedIn}
+      />
       <AboutProject />
       <Techs />
       <AboutMe />

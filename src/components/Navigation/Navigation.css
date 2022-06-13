@@ -1,10 +1,13 @@
 .navigation {
-  display: block;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   box-sizing: border-box;
   width: 100%;
   color: #000;
   margin: 0;
-  padding: 0 70px;
+  padding: 0;
   transition: 0.4s ease-in-out;
 }
 
@@ -28,6 +31,17 @@
   flex-direction: row;
   justify-content: space-between;
   min-width: 212px;
+  margin: 0 50px 0 0;
+  padding: 0;
+}
+
+.navigation__header-link {
+  list-style-type: none;
+  margin-right: 20px;
+}
+
+.navigation__header-link:last-child {
+  margin-right: 0;
 }
 
 .navigation__header-link-movies {
@@ -56,7 +70,7 @@
 
 @media screen and (max-width: 768px) {
   .navigation {
-    padding: 0 30px;
+    width: fit-content;
   }
 
   .navigation__header-block {
@@ -78,11 +92,5 @@
   .navigation__header-conteiner {
     justify-content: flex-end;
     margin: 0;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .navigation {
-    padding: 0 14px;
   }
 }

@@ -7,7 +7,10 @@ import './PopupMenu.css';
 function PopupMenu(props) {
 
   return (
-    <div className="popup-menu">
+    <div
+      className="popup-menu"
+      onClick={props.handleOverlay}
+    >
       <button
         className="popup-menu__btn-close opacity"
         onClick={props.handleClose}
@@ -15,21 +18,21 @@ function PopupMenu(props) {
       <div className="popup-menu__container">
         <div className='popup-menu__links' >
           <NavLink exact to="/"
-            activeClassName="popup-menu__link-active"
+            activeClassName="menu__link-active"
             className="popup-menu__link opacity"
           >
             Главная
           </NavLink>
 
           <NavLink to="/movies"
-            activeClassName="popup-menu__link-active"
+            activeClassName="menu__link-active"
             className="popup-menu__link opacity"
           >
             Фильмы
           </NavLink>
 
           <NavLink to="/saved-movies"
-            activeClassName="popup-menu__link-active"
+            activeClassName="menu__link-active"
             className="popup-menu__link opacity"
           >
             Сохранённые фильмы

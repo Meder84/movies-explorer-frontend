@@ -27,6 +27,15 @@
   padding: 0;
 }
 
+.footer-for-auth__button:disabled {
+  background-color: grey;
+}
+
+.footer-for-auth__button:disabled:hover {
+  cursor: default;
+  opacity: 1;
+}
+
 .footer-for-auth__text-container {
   display: flex;
   flex-direction: row;

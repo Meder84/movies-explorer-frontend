@@ -39,7 +39,7 @@ const Portfolio = () => (
         </h4>
         <a
           className="portfolio__link"
-          href="https://github.com/Meder84/mesto-js"
+          href="https://meder84.github.io/mesto/index.html"
           target="_blank" rel="noreferrer noopener"
         >
           ↗

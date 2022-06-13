@@ -6,12 +6,12 @@ import Header from '../Header/Header';
 import Navigation from '../Navigation/Navigation';
 import Preloader from '../Preloader/Preloader';
 import mainApi from '../../utils/MainApi';
-import { SAVED_MOVIES_STOREGE, SAVED_ERR_API_TEXT, DELETE_ERROR } from '../../utils/consts';
+import { SAVED_MOVIES_STOREGE, SAVED_ERR_API_TEXT, DELETE_ERROR, SWITCH_STORAGE } from '../../utils/consts';
 import { filterMovies } from '../../utils/MoviesSearch';
 import './SavedMovies.css';
 
 function SavedMovies() {
-  const [filterIsOn, setFilterIsOn] = useState(false);
+  const [isChecked, setisChecked] = useState(localStorage.getItem(SWITCH_STORAGE) === 'true');
   const [isLoading, setIsLoading] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
   const [error, setError] = useState('');
@@ -73,8 +73,9 @@ function SavedMovies() {
 
   const filterShortFilm = (cards) => cards.filter((item) => item.duration < 40);
 
-  const onFilterClick = () => {
-    setFilterIsOn(!filterIsOn);
+  const handleOnChange = (e) => {
+    setisChecked(e.target.checked);
+    localStorage.setItem(SWITCH_STORAGE,`${e.target.checked}`);
   };
 
   const handleClickImage = (movie) => {
@@ -90,8 +91,9 @@ function SavedMovies() {
       </Header>
       <SearchForm
         customSearchFormCheckboxContainer='saved-movies__search-form__checkbox-container'
-        onFilterClick={onFilterClick}
         onSearch={handleSearchSubmit}
+        isChecked={isChecked}
+        onChange={handleOnChange}
       />
 
       {isLoading && <Preloader />}
@@ -103,7 +105,7 @@ function SavedMovies() {
           customMoviesCardList='saved-movies__content-container'
           customMoviesCardDescriptionContainer='saved-movies__description-container'
           savedMoviesPage={true}
-          movies={filterIsOn ? filterShortFilm(savedMovies) : savedMovies}
+          movies={isChecked ? filterShortFilm(savedMovies) : savedMovies}
           onClickImage={handleClickImage}
           selectedMovies={selectedMovies}
           onDelete={handleDelete}

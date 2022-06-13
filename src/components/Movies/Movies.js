@@ -6,14 +6,14 @@ import Navigation from '../Navigation/Navigation';
 import Preloader from '../Preloader/Preloader';
 import Header from '../Header/Header';
 import { SHORT_FILMS, SAVE_FILM_ERR_TEXT, SEARCH_STRING_STORAGE,
-  MOVIES_STOREGE, SAVED_ERR_API_TEXT, DELETE_ERROR,
+  MOVIES_STOREGE, SAVED_ERR_API_TEXT, DELETE_ERROR, SWITCH_STORAGE,
 } from '../../utils/consts';
 import mainApi from '../../utils/MainApi';
 import { readMovies, filterMovies, addSavedFlag } from '../../utils/MoviesSearch';
 import './Movies.css';
 
 function Movies() {
-  const [filterIsOn, setFilterIsOn] = useState(false);
+  const [isChecked, setisChecked] = useState(localStorage.getItem(SWITCH_STORAGE) === 'true');
   const [isLoading, setIsLoading] = useState(false);
 
   const [savedMovies, setSavedMovies] = useState([]);
@@ -102,8 +102,9 @@ function Movies() {
 
   const filterShortFilm = (movies) => movies.filter((item) => item.duration < SHORT_FILMS);
 
-  const onFilterClick = () => {
-    setFilterIsOn(!filterIsOn);
+  const handleOnChange = (e) => {
+    setisChecked(e.target.checked);
+    localStorage.setItem(SWITCH_STORAGE,`${e.target.checked}`);
   };
 
   const handleClickImage = (movie) => {
@@ -118,8 +119,9 @@ function Movies() {
         <Navigation />
       </Header>
       <SearchForm
-        onFilterClick={onFilterClick}
         onSearch={handleSearchSubmit}
+        isChecked={isChecked}
+        onChange={handleOnChange}
       />
       {isLoading && <Preloader />}
 
@@ -127,7 +129,7 @@ function Movies() {
         && (
         <MoviesCardList
           savedMoviesPage={false}
-          movies={filterIsOn ? filterShortFilm(foundMovies) : foundMovies}
+          movies={isChecked ? filterShortFilm(foundMovies) : foundMovies}
           onClickSaveDelete={onClickSaveDelete}
           selectedMovies={selectedMovies}
           onClickImage={handleClickImage}

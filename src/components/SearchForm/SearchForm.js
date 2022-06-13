@@ -4,7 +4,8 @@ import useFormWithValidation from '../UseFormWithValidation/UseFormWithValidatio
 import './SearchForm.css';
 
 function SearchForm({
-  onFilterClick, onSearch, isLoading, customSearchFormCheckboxContainer,
+  onSearch, isLoading,
+  customSearchFormCheckboxContainer, isChecked, onChange,
 }) {
   const formWithValidation = useFormWithValidation();
   const { searchText } = formWithValidation.values;
@@ -57,7 +58,8 @@ function SearchForm({
       <fieldset className={`search-form__checkbox-container ${customSearchFormCheckboxContainer}`}>
         <div className='search-form__checkbox-button-container'>
           <FilterCheckbox
-            onFilterClick={onFilterClick}
+            isChecked={isChecked}
+            onChange={onChange}
           />
         </div>
         <span className='search-form__checkbox-text'>

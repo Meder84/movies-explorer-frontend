@@ -5,9 +5,7 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import * as auth from '../../utils/auth';
-import mainApi from '../../utils/MainApi';
-import { SAVED_MOVIES_STOREGE, MOVIES_STOREGE, BAD_REQUEST, DEFAULT_ERROR } from '../../utils/consts';
-import moviesApi, { MOVIES_URL } from '../../utils/MoviesApi';
+import { BAD_REQUEST, DEFAULT_ERROR } from '../../utils/consts';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies'
 import Profile from '../Profile/Profile';

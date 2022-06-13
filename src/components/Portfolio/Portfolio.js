@@ -13,7 +13,7 @@ const Portfolio = () => (
         </h4>
         <a
           className="portfolio__link"
-          href="https://github.com/Meder84/how-to-learn"
+          href="https://meder84.github.io/how-to-learn/"
           target="_blank" rel="noreferrer noopener"
         >
           ↗

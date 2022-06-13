@@ -1,6 +1,6 @@
 // export const BASE_URL = 'https://auth.nomoreparties.co';
-export const BASE_URL = 'http://localhost:3001';
-// export const BASE_URL = 'https://diploma.meder.nomoredomains.work';
+// export const BASE_URL = 'http://localhost:3001';
+export const BASE_URL = 'https://diploma.meder.nomoredomains.work';
 
 const request = ({url, method = 'POST', token, body}) => {
   const config = {

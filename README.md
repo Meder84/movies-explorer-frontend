@@ -1,4 +1,4 @@
-# Ссылка на проект https://movie.frontend.nomoredomains.xyz
+* [Ссылка на проект:](https://movie.frontend.nomoredomains.xyz)
 
 # Getting Started with Create React App
 

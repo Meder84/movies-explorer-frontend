@@ -1,7 +1,7 @@
 # Дипломная работа
 ## Проект: "Movies-explorer"
 * [Ссылка на проект](https://movie.frontend.nomoredomains.xyz)
-* [Ссылка на анимацию](https://https://vk.com/s/v1/doc/GdaiL5FRDObYYGuWmqzQ84dpApl7IwX6c4JbK0UGLspoBfZiY3Q)
+* [Ссылка на анимацию](https://vk.com/s/v1/doc/GdaiL5FRDObYYGuWmqzQ84dpApl7IwX6c4JbK0UGLspoBfZiY3Q)
 
 ### Обзор
 

@@ -38,7 +38,7 @@
 
 ### Инструкция по развёртыванию и системные требования:
 * Клонировать репозиторий <br>
-`git clone https://github.com/Meder84/movies-explorer-frontend.git`
+`git clone...`
 
 * Установить зависимости <br>
 `cd movies-explorer-frontend`

@@ -38,13 +38,13 @@
 
 ### Инструкция по развёртыванию и системные требования:
 * Клонировать репозиторий
-git clone https://github.com/Meder84/movies-explorer-frontend.git
+`git clone https://github.com/Meder84/movies-explorer-frontend.git`
 
 * Установить зависимости
-cd movies-explorer-frontend
+`cd movies-explorer-frontend`
 npm install
 * Команды для запуска приложения 
-npm start
+`npm start`
 Запуск приложения в режиме разработки. Для просмотра результатов в браузере откройте http://localhost:3000 После внесения изменений страница перезагрузится автоматически
-npm run build
+`npm run build`
 Создает оптимизированную версию приложения, готовую для развертывания, в папке build

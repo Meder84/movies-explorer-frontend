@@ -41,7 +41,7 @@
 `git clone...`
 
 * Установить зависимости <br>
-`cd movies-explorer-frontend`
+`cd movies-explorer-frontend`<br>
 `npm install`
 * Команды для запуска приложения <br> 
 `npm start`<br>

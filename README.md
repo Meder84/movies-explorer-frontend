@@ -2,8 +2,10 @@
 ## Проект: "Movies-explorer"
 * [Ссылка на проект](https://movie.frontend.nomoredomains.xyz)
 * [Анимированная инфографика сайта](https://github.com/Meder84/Meder84/blob/main/gif/Movies_frontent1024.gif)
+* [Правила написания кода](https://code.s3.yandex.net/web-developer/landings/design-rules/index.html)
+* [Ссылка на back-end](https://github.com/Meder84/movies-explorer-api)
 
-### Обзор
+### Описание
 * Создано приложение с использованием CRA (Create React App). 
 * Общение с сервером и написание логики работы, с использованием fetch API. 
 * Адаптивная верстка сайта и добавление интерактивности с использованием javaScript и React.js.
@@ -33,3 +35,16 @@
 **Планы по доработке кода**
 * Оптимизировать JavaScript-код (структура кода, название функций и переменных).
 * Сделать код полностью объектно-ориентированным.
+
+### Инструкция по развёртыванию и системные требования:
+* Клонировать репозиторий
+git clone https://github.com/Meder84/movies-explorer-frontend.git
+
+* Установить зависимости
+cd movies-explorer-frontend
+npm install
+* Команды для запуска приложения 
+npm start
+Запуск приложения в режиме разработки. Для просмотра результатов в браузере откройте http://localhost:3000 После внесения изменений страница перезагрузится автоматически
+npm run build
+Создает оптимизированную версию приложения, готовую для развертывания, в папке build

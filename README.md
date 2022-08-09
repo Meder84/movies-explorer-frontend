@@ -1,7 +1,7 @@
 # Дипломная работа
 ## Проект: "Movies-explorer"
 * [Ссылка на проект](https://movie.frontend.nomoredomains.xyz)
-* [Анимированная инфографика сайта](https://github.com/Meder84/Meder84/blob/main/gif/Movies_frontent.gif)
+* [Анимированная инфографика сайта](https://github.com/Meder84/Meder84/blob/main/gif/Movies_frontent1024.gif)
 
 ### Обзор
 * Создано приложение с использованием CRA (Create React App). 

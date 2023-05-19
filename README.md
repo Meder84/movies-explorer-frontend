@@ -1,6 +1,7 @@
 # Дипломная работа
 ## Проект: "Movies-explorer"
-* [Ссылка на проект](https://movie.frontend.nomoredomains.xyz)
+<!-- * [Ссылка на проект](https://movie.frontend.nomoredomains.xyz) -->
+* [Ссылка на проект](https://movies-explorer-frontend-pearl-xi.vercel.app/)
 * [Анимированная инфографика сайта](https://github.com/Meder84/Meder84/blob/main/gif/Movies_frontent1024.gif)
 * [Правила написания кода](https://code.s3.yandex.net/web-developer/landings/design-rules/index.html)
 * [Ссылка на back-end](https://github.com/Meder84/movies-explorer-api)
